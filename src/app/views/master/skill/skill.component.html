@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="card-footer">
-          <button type="submit" class="btn btn-primary" [disabled]="!newSkillForm.form.valid">Submit</button>
+          <button type="submit"  class="btn btn-primary" [disabled]="!newSkillForm.form.valid">Submit</button>
         </div>
       </form>
 
@@ -78,7 +78,7 @@
                      <div class="form-group">
                         <select class="form-control" (change)="showAll($event)">
                            <option value=all>All</option>
-                           <option value=10>show 10</option>
+                           <option *ngFor=" let i = index" value=5> {{index+5}}</option>
                         </select>
                      </div>
                   </div>
@@ -112,7 +112,7 @@
                           </tr>
                      </tbody>
                   </table>
-                  <pagination-controls  class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+                  <pagination-controls  class="my-pagination" (pageChange)="p = $event" *ngIf="!isShow"></pagination-controls>
                </div>
               </div>
       </div>

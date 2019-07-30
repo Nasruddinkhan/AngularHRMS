@@ -23,6 +23,7 @@ export class SkillComponent implements OnInit {
   skillmodel:SkillMaster;
   p: number = 1;
   initialPageSize: number = 5;
+  isShow :boolean=false;
   constructor(private skillService:SkillService ,  private toastr:ToastrService, private router:Router) {
   //  this.loadStates();
    }
@@ -79,6 +80,18 @@ export class SkillComponent implements OnInit {
       // ...our form is valid, we can submit the data
       form.reset();
     }
+  }
+  showAll(event: any) {
+    //alert(event.target.value)
+    if (event.target.value == 5) {
+      this.isShow = false;
+      this.initialPageSize = event.target.value;
+     this.p = 1;
+    } else {
+      this.isShow = true;
+      this.initialPageSize = this.skillList.length;
+    }
+    // alert(this.searchResult.length)
   }
  
 }
