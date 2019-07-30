@@ -1,0 +1,175 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+<div class="animated fadeIn">
+  <!--/.row-->
+  <div class="row">
+    <div class="col-lg-12">
+        <form [formGroup]="registrationForm" (ngSubmit)="register()">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-user"></i>User Registration
+          <div class="card-header-actions">
+            <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse()">
+              <i class={{iconCollapse}}></i>
+            </button>
+          </div>
+        </div>
+
+        <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card-body">
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <div class="form-group">
+                <label for="firstname">First Name
+                  <font color="red">*</font>
+                </label>
+                <input type="text" class="form-control" formControlName="firstname" [ngClass]="{ 'is-invalid': isSubmitted && f.firstname.errors }" >
+                <div *ngIf="isSubmitted && f.firstname.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstname.errors.required">First Name is required</div>
+                    <div *ngIf="f.firstname.errors.pattern">Only alphabet is allow</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 form-group">
+              <div class="form-group">
+                <label for="middlename">Middele Name</label>
+                <input type="text" class="form-control" formControlName="middlename">
+              </div>
+            </div>
+            <div class="col-sm-2 form-group">
+              <div class="form-group">
+                <label for="lastname">Last Name
+                  <font color="red">*</font>
+                </label>
+                <input type="text" class="form-control" formControlName="lastname" [ngClass]="{ 'is-invalid': isSubmitted && f.lastname.errors }">
+                <div *ngIf="isSubmitted && f.lastname.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastname.errors.required">First Name is required</div>
+                    <div *ngIf="f.lastname.errors.pattern">Only alphabet is allow</div>
+                    
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 form-group">
+              <div class="form-group">
+                <label for="lastname">Gender
+                  <font color="red">*</font>
+                </label>
+                <select type="text" class="form-control">
+                  <option value="">Please Select</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-2 form-group">
+                <div class="form-group">
+                  <label for="doj">D.O.J
+                    <font color="red">*</font>
+                  </label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-sm-2 form-group">
+                <div class="form-group">
+                  <label for="dob">D.O.B
+                    <font color="red">*</font>
+                  </label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+          </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <div class="form-group">
+                <label for="doj">D.O.J
+                  <font color="red">*</font>
+                </label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-2 form-group">
+              <div class="form-group">
+                <label for="dob">D.O.B
+                  <font color="red">*</font>
+                </label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-2 form-group">
+              <div class="form-group">
+                <label for="email">Email
+                  <font color="red">*</font>
+                </label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-2 form-group">
+              <div class="form-group">
+                <label for="mobileno">Mobile No
+                  <font color="red">*</font>
+                </label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-2 form-group">
+                <div class="form-group">
+                  <label for="doj">Pan No</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-sm-2 form-group">
+                <div class="form-group">
+                  <label for="dob">Aadhaar No
+                    <font color="red">*</font>
+                  </label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+          </div>
+          <!--/.row-->
+          <div class="row">
+           
+            <div class="col-sm-2 form-group">
+              <!-- <div class="form-group">
+                <label for="lastname">Material Status
+                  <font color="red">*</font>
+                </label>
+                <select type="text" class="form-control">
+                  <option value="">Please Select</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                </select>
+
+              </div> -->
+               
+                <webcam [height]="200" [width]="250" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+                  
+                  [imageQuality]="1" ></webcam>
+              
+            </div>
+            <div class="col-sm-2 form-group">
+              <label>&nbsp;&nbsp;</label>
+                <input type="button" style="margin-top:30%" (click)="triggerSnapshot();" class="btn btn-danger"  value="Take Image">
+              </div>
+            <div class="col-sm-2 form-group">
+              <div class="snapshot" *ngIf="webcamImage">
+                  <img [src]="webcamImage.imageAsDataUrl" width="250" height="200"/>
+                </div>
+            </div>
+        
+          </div>
+          <!--/.row-->
+          <div class="row">
+             
+          </div>
+        </div>
+
+        <div class="card-footer">
+         <input type="submit" style="float: right"  class="btn btn-primary"  value="submit">
+        </div>
+      </div>
+    </form>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>

@@ -1,0 +1,121 @@
+<!-- <!-- <form class = "tp-form">
+  <mat-form-field class = "tp-full-width">
+     <input type = "text" 
+        placeholder = "US State" 
+        aria-label = "Number" 
+        matInput 
+        [formControl] = "myControl" 
+        [matAutocomplete] = "auto">
+     <mat-autocomplete #auto = "matAutocomplete">
+        <mat-option *ngFor = "let state of states" [value] = "state.value">
+           {{state.display}}
+        </mat-option>
+     </mat-autocomplete>
+  </mat-form-field>
+</form> -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i>{{headerTitle}}
+       
+      </div>
+      <form #newSkillForm="ngForm" (ngSubmit)="onSubmit(newSkillForm)">
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label for="skillname">Skill Name <span style="color:red" >*</span></label>
+              <input type="text" class="form-control" required [(ngModel)]="slillName" name="slillName" [ngClass]="{'red-border-class': !slillName1.valid && slillName1.touched}"
+              #slillName1="ngModel">
+              <div *ngIf="!slillName1.valid && slillName1.touched"  style="color:red">
+                  skill name is required
+                </div>  
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="orderlevel">Order Level <span style="color:red" >*</span></label>
+                <input type="text" class="form-control" appOnlynumber required [(ngModel)]="orderlevel" name="orderlevel" [ngClass]="{'red-border-class': !orderlevel1.valid && orderlevel1.touched}"
+                #orderlevel1="ngModel">
+                <div *ngIf="!orderlevel1.valid && orderlevel1.touched"  style="color:red">
+                    order level is required
+                  </div>  
+              </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="!newSkillForm.form.valid">Submit</button>
+        </div>
+      </form>
+
+    </div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+    <div *ngIf="skillList?.length > 0">
+    <div class="card">
+        <div class="card-header">
+          <i class="icon-people"></i>Skill Details
+          <div class="card-header-actions">
+            <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse()">
+              <i class={{iconCollapse}}></i>
+            </button>
+          </div>
+        </div>
+        
+          <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card-body">
+              <div class="form-group row">
+                  <div class="col-md-10">
+                     <div class="input-group">
+                        <span class="input-group-prepend">
+                           <button type="button" class="btn btn-primary"><i class="icon-people"></i></button>
+                        </span>
+                        <input type="text" style="height: calc(2.0625rem + 2px) !important;" id="input3-group2"
+                           [(ngModel)]="searchText" class="form-control" placeholder="Search">
+                        <span class="input-group-append">
+                           <button type="button" class="btn btn-primary"><i class="icon-magnifier"></i></button>
+                        </span>
+                     </div>
+                  </div>
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <select class="form-control" (change)="showAll($event)">
+                           <option value=all>All</option>
+                           <option value=10>show 10</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="card-body table-responsive" style="padding: 0.25rem !important">
+                  <table class="table table-bordered table-striped table-sm">
+                     <thead>
+                        <tr>
+                            <th>Sr.</th>
+                           <th>Skill ID</th>
+                           <th>Skill Name</th>
+                           <th>Order Level</th>
+                           <th>Active Status</th>
+                           <th>Created On</th>
+                           <th>Created By</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr *ngFor="let skl of skillList | grdFilter:{skillID: searchText, skillName:searchText} | paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index">
+                           <td>  {{ initialPageSize * (p - 1) + i+1 }}</td> 
+                          <td>{{skl.skillID}}</td>
+                           <td>{{skl.skillName}}</td>
+                           <td>{{skl.orderlevl}}</td>
+                           <td>
+                      
+                             <span *ngIf="skl.activeStatus ===1">Active</span>
+                             <span *ngIf="skl.activeStatus !==1">DeActive</span>
+                            </td>
+                           <td>{{skl.createdDate  | date: 'MM/dd/yyyy'}}</td>
+                           <td>{{skl.createdBy}}</td>
+                          </tr>
+                     </tbody>
+                  </table>
+                  <pagination-controls  class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+               </div>
+              </div>
+      </div>
+ 
+    </div>
+</div> -->
