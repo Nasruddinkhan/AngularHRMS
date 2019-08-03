@@ -14,6 +14,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 /* import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatAutocompleteModule,MatInputModule} from '@angular/material'; */
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 
 @NgModule({
@@ -32,8 +33,10 @@ import {MatAutocompleteModule,MatInputModule} from '@angular/material'; */
       ToastrModule.forRoot(),
       NgxLoadingModule,
       ApplicationPipesModule,
+      TypeaheadModule.forRoot(),
     ],
-    declarations: [ SkillComponent, SkillElementComponent, OnlynumberDirective ]
+    declarations: [ SkillComponent, SkillElementComponent, OnlynumberDirective ],
+    bootstrap:[SkillElementComponent]
   })
 export class MasterModule{
 

@@ -8,3 +8,6 @@
   .my-pagination /deep/ .ngx-pagination .current {
     background: red;
   }
+  .table thead th {
+    white-space: nowrap !important;
+}

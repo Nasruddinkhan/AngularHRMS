@@ -1,3 +1,47 @@
-<p>
-  skill-element works!
-</p>
+<div class="row">
+  <div class="col-lg-12">
+    
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i>{{headerTitle}}
+      </div>
+      <form #newSkillElementForm="ngForm" (ngSubmit)="onSubmit(newSkillElementForm)">
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group col-sm-4">
+              <label for="slillelementName">Skill Element Name <span style="color:red">*</span></label>
+              <input type="text" class="form-control" required [(ngModel)]="slillelementName" name="slillelementName"
+                [ngClass]="{'red-border-class': !slillelementName1.valid && slillelementName1.touched}"
+                #slillelementName1="ngModel">
+              <div *ngIf="!slillelementName1.valid && slillelementName1.touched" style="color:red">
+                skillelements name is required
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="orderlevel">Order Level <span style="color:red">*</span></label>
+              <input type="text" class="form-control" appOnlynumber required [(ngModel)]="orderlevel" name="orderlevel"
+                [ngClass]="{'red-border-class': !orderlevel1.valid && orderlevel1.touched}" #orderlevel1="ngModel">
+              <div *ngIf="!orderlevel1.valid && orderlevel1.touched" style="color:red">
+                order level is required
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="SkillName">SkillName <span style="color:red">*</span></label>
+              <input required [(ngModel)]="skillname" [typeahead]="skills" typeaheadOptionField="code" name="skillname"
+              [ngClass]="{'red-border-class': !skillname1.valid && skillname1.touched}" (typeaheadOnSelect)="onSelect($event)"
+                [typeaheadScrollable]="true" [typeaheadOptionsInScrollableView]="10" #skillname1="ngModel"
+                class="form-control">
+              <div *ngIf="!skillname1.valid && skillname1.touched" style="color:red">
+                Skill Name is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="!newSkillElementForm.form.valid">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+</div>

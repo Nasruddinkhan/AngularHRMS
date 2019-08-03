@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl , NgForm} from "@angular/forms";
+import {  NgForm} from "@angular/forms";
 import { SkillService } from '../../service/skill.service';
 import { ToastrService } from 'ngx-toastr';
 import { SkillMaster } from '../../model/skillmodel';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
 
@@ -47,6 +46,7 @@ export class SkillComponent implements OnInit {
     this.loading = false;
     console.log(msg);
     this.skillList=msg;
+    
   },err=>{
     this.loading = false;
     console.log(err);
