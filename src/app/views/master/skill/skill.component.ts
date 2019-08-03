@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import {  NgForm} from "@angular/forms";
 import { SkillService } from '../../service/skill.service';
 import { ToastrService } from 'ngx-toastr';
 import { SkillMaster } from '../../model/skillmodel';
 import { Router } from '@angular/router';
-
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-skill',
@@ -23,7 +23,10 @@ export class SkillComponent implements OnInit {
   p: number = 1;
   initialPageSize: number = 5;
   isShow :boolean=false;
-  constructor(private skillService:SkillService ,  private toastr:ToastrService, private router:Router) {
+  message:string;
+  deletesklid:number;
+  modalRef: BsModalRef;
+  constructor(private skillService:SkillService ,  private toastr:ToastrService, private router:Router, private modalService: BsModalService) {
   //  this.loadStates();
    }
    collapsed(event: any): void {
@@ -52,6 +55,32 @@ export class SkillComponent implements OnInit {
     console.log(err);
   });
   }
+  deleteSkillsModal(template: TemplateRef<any>,sklname :string, sklid:number) {
+    this.deletesklid = sklid;
+    this.message= sklid+"-"+sklname;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+  confirm(): void {
+    this.deleteSkill();
+    this.modalRef.hide();
+  }
+  deleteSkill(){
+    this.skillService.deleteSkills(this.deletesklid).subscribe((msg:any)=>{
+      this.getSkillList();
+      this.loading=false;
+      this.toastr.success(this.deletesklid+' has been  successfully', 'Delete Skill', {
+        positionClass: 'toast-bottom-right'
+      });
+    },err=>{
+      this.loading=false;
+      this.toastr.error(err.msg, 'Internal Errors', {
+        positionClass: 'toast-bottom-right'
+      });
+    });
+  }
+  decline(): void {
+    this.modalRef.hide();
+  }
   onSubmit(form: NgForm) {
     if (form.valid) {
       this.skillmodel = new SkillMaster;
@@ -66,7 +95,7 @@ export class SkillComponent implements OnInit {
         this.loading = false;
         console.log(msg);
         //this.skillList=msg;
-        this.toastr.success('Add Skill Successfully','Skill Master',{
+         this.toastr.success('Add Skill Successfully','Skill Master',{
           positionClass:'toast-bottom-right' });
           this.getSkillList();
       },err=>{

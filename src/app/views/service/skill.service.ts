@@ -23,4 +23,8 @@ export class SkillService {
     return this.http.post(this.baseURL+`skillmaster/saveskill`, skill).pipe(
       catchError(this.errorHandling.handleError))
   }
+  deleteSkills(skillID:number):Observable<any>{
+    return this.http.delete(this.baseURL + `skillmaster/${skillID}/deleteskill`).pipe(
+      catchError(this.errorHandling.handleError));
+  }
 }
