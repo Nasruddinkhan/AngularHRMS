@@ -46,7 +46,6 @@
           <button type="submit"  class="btn btn-primary" [disabled]="!newSkillForm.form.valid">Submit</button>
         </div>
       </form>
-
     </div>
     <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
     <div *ngIf="skillList?.length > 0">
