@@ -25,39 +25,59 @@ export class SkillElementComponent implements OnInit {
   initialPageSize: number = 5;
   modalRef: BsModalRef;
   message: string;
-  deleteSklEleId:number;
+  deleteSklEleId: number;
+  showDeleteModal :boolean=false;
+  showEditModel :boolean=false;
+  showModalclass:string;
   constructor(private sklelementSrvice: SkillelementService, private toastr: ToastrService, private modalService: BsModalService) { }
   ngOnInit() {
     this.getSkillsList();
     this.getSkillElementsDetails();
   }
-  delteeModal(template: TemplateRef<any>,skillelementname :string, skillelID:number) {
-    this.deleteSklEleId = skillelID;
-    this.message= skillelID+"-"+skillelementname;
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+
+  openModal(template: TemplateRef<any>, skillelements, page) {
+    this.showDeleteModal=false;
+    this.showEditModel=false;
+    if (page === 'D') {
+      this.showDeleteModal=true;
+      this.deleteSklEleId = skillelements.skillElementID;
+      this.message = skillelements.skillElementID + "-" + skillelements.skillElementName;
+      this.showModalclass='modal-sm' ;
+    }else if(page ==='E'){
+      this.message = "Update Skill Ellemnts : "+skillelements.skillElementID + "-" + skillelements.skillElementName;
+      this.showEditModel=true;
+      this.showModalclass='modal-lg' ;
+    }
+    this.modalRef = this.modalService.show(template, { class:   this.showModalclass });
   }
 
   confirm(): void {
     this.deleteSkillElelents();
     this.modalRef.hide();
   }
-  deleteSkillElelents(){
-    this.sklelementSrvice.deleteSkillElements(this.deleteSklEleId).subscribe((msg:any)=>{
-      this.getSkillElementsDetails();
-      this.loading=false;
-      this.toastr.success(this.deleteSklEleId+' has been  Successfully', 'Delete Skill Elelements', {
+  deleteSkillElelents() {
+    this.sklelementSrvice.deleteSkillElements(this.deleteSklEleId).subscribe((msg: any) => {
+      this.loading = false;
+      this.toastr.success(this.deleteSklEleId + ' has been  Successfully', 'Delete Skill Elelements', {
         positionClass: 'toast-bottom-right'
       });
-    },err=>{
-      this.loading=false;
-      this.toastr.error(err.msg, 'Internal Errors', {
+     
+    }, err => {
+      this.loading = false;
+     // alert(JSON.stringify(err));
+      this.toastr.error(err.error.message, 'Internal Errors', {
         positionClass: 'toast-bottom-right'
       });
+      
     });
+    this.getSkillElementsDetails();
   }
 
   decline(): void {
     this.modalRef.hide();
+    this.toastr.warning('decline delete event', 'Skillelements', {
+      positionClass: 'toast-bottom-right'
+    });
   }
   collapsed(event: any): void {
     // console.log(event);
@@ -75,6 +95,7 @@ export class SkillElementComponent implements OnInit {
       this.skillelements = skillelements;
       console.log(this.skillelements);
     }, err => {
+      this.skillelements=[];
       console.log(err);
     });
     this.loading = false;
@@ -84,7 +105,7 @@ export class SkillElementComponent implements OnInit {
     this.sklelementSrvice.getSkillsList().subscribe((msg: any) => {
       this.loading = false;
       this.skills = msg;
-      
+
       console.log(msg);
     }, err => {
       this.loading = false;
@@ -98,7 +119,7 @@ export class SkillElementComponent implements OnInit {
   }*/
   onSubmit(form: NgForm) {
     if (form.valid) {
-     this.loading=true;
+      this.loading = true;
       this.skillelement = new SkillElementsMaster;
       this.skillelement.activeStatus = 1;
       this.skillelement.createdBy = "Nasruddin";
@@ -106,14 +127,14 @@ export class SkillElementComponent implements OnInit {
       this.skillelement.skillElementName = form.value.slillelementName;
       this.skillelement.orderlevl = form.value.orderlevel;
       this.sklelementSrvice.saveSkillElementDetails(this.skillId, this.skillelement).subscribe((response: any) => {
-        this.loading=false;
+        this.loading = false;
         this.getSkillElementsDetails();
         this.toastr.success('Add Skill Element Successfully', 'Skill Elelements', {
           positionClass: 'toast-bottom-right'
         });
       }, err => {
-        this.loading=false;
-        this.toastr.error(err.msg, 'Internal Errors', {
+        this.loading = false;
+        this.toastr.error(err.error.message, 'Internal Errors', {
           positionClass: 'toast-bottom-right'
         });
       });
