@@ -5,7 +5,7 @@
       <div class="card-header">
         <i class="icon-people"></i>{{headerTitle}}
       </div>
-      <form #newSkillElementForm="ngForm" (ngSubmit)="onSubmit(newSkillElementForm)">
+      <form #newSkillElementForm="ngForm" (ngSubmit)="onSubmit(newSkillElementForm, 'I')">
         <div class="card-body">
           <div class="row">
             <div class="form-group col-sm-4">
@@ -30,6 +30,7 @@
               <select required [(ngModel)]="skillId" typeaheadOptionField="code" name="skillname"
                 [ngClass]="{'red-border-class': !skillname1.valid && skillname1.touched}" #skillname1="ngModel"
                 class="form-control">
+                <option value="">Select skill</option>
                 <option *ngFor="let skl of skills" [value]="skl.id">{{skl.code}}</option>
               </select>
               <div *ngIf="!skillname1.valid && skillname1.touched" style="color:red">
@@ -97,7 +98,7 @@
               </thead>
               <tbody>
                 <tr
-                  *ngFor="let skillelements of skillelements | grdFilter:{skillID: searchText, skillName:searchText} |  paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index">
+                  *ngFor="let skillelements of skillelements | grdFilter:{skillID: searchText, skillName:searchText} |  paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index"  >
                   <td> {{ initialPageSize * (p - 1) + i+1 }}</td>
                   <td>{{skillelements.skillElementID}}</td>
                   <td>{{skillelements.skillName}}</td>
@@ -111,6 +112,8 @@
                   <td>{{skillelements.createdDate  | date: 'MM/dd/yyyy'}}</td>
                   <td>{{skillelements.createdBy}}</td>
                   <td>
+                      <span><button class="badge badge-primary"
+                        (click)="openModal(template,skillelements, 'V')">View</button></span>
                     <span><button class="badge badge-info"
                         (click)="openModal(template,skillelements, 'E')">Edit</button></span>
                     <span><button class="badge badge-danger"
@@ -136,18 +139,47 @@
       <button type="button" class="btn btn-danger" (click)="confirm()">Yes</button>
       <button type="button" class="btn btn-primary" (click)="decline()">No</button>
     </div>
-
+    <div *ngIf=" this.showViewModel">
+        <div class="card">
+        <div class="card-header">
+          <i class="icon-people"></i>{{message}}
+        </div>
+        <div class="card-body table-responsive" style="padding: 0.25rem !important">
+            <table class="table table-bordered table-striped table-sm">
+              
+                <tr>
+                  <th>Skill ID</th>
+                  <td style="background-color: white">{{upSkills}}</td>
+                  <th>SkillElement Name</th>
+                  <td style="background-color: white">{{upslillelementName}}</td>
+                  <th>Skill Name</th>
+                  <td style="background-color: white">{{updateskills}}</td>
+                </tr>
+                <tr>
+                    <th>Created Date</th>
+                    <td style="background-color: white">{{upCreatedDate}}</td>
+                    <th>Created By</th>
+                    <td style="background-color: white">{{updatedCreatedBy}}</td>
+                    <th>Updated By Date</th>
+                    <td style="background-color: white">{{updatedBY}} {{this.updatedDate | date: 'MM/dd/yyyy'}}</td>
+                </tr>
+                <tr>
+              </tr>
+            </table>
+          </div>
+          </div>
+    </div>
     <div *ngIf="showEditModel">
       <div class="card">
         <div class="card-header">
           <i class="icon-people"></i>{{message}}
         </div>
-        <form #newSkillElementForm="ngForm" (ngSubmit)="onSubmit(newSkillElementForm)">
+        <form #updateSkillElementForm="ngForm" (ngSubmit)="onSubmit(updateSkillElementForm, 'U')">
             <div class="card-body">
               <div class="row">
                 <div class="form-group col-sm-4">
                   <label for="slillelementName">Skill Element Name <span style="color:red">*</span></label>
-                  <input type="text" class="form-control" required [(ngModel)]="slillelementName" name="slillelementName"
+                  <input type="text" class="form-control" required [(ngModel)]="upslillelementName" name="slillelementName"
                     [ngClass]="{'red-border-class': !slillelementName1.valid && slillelementName1.touched}"
                     #slillelementName1="ngModel">
                   <div *ngIf="!slillelementName1.valid && slillelementName1.touched" style="color:red">
@@ -156,7 +188,7 @@
                 </div>
                 <div class="form-group col-sm-4">
                   <label for="orderlevel">Order Level <span style="color:red">*</span></label>
-                  <input type="text" class="form-control" appOnlynumber required [(ngModel)]="orderlevel" name="orderlevel"
+                  <input type="text" class="form-control" appOnlynumber required [(ngModel)]="uporderlevel" name="orderlevel"
                     [ngClass]="{'red-border-class': !orderlevel1.valid && orderlevel1.touched}" #orderlevel1="ngModel">
                   <div *ngIf="!orderlevel1.valid && orderlevel1.touched" style="color:red">
                     order level is required
@@ -164,9 +196,10 @@
                 </div>
                 <div class="form-group col-sm-4">
                   <label for="SkillName">SkillName <span style="color:red">*</span></label>
-                  <select required [(ngModel)]="skillId" typeaheadOptionField="code" name="skillname"
+                  <select required [(ngModel)]="upskillId" typeaheadOptionField="code" name="skillname"
                     [ngClass]="{'red-border-class': !skillname1.valid && skillname1.touched}" #skillname1="ngModel"
                     class="form-control">
+                    <option value="">Select skill</option>
                     <option *ngFor="let skl of skills" [value]="skl.id">{{skl.code}}</option>
                   </select>
                   <div *ngIf="!skillname1.valid && skillname1.touched" style="color:red">
@@ -176,7 +209,7 @@
               </div>
             </div>
             <div class="card-footer">
-              <button type="submit" class="btn btn-primary" [disabled]="!newSkillElementForm.form.valid">Update</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!updateSkillElementForm.form.valid">Update</button>
               <button type="reset" class="btn btn-warning">Reset</button>
             </div>
           </form>

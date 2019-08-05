@@ -16,7 +16,7 @@ import { AppComponent } from './app.component';
 import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
+
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
@@ -49,6 +49,7 @@ import { ErrorHandling } from './views/service/error.service';
 import { ToastrModule } from 'ngx-toastr';
 import { OnlynumberDirective } from './views/directive/onlynumber.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ShareCommonComonentModule } from './ShareCommonComonentModule';
 
 @NgModule({
   imports: [
@@ -69,7 +70,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     CollapseModule.forRoot(),
     WebcamModule,
-  
+    ShareCommonComonentModule,
     ReactiveFormsModule,
         BrowserModule,
         ToastrModule.forRoot({
@@ -81,7 +82,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
-    P500Component,
     LoginComponent,
     RegisterComponent
     

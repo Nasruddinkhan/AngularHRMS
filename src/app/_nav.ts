@@ -50,6 +50,11 @@ export const navItems: NavData[] = [
         name: 'SkillElements',
         url: '/master/skillelements',
         icon: 'fa fa-fw fa-user'
+      },
+      {
+        name: 'upload',
+        url: '/master/uploadmaster',
+        icon: 'fa fa-fw fa-user'
       }
     ]
   }

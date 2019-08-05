@@ -16,6 +16,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatAutocompleteModule,MatInputModule} from '@angular/material'; */
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { UploadMasterComponent } from './upload-master/upload-master.component';
+import { P500Component } from '../error/500.component';
+import { ShareCommonComonentModule } from '../../ShareCommonComonentModule';
 
 
 @NgModule({
@@ -35,9 +38,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
       NgxLoadingModule,
       ApplicationPipesModule,
       TypeaheadModule.forRoot(),
-      ModalModule.forRoot()
+      ModalModule.forRoot(),
+      ShareCommonComonentModule
     ],
-    declarations: [ SkillComponent, SkillElementComponent, OnlynumberDirective ],
+    declarations: [ SkillComponent, SkillElementComponent, OnlynumberDirective, UploadMasterComponent],
     bootstrap:[SkillElementComponent]
   })
 export class MasterModule{
