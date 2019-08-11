@@ -45,7 +45,7 @@
             </div>
             <div class="card-footer">
                <button type="submit" class="btn btn-primary" [disabled]="!newSkillForm.form.valid">Submit</button>
-               <button type="reset" class="btn btn-warning" >Reset</button>
+               <button type="reset" class="btn btn-warning">Reset</button>
             </div>
          </form>
       </div>
@@ -80,8 +80,8 @@
                   <div class="col-md-2">
                      <div class="form-group">
                         <select class="form-control" (change)="showAll($event)">
-                              <option value=all>All</option>
-                              <option value=5>show 5</option>
+                           <option value=all>All</option>
+                           <option value=5>show 5</option>
                         </select>
                      </div>
                   </div>
@@ -114,10 +114,16 @@
                            </td>
                            <td>{{skl.createdDate  | date: 'MM/dd/yyyy'}}</td>
                            <td>{{skl.createdBy}}</td>
-                           <td><!-- 
+                           <td>
+                              <!-- 
                                  <span><button  class="badge badge-info" >Edit</button></span> -->
-                                 <span><button  class="badge badge-danger"  (click)="deleteSkillsModal(template, skl.skillName, skl.skillID )">Delete</button></span>
-                            </td>
+                              <span><button class="badge badge-primary"
+                                    (click)="openSkillsModal(template,skillelements, 'V')">View</button></span>
+                              <span><button class="badge badge-info"
+                                    (click)="openSkillsModal(template,skillelements, 'E')">Edit</button></span>
+                              <span><button class="badge badge-danger"
+                                    (click)="openSkillsModal(template, skl, 'D' )">Delete</button></span>
+                           </td>
                         </tr>
                      </tbody>
                   </table>
@@ -130,9 +136,24 @@
       </div>
    </div>
    <ng-template #template>
-         <div class="modal-body text-center">
-           <p>Do you want to delete this skills {{message}}?</p>
-           <button type="button" class="btn btn-success" (click)="confirm()" >Yes</button>
-           <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+      <div class="modal-body text-center">
+         <div *ngIf="showDeleteModal">
+            <p>Do you want to delete this skills {{message}}?</p>
+            <button type="button" class="btn btn-success" (click)="confirm()">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
          </div>
-       </ng-template>
+         <div *ngIf="showViewModel">
+               <div class="card">
+                     <div class="card-header">
+                       <i class="icon-people"></i>View Skills
+                     </div>
+                     <div class="card-body table-responsive" style="padding: 0.25rem !important">
+                         <table class="table table-bordered table-striped table-sm">
+                           
+                           
+                         </table>
+                       </div>
+                       </div>
+         </div>
+      </div>
+   </ng-template>

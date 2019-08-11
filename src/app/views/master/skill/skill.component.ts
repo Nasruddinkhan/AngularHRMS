@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import {  NgForm} from "@angular/forms";
+import { NgForm } from "@angular/forms";
 import { SkillService } from '../../service/skill.service';
 import { ToastrService } from 'ngx-toastr';
 import { SkillMaster } from '../../model/skillmodel';
@@ -14,22 +14,25 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class SkillComponent implements OnInit {
   title = 'materialApp';
   headerTitle = "Add Skill";
-  slillName:string;
+  slillName: string;
   isCollapsed: boolean = false;
   iconCollapse: string = 'icon-arrow-up';
   public loading = false;
-  skillList:any;
-  skillmodel:SkillMaster;
+  skillList: any;
+  skillmodel: SkillMaster;
   p: number = 1;
   initialPageSize: number = 5;
-  isShow :boolean=false;
-  message:string;
-  deletesklid:number;
+  isShow: boolean = false;
+  message: string;
+  deletesklid: number;
   modalRef: BsModalRef;
-  constructor(private skillService:SkillService ,  private toastr:ToastrService, private router:Router, private modalService: BsModalService) {
-  //  this.loadStates();
-   }
-   collapsed(event: any): void {
+  showDeleteModal :boolean=false;
+  showEditModel :boolean=false;
+  showViewModel :boolean=false;
+  constructor(private skillService: SkillService, private toastr: ToastrService, private router: Router, private modalService: BsModalService) {
+    //  this.loadStates();
+  }
+  collapsed(event: any): void {
     // console.log(event);
   }
   expanded(event: any): void {
@@ -44,35 +47,46 @@ export class SkillComponent implements OnInit {
   }
 
   getSkillList() {
-  this.loading = true;
-  this.skillService.getAllSkillDetails().subscribe((msg:any)=>{
-    this.loading = false;
-    console.log(msg);
-    this.skillList=msg;
-    
-  },err=>{
-    this.loading = false;
-    console.log(err);
-  });
+    this.loading = true;
+    this.skillService.getAllSkillDetails().subscribe((msg: any) => {
+      this.loading = false;
+      console.log(msg);
+      this.skillList = msg;
+
+    }, err => {
+      this.loading = false;
+      console.log(err);
+    });
   }
-  deleteSkillsModal(template: TemplateRef<any>,sklname :string, sklid:number) {
-    this.deletesklid = sklid;
-    this.message= sklid+"-"+sklname;
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  openSkillsModal(template: TemplateRef<any>, skls, flag) {
+    this.showDeleteModal=false;
+    this.showEditModel=false;
+    this.showViewModel=false;
+    let modalClass;
+    if (flag == 'D') {
+      this.showDeleteModal=true;
+      this.deletesklid = skls.skillID;
+      this.message = skls.skillID + "-" + skls.skillName;
+      modalClass = 'modal-sm';
+    }else if(flag == 'V'){
+      modalClass = 'modal-lg';
+      this.showViewModel=true;
+    }
+    this.modalRef = this.modalService.show(template, { class: modalClass });
   }
   confirm(): void {
     this.deleteSkill();
     this.modalRef.hide();
   }
-  deleteSkill(){
-    this.skillService.deleteSkills(this.deletesklid).subscribe((msg:any)=>{
+  deleteSkill() {
+    this.skillService.deleteSkills(this.deletesklid).subscribe((msg: any) => {
       this.getSkillList();
-      this.loading=false;
-      this.toastr.success(this.deletesklid+' has been  successfully', 'Delete Skill', {
+      this.loading = false;
+      this.toastr.success(this.deletesklid + ' has been  successfully', 'Delete Skill', {
         positionClass: 'toast-bottom-right'
       });
-    },err=>{
-      this.loading=false;
+    }, err => {
+      this.loading = false;
       this.toastr.error(err.msg, 'Internal Errors', {
         positionClass: 'toast-bottom-right'
       });
@@ -86,26 +100,28 @@ export class SkillComponent implements OnInit {
       this.skillmodel = new SkillMaster;
       console.log(form.value.slillName);
       console.log(form.value.orderlevel);
-      this.skillmodel.activeStatus=1;
-      this.skillmodel.createdBy="Nasruddin";
-      this.skillmodel.createdDate=new Date();
-      this.skillmodel.skillName=form.value.slillName;
+      this.skillmodel.activeStatus = 1;
+      this.skillmodel.createdBy = "Nasruddin";
+      this.skillmodel.createdDate = new Date();
+      this.skillmodel.skillName = form.value.slillName;
       this.skillmodel.orderlevl = form.value.orderlevel;
-      this.skillService.saveSkillDetail(this.skillmodel).subscribe((msg:any)=>{
+      this.skillService.saveSkillDetail(this.skillmodel).subscribe((msg: any) => {
         this.loading = false;
         console.log(msg);
         //this.skillList=msg;
-         this.toastr.success('Add Skill Successfully','Skill Master',{
-          positionClass:'toast-bottom-right' });
-          this.getSkillList();
-      },err=>{
+        this.toastr.success('Add Skill Successfully', 'Skill Master', {
+          positionClass: 'toast-bottom-right'
+        });
+        this.getSkillList();
+      }, err => {
         this.loading = false;
-        this.toastr.error(err.message,'Internal Error',{
-          positionClass:'toast-bottom-right' });
-          this.router.navigate(['/master/error']);
+        this.toastr.error(err.message, 'Internal Error', {
+          positionClass: 'toast-bottom-right'
+        });
+        this.router.navigate(['/master/error']);
         console.log(err);
       });
-     // console.log(JSON.stringify(this.skillmodel));
+      // console.log(JSON.stringify(this.skillmodel));
       // ...our form is valid, we can submit the data
       form.reset();
     }
@@ -115,12 +131,12 @@ export class SkillComponent implements OnInit {
     if (event.target.value == 5) {
       this.isShow = false;
       this.initialPageSize = event.target.value;
-     this.p = 1;
+      this.p = 1;
     } else {
       this.isShow = true;
       this.initialPageSize = this.skillList.length;
     }
     // alert(this.searchResult.length)
   }
- 
+
 }

@@ -157,11 +157,11 @@
                 </tr>
                 <tr>
                     <th>Created Date</th>
-                    <td style="background-color: white">{{upCreatedDate}}</td>
+                    <td style="background-color: white">{{upCreatedDate  | date: 'MM/dd/yyyy'}}</td>
                     <th>Created By</th>
                     <td style="background-color: white">{{updatedCreatedBy}}</td>
                     <th>Updated By Date</th>
-                    <td style="background-color: white">{{updatedBY}} {{this.updatedDate | date: 'MM/dd/yyyy'}}</td>
+                    <td style="background-color: white">{{updatedBY}} {{updatedDate | date: 'MM/dd/yyyy'}}</td>
                 </tr>
                 <tr>
               </tr>
