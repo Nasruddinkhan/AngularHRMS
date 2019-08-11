@@ -8,6 +8,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { AuthGuardService } from './views/auth/auth-guard.service';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,14 @@ export const routes: Routes = [
       title: 'Page 404'
     }
   },
+  {
+    path:'error',
+    data:{
+        title:'error'
+    },
+    component:P500Component,
+    canActivate: [AuthGuardService],
+},
   {
     path: '500',
     component: P500Component,
@@ -52,11 +61,13 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: './views/dashboard/dashboard.module#DashboardModule'
+        loadChildren: './views/dashboard/dashboard.module#DashboardModule',
+        canActivate: [AuthGuardService],
       },
       {
         path: 'master',
-        loadChildren: './views/master/master.module#MasterModule'
+        loadChildren: './views/master/master.module#MasterModule',
+        canActivate: [AuthGuardService],
       }
     ]
   },

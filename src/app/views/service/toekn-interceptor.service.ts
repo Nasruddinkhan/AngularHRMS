@@ -11,7 +11,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     let tokenizedReq;
     if(authService.loggedIn()){
       req = req.clone({headers: req.headers.set('Authorization', 'Token '+authService.getToken())})
-    console.log("header :::::::::: "+req)
+    //alert("header :::::::::: "+req)
     }
     req = req.clone({headers: req.headers.set('Content-Type', 'application/json')})
     return next.handle(req)

@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -40,16 +38,19 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { TokenInterceptorService } from './views/service/toekn-interceptor.service';
-import { HTTP_INTERCEPTORS,HttpClientModule } from '@angular/common/http/';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http/';
 import { NgxLoadingModule } from 'ngx-loading';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CollapseModule } from 'ngx-bootstrap/collapse/';
-import {WebcamModule} from 'ngx-webcam';
+import { WebcamModule } from 'ngx-webcam';
 import { ErrorHandling } from './views/service/error.service';
 import { ToastrModule } from 'ngx-toastr';
 import { OnlynumberDirective } from './views/directive/onlynumber.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShareCommonComonentModule } from './ShareCommonComonentModule';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { SessionPromtModalComponent } from './session.promt.modal';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -72,31 +73,33 @@ import { ShareCommonComonentModule } from './ShareCommonComonentModule';
     WebcamModule,
     ShareCommonComonentModule,
     ReactiveFormsModule,
-        BrowserModule,
-        ToastrModule.forRoot({
-          maxOpened:1,
-      autoDismiss:true
-        })
+    BrowserModule,
+    ToastrModule.forRoot({
+      maxOpened: 1,
+      autoDismiss: true
+    }),
+    NgIdleKeepaliveModule.forRoot(),
+    NgbModule.forRoot()
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
     LoginComponent,
-    RegisterComponent
-    
+    RegisterComponent,
+    SessionPromtModalComponent,
   ],
-  providers: [ErrorHandling,OnlynumberDirective,{
+  providers: [ErrorHandling, OnlynumberDirective, {
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   },
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptorService,
-    multi: true
-  }]
-  
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }]
   ,
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent],
+  entryComponents: [SessionPromtModalComponent]
 })
 export class AppModule { }
