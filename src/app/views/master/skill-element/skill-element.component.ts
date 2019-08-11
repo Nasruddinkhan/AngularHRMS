@@ -26,21 +26,21 @@ export class SkillElementComponent implements OnInit {
   modalRef: BsModalRef;
   message: string;
   deleteSklEleId: number;
-  showDeleteModal :boolean=false;
-  showEditModel :boolean=false;
-  showViewModel :boolean=false;
-  showModalclass:string;
-  upslillelementName:string;
-  upskillId :string;
-  uporderlevel:number;
-  upSkills:number;
-  upCreatedDate:Date;
-  updatedCreatedBy:string;
-  viewskills:string;
-  viewSkillsID:number;
-  updatedBY:string;
-  updatedDate:string;
-  updateskills:string;
+  showDeleteModal: boolean = false;
+  showEditModel: boolean = false;
+  showViewModel: boolean = false;
+  showModalclass: string;
+  upslillelementName: string;
+  upskillId: string;
+  uporderlevel: number;
+  upSkills: number;
+  upCreatedDate: Date;
+  updatedCreatedBy: string;
+  viewskills: string;
+  viewSkillsID: number;
+  updatedBY: string;
+  updatedDate: string;
+  updateskills: string;
   constructor(private sklelementSrvice: SkillelementService, private toastr: ToastrService, private modalService: BsModalService) { }
   ngOnInit() {
     this.getSkillsList();
@@ -48,39 +48,38 @@ export class SkillElementComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>, skillelements, page) {
-    
-    this.showDeleteModal=false;
-    this.showEditModel=false;
-    this.showViewModel=false;
+
+    this.showDeleteModal = false;
+    this.showEditModel = false;
+    this.showViewModel = false;
     if (page === 'D') {
-      this.showDeleteModal=true;
+      this.showDeleteModal = true;
       this.deleteSklEleId = skillelements.skillElementID;
       this.message = skillelements.skillElementID + "-" + skillelements.skillElementName;
-      this.showModalclass='modal-sm' ;
-    }else if(page ==='E' || page ==='V'){
-    
-     if(page ==='E'){
-      this.showEditModel=true;
-      this.message = "Update Skill Ellemnts : "+skillelements.skillElementID + "-" + skillelements.skillElementName;
+      this.showModalclass = 'modal-sm';
+    } else if (page === 'E' || page === 'V') {
 
-     }
-      else{
-      this.showViewModel=true;
-      this.message = "View Skill Ellemnts : "+skillelements.skillElementID + "-" + skillelements.skillElementName;
-      this.updatedBY=skillelements.modifiedBy;
-  this.updatedDate=skillelements.modifiedDate;
+      if (page === 'E') {
+        this.showEditModel = true;
+        this.message = "Update Skill Ellemnts : " + skillelements.skillElementID + "-" + skillelements.skillElementName;
 
       }
-      this.upSkills= skillelements.skillElementID ;
-      this.showModalclass='modal-lg' ;
-      this.upslillelementName=skillelements.skillElementName;
-      this.upskillId =skillelements.skillID;
-      this.uporderlevel=skillelements.orderlevl;
-      this.upCreatedDate=skillelements.createdDate; 
-      this.updatedCreatedBy=skillelements.createdBy;
-      this.updateskills=skillelements.skillName;
+      else {
+        this.showViewModel = true;
+        this.message = "View Skill Ellemnts : " + skillelements.skillElementID + "-" + skillelements.skillElementName;
+        this.updatedBY = skillelements.modifiedBy;
+        this.updatedDate = skillelements.modifiedDate;
+      }
+      this.upSkills = skillelements.skillElementID;
+      this.showModalclass = 'modal-lg';
+      this.upslillelementName = skillelements.skillElementName;
+      this.upskillId = skillelements.skillID;
+      this.uporderlevel = skillelements.orderlevl;
+      this.upCreatedDate = skillelements.createdDate;
+      this.updatedCreatedBy = skillelements.createdBy;
+      this.updateskills = skillelements.skillName;
     }
-    this.modalRef = this.modalService.show(template, { class:   this.showModalclass });
+    this.modalRef = this.modalService.show(template, { class: this.showModalclass });
   }
 
   confirm(): void {
@@ -94,20 +93,20 @@ export class SkillElementComponent implements OnInit {
       this.toastr.success(this.deleteSklEleId + ' has been  Successfully', 'Delete Skill Elelements', {
         positionClass: 'toast-bottom-right'
       });
-     
+
     }, err => {
       this.loading = false;
-     // alert(JSON.stringify(err));
+      // alert(JSON.stringify(err));
       this.toastr.error(err.error.message, 'Internal Errors', {
         positionClass: 'toast-bottom-right'
       });
-      
+
     });
-   
+
   }
-closePopUP():void{
-  this.modalRef.hide();
-}
+  closePopUP(): void {
+    this.modalRef.hide();
+  }
 
   decline(): void {
     this.modalRef.hide();
@@ -131,7 +130,7 @@ closePopUP():void{
       this.skillelements = skillelements;
       console.log(this.skillelements);
     }, err => {
-      this.skillelements=[];
+      this.skillelements = [];
       console.log(err);
     });
     this.loading = false;
@@ -153,41 +152,41 @@ closePopUP():void{
     this.skillId = event.item.id;
     
   }*/
-  onSubmit(form: NgForm,  pageFlag) {
+  onSubmit(form: NgForm, pageFlag) {
     let skillmsg;
     let skillid;
     if (form.valid) {
       this.loading = true;
       this.skillelement = new SkillElementsMaster;
-      if(pageFlag==='I'){
-        skillmsg ="Add Skill Element Successfully";
+      if (pageFlag === 'I') {
+        skillmsg = "Add Skill Element Successfully";
         this.skillelement.createdBy = "Nasruddin";
         this.skillelement.createdDate = new Date();
         this.skillelement.orderlevl = form.value.orderlevel;
         skillid = this.skillId;
-      }else{
-        skillmsg ="Update Skill Element Successfully";
-        this.skillelement.skillElementID=this.upSkills;
+      } else {
+        skillmsg = "Update Skill Element Successfully";
+        this.skillelement.skillElementID = this.upSkills;
         this.skillelement.modifiedBy = "Nasruddin";
         this.skillelement.modifiedDate = new Date();
         this.skillelement.orderlevl = this.uporderlevel;
         skillid = this.upskillId;
-        this.skillelement.createdBy=this.updatedCreatedBy;
-        this.skillelement.createdDate=this.upCreatedDate;
+        this.skillelement.createdBy = this.updatedCreatedBy;
+        this.skillelement.createdDate = this.upCreatedDate;
       }
-      
-    
-     
+
+
+
       this.skillelement.activeStatus = 1;
       this.skillelement.skillElementName = form.value.slillelementName;
-      
+
       this.sklelementSrvice.saveSkillElementDetails(skillid, this.skillelement).subscribe((response: any) => {
         this.loading = false;
         this.getSkillElementsDetails();
         this.toastr.success(skillmsg, 'Skill Elelements', {
           positionClass: 'toast-bottom-right'
         });
-        if(pageFlag==='U')
+        if (pageFlag === 'U')
           this.closePopUP();
 
       }, err => {
@@ -201,5 +200,5 @@ closePopUP():void{
     // console.log(JSON.stringify(this.skillmodel));
     // ...our form is valid, we can submit the data
   }
- 
+
 }

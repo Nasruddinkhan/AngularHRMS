@@ -37,6 +37,14 @@ const routes: Routes=[{
         },
         component:UploadMasterComponent,
         canActivate: [AuthGuardService],
+    },
+    {
+        path:'error',
+        data:{
+            title:'error'
+        },
+        component:P500Component,
+        canActivate: [AuthGuardService],
     }
     ]
     }]

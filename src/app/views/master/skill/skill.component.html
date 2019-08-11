@@ -21,7 +21,7 @@
             <i class="icon-people"></i>{{headerTitle}}
 
          </div>
-         <form #newSkillForm="ngForm" (ngSubmit)="onSubmit(newSkillForm)">
+         <form #newSkillForm="ngForm" (ngSubmit)="onSubmit(newSkillForm, 'I')">
             <div class="card-body">
                <div class="row">
                   <div class="form-group col-sm-3">
@@ -118,9 +118,9 @@
                               <!-- 
                                  <span><button  class="badge badge-info" >Edit</button></span> -->
                               <span><button class="badge badge-primary"
-                                    (click)="openSkillsModal(template,skillelements, 'V')">View</button></span>
+                                    (click)="openSkillsModal(template,skl, 'V')">View</button></span>
                               <span><button class="badge badge-info"
-                                    (click)="openSkillsModal(template,skillelements, 'E')">Edit</button></span>
+                                    (click)="openSkillsModal(template,skl, 'E')">Edit</button></span>
                               <span><button class="badge badge-danger"
                                     (click)="openSkillsModal(template, skl, 'D' )">Delete</button></span>
                            </td>
@@ -143,17 +143,76 @@
             <button type="button" class="btn btn-primary" (click)="decline()">No</button>
          </div>
          <div *ngIf="showViewModel">
-               <div class="card">
-                     <div class="card-header">
-                       <i class="icon-people"></i>View Skills
+            <div class="card">
+               <div class="card-header">
+                  <i class="icon-people"></i>View Skills {{message}}
+               </div>
+               <div class="card-body table-responsive" style="padding: 0.25rem !important">
+                  <table class="table table-bordered table-striped table-sm">
+                     <tr>
+                        <th>Skill ID</th>
+                        <td style="background-color: white">{{upSkills}}</td>
+
+                        <th>Skill Name</th>
+                        <td style="background-color: white">{{updateskills}}</td>
+
+                        <th>Created Date</th>
+                        <td style="background-color: white">{{upCreatedDate  | date: 'MM/dd/yyyy'}}</td>
+
+                     </tr>
+                     <tr>
+
+                        <th>Created By</th>
+                        <td style="background-color: white">{{updatedCreatedBy}}</td>
+                        <th>Updated By</th>
+                        <td style="background-color: white">{{updatedBY}} </td>
+                        <th>Updated Date</th>
+                        <td style="background-color: white">{{updatedDate | date: 'MM/dd/yyyy'}}</td>
+
+                     </tr>
+
+                  </table>
+               </div>
+            </div>
+         </div>
+         <div *ngIf="showEditModel">
+            <div class="card">
+               <div class="card-header">
+                  <i class="icon-people"></i>{{message}}
+               </div>
+               <form #updateSkillForm="ngForm" (ngSubmit)="onSubmit(updateSkillForm, 'U')">
+                  <div class="card-body">
+                     <div class="row">
+                        <div class="form-group col-sm-4">
+                           <label for="slillelementName">Skill Name <span style="color:red">*</span></label>
+                           <input type="text" class="form-control" required [(ngModel)]="updateskills"
+                              name="slillelementName"
+                              [ngClass]="{'red-border-class': !updateskills1.valid && updateskills1.touched}"
+                              #updateskills1="ngModel">
+                           <div *ngIf="!updateskills1.valid && updateskills1.touched" style="color:red">
+                              skill name is required
+                           </div>
+                        </div>
+                        <div class="form-group col-sm-4">
+                           <label for="orderlevel">Order Level <span style="color:red">*</span></label>
+                           <input type="text" class="form-control" appOnlynumber required [(ngModel)]="uporderlevel"
+                              name="orderlevel"
+                              [ngClass]="{'red-border-class': !orderlevel1.valid && orderlevel1.touched}"
+                              #orderlevel1="ngModel">
+                           <div *ngIf="!orderlevel1.valid && orderlevel1.touched" style="color:red">
+                              order level is required
+                           </div>
+                        </div>
+                        
                      </div>
-                     <div class="card-body table-responsive" style="padding: 0.25rem !important">
-                         <table class="table table-bordered table-striped table-sm">
-                           
-                           
-                         </table>
-                       </div>
-                       </div>
+                  </div>
+                  <div class="card-footer">
+                     <button type="submit" class="btn btn-primary"
+                        [disabled]="!updateSkillForm.form.valid">Update</button>
+                     <button type="reset" class="btn btn-warning">Reset</button>
+                  </div>
+               </form>
+            </div>
          </div>
       </div>
    </ng-template>

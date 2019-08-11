@@ -29,6 +29,13 @@ export class SkillComponent implements OnInit {
   showDeleteModal :boolean=false;
   showEditModel :boolean=false;
   showViewModel :boolean=false;
+  uporderlevel: number;
+  upSkills: number;
+  upCreatedDate: Date;
+  updatedCreatedBy: string;
+  updatedBY: string;
+  updatedDate: string;
+  updateskills: string;
   constructor(private skillService: SkillService, private toastr: ToastrService, private router: Router, private modalService: BsModalService) {
     //  this.loadStates();
   }
@@ -54,6 +61,7 @@ export class SkillComponent implements OnInit {
       this.skillList = msg;
 
     }, err => {
+      this.skillList = [];
       this.loading = false;
       console.log(err);
     });
@@ -68,9 +76,24 @@ export class SkillComponent implements OnInit {
       this.deletesklid = skls.skillID;
       this.message = skls.skillID + "-" + skls.skillName;
       modalClass = 'modal-sm';
-    }else if(flag == 'V'){
-      modalClass = 'modal-lg';
-      this.showViewModel=true;
+    }else if(flag == 'V' || flag === 'E'){
+      if (flag === 'E') {
+        this.showEditModel = true;
+        this.message = "Edit Skill: " + skls.skillID + "-" + skls.skillName;
+
+      }
+      else {
+        this.showViewModel = true;
+        this.message = "View Skill: " + skls.skillID + "-" + skls.skillName;
+        this.updatedBY = skls.modifiedBy;
+        this.updatedDate = skls.modifiedDate;
+      }
+      this.upSkills =  skls.skillID;
+      this.uporderlevel = skls.orderlevl;
+      this.upCreatedDate = skls.createdDate;
+      this.updatedCreatedBy = skls.createdBy;
+      this.updateskills = skls.skillName;
+      modalClass = 'modal-lg';    
     }
     this.modalRef = this.modalService.show(template, { class: modalClass });
   }
@@ -78,7 +101,11 @@ export class SkillComponent implements OnInit {
     this.deleteSkill();
     this.modalRef.hide();
   }
+  closePopUP(){
+    this.modalRef.hide();
+  }
   deleteSkill() {
+    this.loading=true;
     this.skillService.deleteSkills(this.deletesklid).subscribe((msg: any) => {
       this.getSkillList();
       this.loading = false;
@@ -86,6 +113,7 @@ export class SkillComponent implements OnInit {
         positionClass: 'toast-bottom-right'
       });
     }, err => {
+  
       this.loading = false;
       this.toastr.error(err.msg, 'Internal Errors', {
         positionClass: 'toast-bottom-right'
@@ -95,27 +123,45 @@ export class SkillComponent implements OnInit {
   decline(): void {
     this.modalRef.hide();
   }
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm, pageFlag) {
+    let skillmsg;
+    let skillid;
     if (form.valid) {
       this.skillmodel = new SkillMaster;
-      console.log(form.value.slillName);
-      console.log(form.value.orderlevel);
+      if(pageFlag == 'I'){
+        skillmsg = "Add Skill Element Successfully";
+        this.skillmodel.createdBy = "Nasruddin";
+        this.skillmodel.createdDate = new Date();
+        this.skillmodel.orderlevl = form.value.orderlevel;
+        this.skillmodel.skillName = form.value.slillName;
+      }else{
+        skillmsg = "Update Skill Element Successfully";
+        this.skillmodel.skillID = this.upSkills;
+        this.skillmodel.modifiedBy = "Nasruddin";
+        this.skillmodel.modifiedDate = new Date();
+        this.skillmodel.orderlevl = this.uporderlevel;
+        this.skillmodel.createdBy = this.updatedCreatedBy;
+        this.skillmodel.createdDate = this.upCreatedDate;
+        this.skillmodel.skillName = this.updateskills;
+        
+      }
       this.skillmodel.activeStatus = 1;
-      this.skillmodel.createdBy = "Nasruddin";
-      this.skillmodel.createdDate = new Date();
-      this.skillmodel.skillName = form.value.slillName;
-      this.skillmodel.orderlevl = form.value.orderlevel;
+     
       this.skillService.saveSkillDetail(this.skillmodel).subscribe((msg: any) => {
         this.loading = false;
         console.log(msg);
-        //this.skillList=msg;
-        this.toastr.success('Add Skill Successfully', 'Skill Master', {
+        this.getSkillList();
+        this.toastr.success(skillmsg, 'Skill Master', {
           positionClass: 'toast-bottom-right'
         });
-        this.getSkillList();
+      
+        if (pageFlag === 'U')
+        this.closePopUP();
       }, err => {
         this.loading = false;
-        this.toastr.error(err.message, 'Internal Error', {
+        if (pageFlag === 'U')
+        this.closePopUP();
+        this.toastr.error(err.error.message, 'Internal Error', {
           positionClass: 'toast-bottom-right'
         });
         this.router.navigate(['/master/error']);

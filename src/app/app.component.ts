@@ -45,6 +45,8 @@ export class AppComponent implements OnInit {
     });
 
     idle.onIdleStart.subscribe(() => {
+     //alert(this.router.url);
+     if(this.router.url != '/')
       this.idleState = 'IDLE_START', this.openProgressForm(1);
     });
 
@@ -78,7 +80,7 @@ export class AppComponent implements OnInit {
     }
   
     reverseNumber(countdown: number) {
-      return (300 - (countdown - 1));
+      return (60 - (countdown - 1));
     }
   
     reset() {
