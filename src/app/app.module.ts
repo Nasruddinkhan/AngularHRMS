@@ -53,6 +53,7 @@ import { SessionPromtModalComponent } from './session.promt.modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 
+
 @NgModule({
   imports: [
     BrowserModule,

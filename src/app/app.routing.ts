@@ -88,6 +88,11 @@ export const routes: Routes = [
         loadChildren: './views/work-remark/work-remark.module#WorkRemarkModule',
         canActivate: [AuthGuardService],
       },
+      {
+        path: 'payemp',
+        loadChildren: './views/payroll/payroll.module#PayrollModule',
+        canActivate: [AuthGuardService],
+      },
     ]  
   },
   { path: '**', component: P404Component }

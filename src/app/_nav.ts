@@ -90,8 +90,21 @@ export const navItems: NavData[] = [
       ]
     }
     ,
+    {
+      name: 'Payroll',
+       url: '/payemp',
+       icon: 'icon-user',
+       children: [
+         {
+           name: 'Genrate Documents',
+           url: '/payemp/payroll',
+           icon: 'fa fa-fw fa-cubes', 
+         }
+       ]
+     }
+    ,
    {
-     name: 'workremark',
+     name: 'Work Remark',
       url: '/workremark',
       icon: 'icon-user',
       children: [
