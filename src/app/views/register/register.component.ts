@@ -7,7 +7,6 @@ import { Observable } from 'rxjs/internal/Observable';
 import { FormGroup } from '@angular/forms/src/model';
 import { FormBuilder, Validators } from '@angular/forms/';
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'register.component.html',
