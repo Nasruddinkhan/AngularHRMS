@@ -5,6 +5,7 @@ import { SkillElementComponent } from './skill-element/skill-element.component';
 import { UploadMasterComponent } from './upload-master/upload-master.component';
 import { P500Component } from '../error/500.component';
 import { AuthGuardService } from '../auth/auth-guard.service';
+import { UnAthorizeComponent } from '../error/unathorize.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -49,7 +50,17 @@ const routes: Routes=[{
         },
         component:P500Component,
         canActivate: [AuthGuardService],
+    },
+    {
+        path:'unathorise',
+        data:{
+            title:'unathorise'
+        },
+        component:UnAthorizeComponent,
+        canActivate: [AuthGuardService],
     }
+
+    
     ]
     }]
 @NgModule({

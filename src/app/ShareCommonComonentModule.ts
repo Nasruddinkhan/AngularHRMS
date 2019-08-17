@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { P500Component } from './views/error/500.component';
 import { CommonModule } from '@angular/common';
+import { UnAthorizeComponent } from './views/error/unathorize.component';
 
 /**
  * Created By, Nasruddin Khan
@@ -10,7 +11,8 @@ import { CommonModule } from '@angular/common';
 
 @NgModule ({
     declarations:[
-        P500Component
+        P500Component,
+        UnAthorizeComponent
     ],
     imports:[
         CommonModule
