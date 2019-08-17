@@ -1,5 +1,8 @@
 
-
+/**
+ * Created By, Nasruddin Khan
+ * Created Date Aug 17, 2019 
+ */
 export class SkillMaster{
     skillID :number;
     skillName :String;

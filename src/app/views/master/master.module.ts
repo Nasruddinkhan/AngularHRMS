@@ -20,7 +20,10 @@ import { UploadMasterComponent } from './upload-master/upload-master.component';
 import { P500Component } from '../error/500.component';
 import { ShareCommonComonentModule } from '../../ShareCommonComonentModule';
 
-
+/**
+ * Created By, Nasruddin Khan
+ * Created Date Aug 17, 2019 
+ */
 @NgModule({
     imports: [
       CommonModule,

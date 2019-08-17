@@ -57,6 +57,55 @@ export const navItems: NavData[] = [
         icon: 'fa fa-fw fa-user'
       }
     ]
-  }
-  
+  },
+  {
+    name: 'Application',
+     url: '/user',
+     icon: 'icon-user',
+     children: [
+       {
+         name: 'Personal',
+         url: '/user/personal',
+         icon: 'fa fa-fw fa-cubes',
+         
+       },
+       {
+        name: 'Education',
+        url: '/user/education',
+        icon: 'fa fa-fw fa-cubes',
+      }
+     ]
+   }
+   ,
+   {
+     name: 'Documents',
+      url: '/documents',
+      icon: 'icon-user',
+      children: [
+        {
+          name: 'documents',
+          url: '/documents/mydoc',
+          icon: 'fa fa-fw fa-cubes', 
+        }
+      ]
+    }
+    ,
+   {
+     name: 'workremark',
+      url: '/workremark',
+      icon: 'icon-user',
+      children: [
+        {
+          name: 'Work Status',
+          url: '/workremark/workstatus',
+          icon: 'fa fa-fw fa-cubes', 
+        },
+        {
+          name: 'InOut Time',
+          url: '/workremark/inouttime',
+          icon: 'fa fa-fw fa-cubes', 
+        }
+      ]
+    }
 ];
+  

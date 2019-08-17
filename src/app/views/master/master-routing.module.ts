@@ -5,6 +5,10 @@ import { SkillElementComponent } from './skill-element/skill-element.component';
 import { UploadMasterComponent } from './upload-master/upload-master.component';
 import { P500Component } from '../error/500.component';
 import { AuthGuardService } from '../auth/auth-guard.service';
+/**
+ * Created By, Nasruddin Khan
+ * Created Date Aug 17, 2019 
+ */
 const routes: Routes=[{
     path:'',
     data:{

@@ -51,6 +51,7 @@ import { ShareCommonComonentModule } from './ShareCommonComonentModule';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { SessionPromtModalComponent } from './session.promt.modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       autoDismiss: true
     }),
     NgIdleKeepaliveModule.forRoot(),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    SocialLoginModule
   ],
   declarations: [
     AppComponent,
@@ -87,10 +89,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     P404Component,
     LoginComponent,
     RegisterComponent,
-    SessionPromtModalComponent,
+    SessionPromtModalComponent
   ],
   providers: [ErrorHandling, OnlynumberDirective, {
-    provide: LocationStrategy,
+    provide: [LocationStrategy,AuthServiceConfig],
     useClass: HashLocationStrategy
   },
     {

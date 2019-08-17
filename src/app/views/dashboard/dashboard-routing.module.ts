@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
-
+/**
+ * Created By, Nasruddin Khan
+ * Created Date Aug 17, 2019 
+ */
 const routes: Routes = [
   {
     path: '',

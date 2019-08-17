@@ -10,7 +10,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
     <div id="ac90819di1" class="modal-body">
       You will be timed out in {{(countMinutes !== 0 ? + countMinutes+' Minute'+(countMinutes > 1 ? 's ' : ' ') : '') + countSeconds+' Seconds'}}
       <p>
-        <ngb-progressbar type="danger" [value]="progressCount" [max]="300" animate="false" id="ac90819ou1"
+        <ngb-progressbar type="danger" [value]="progressCount" [max]="60" animate="true" id="ac90819ou1"
                          class="progress-striped active">
         </ngb-progressbar>
       </p>
@@ -22,8 +22,8 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
   `
 })
 /**
- * Created By NK5050747, Nasruddin Khan
- * Created Date Mar 12, 2019 
+ * Created By, Nasruddin Khan
+ * Created Date Aug 17, 2019 
  */
 export class SessionPromtModalComponent {
 

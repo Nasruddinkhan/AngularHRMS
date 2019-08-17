@@ -1,11 +1,11 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import {EventTargetInterruptSource, Idle} from '@ng-idle/core';
-import {Keepalive} from '@ng-idle/keepalive';
+import { EventTargetInterruptSource, Idle } from '@ng-idle/core';
+import { Keepalive } from '@ng-idle/keepalive';
 
 import { SessionPromtModalComponent } from './session.promt.modal';
 import { PlatformLocation } from '@angular/common';
-import { NgbModalRef , NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   // tslint:disable-next-line
@@ -18,13 +18,13 @@ export class AppComponent implements OnInit {
   timedOut = false;
   lastPing?: Date = null;
   progressBarPopup: NgbModalRef;
-  constructor(private router: Router,location: PlatformLocation,
-    private element: ElementRef, private idle: Idle, private keepalive: Keepalive, private ngbModal: NgbModal) { 
-      // sets an idle timeout of 15 minutes.
-      
-      location.onPopState(() => {
-        console.log(this.router);
-       // this.router.navigate(['/expiresession']);
+  constructor(private router: Router, location: PlatformLocation,
+    private element: ElementRef, private idle: Idle, private keepalive: Keepalive, private ngbModal: NgbModal) {
+    // sets an idle timeout of 15 minutes.
+
+    location.onPopState(() => {
+      console.log(this.router);
+      // this.router.navigate(['/expiresession']);
     });
     idle.setIdle(180);
     // sets a timeout period of 5 minutes.
@@ -45,9 +45,11 @@ export class AppComponent implements OnInit {
     });
 
     idle.onIdleStart.subscribe(() => {
-     //alert(this.router.url);
-     if(this.router.url != '/')
-      this.idleState = 'IDLE_START', this.openProgressForm(1);
+      alert(this.router.url);
+      if (this.router.url != '/') {
+        if (this.router.url != '/register')
+          this.idleState = 'IDLE_START', this.openProgressForm(1);
+      }
     });
 
     idle.onTimeoutWarning.subscribe((countdown: any) => {
@@ -55,7 +57,7 @@ export class AppComponent implements OnInit {
       this.progressBarPopup.componentInstance.count = (Math.floor((countdown - 1) / 60) + 1);
       this.progressBarPopup.componentInstance.progressCount = this.reverseNumber(countdown);
       this.progressBarPopup.componentInstance.countMinutes = (Math.floor(countdown / 60));
-      this.progressBarPopup.componentInstance.countSeconds = countdown%60;
+      this.progressBarPopup.componentInstance.countSeconds = countdown % 60;
     });
 
     // sets the ping interval to 15 seconds
@@ -68,59 +70,59 @@ export class AppComponent implements OnInit {
      * // Redirect user to logout screen stating session is timeout out if if response.status != 200
      * });
      */
- 
 
-   
+
+
     this.reset();
-    }
- 
-    ngOnDestroy() {
-      this.resetTimeOut();
-  
-    }
-  
-    reverseNumber(countdown: number) {
-      return (60 - (countdown - 1));
-    }
-  
-    reset() {
-      this.idle.watch();
-      this.idleState = 'Started.';
-      this.timedOut = false;
-    }
-  
-    openProgressForm(count: number) {
-      this.progressBarPopup = this.ngbModal.open(SessionPromtModalComponent, {
-        backdrop: 'static',
-        keyboard: false
-      });
-      this.progressBarPopup.componentInstance.count = count;
-      this.progressBarPopup.result.then((result: any) => {
-        if (result !== '' && 'logout' === result) {
-          this.logout();
-        } else {
-          this.reset();
-        }
-      });
-    }
-  
-    logout() {
-      this.resetTimeOut();
-    }
-  
-    closeProgressForm() {
-      this.router.navigate(['/']);
-      this.progressBarPopup.close();
-    }
-    resetTimeOut() {
-      this.idle.stop();
-      this.idle.onIdleStart.unsubscribe();
-      this.idle.onTimeoutWarning.unsubscribe();
-      this.idle.onIdleEnd.unsubscribe();
-      this.router.navigate(['/']);
-    
+  }
+
+  ngOnDestroy() {
+    this.resetTimeOut();
+
+  }
+
+  reverseNumber(countdown: number) {
+    return (60 - (countdown - 1));
+  }
+
+  reset() {
+    this.idle.watch();
+    this.idleState = 'Started.';
+    this.timedOut = false;
+  }
+
+  openProgressForm(count: number) {
+    this.progressBarPopup = this.ngbModal.open(SessionPromtModalComponent, {
+      backdrop: 'static',
+      keyboard: false
+    });
+    this.progressBarPopup.componentInstance.count = count;
+    this.progressBarPopup.result.then((result: any) => {
+      if (result !== '' && 'logout' === result) {
+        this.logout();
+      } else {
+        this.reset();
+      }
+    });
+  }
+
+  logout() {
+    this.resetTimeOut();
+  }
+
+  closeProgressForm() {
+    this.router.navigate(['/']);
+    this.progressBarPopup.close();
+  }
+  resetTimeOut() {
+    this.idle.stop();
+    this.idle.onIdleStart.unsubscribe();
+    this.idle.onTimeoutWarning.unsubscribe();
+    this.idle.onIdleEnd.unsubscribe();
+    this.router.navigate(['/']);
+
     //  this.idle.onIdleEnd.unsubscribe();
-    }
+  }
   ngOnInit() {
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
@@ -128,7 +130,7 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
-  
+
   }
 
 }

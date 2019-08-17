@@ -5,6 +5,10 @@ import { SkillelementService } from '../../service/skillelement.service';
 
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+/**
+ * Created By, Nasruddin Khan
+ * Created Date Aug 17, 2019 
+ */
 @Component({
   selector: 'app-skill-element',
   templateUrl: './skill-element.component.html',

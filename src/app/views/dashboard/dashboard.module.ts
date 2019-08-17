@@ -6,7 +6,10 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-
+/**
+ * Created By, Nasruddin Khan
+ * Created Date Aug 17, 2019 
+ */
 @NgModule({
   imports: [
     FormsModule,

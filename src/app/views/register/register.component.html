@@ -1,6 +1,6 @@
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
-<div class="animated fadeIn">
-  <!--/.row-->
+<!-- <div class="animated fadeIn">
+
   <div class="row">
     <div class="col-lg-12">
         <form [formGroup]="registrationForm" (ngSubmit)="register()">
@@ -76,7 +76,7 @@
                 </div>
               </div>
           </div>
-          <!--/.row-->
+        
           <div class="row">
             <div class="col-sm-2 form-group">
               <div class="form-group">
@@ -125,11 +125,11 @@
                 </div>
               </div>
           </div>
-          <!--/.row-->
+        
           <div class="row">
            
             <div class="col-sm-2 form-group">
-              <!-- <div class="form-group">
+             <div class="form-group">
                 <label for="lastname">Material Status
                   <font color="red">*</font>
                 </label>
@@ -139,7 +139,7 @@
                   <option value="F">Female</option>
                 </select>
 
-              </div> -->
+              </div> 
                
                 <webcam [height]="200" [width]="250" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
                   
@@ -157,7 +157,7 @@
             </div>
         
           </div>
-          <!--/.row-->
+        
           <div class="row">
              
           </div>
@@ -169,7 +169,79 @@
       </div>
     </form>
     </div>
-    <!--/.col-->
+
   </div>
-  <!--/.row-->
-</div>
+ 
+</div>-->
+
+<div class="app-body">
+    <main class="main d-flex align-items-center">
+      <div class="container">
+        <div class="row">
+           
+
+          <div class="col-md-8 mx-auto">
+            <div class="card-group">
+              <div class="card p-4">
+                <div class="card-body">
+                    <form [formGroup]="regForm" class="login-container" (ngSubmit)="register()">
+                    <h1>HRMS</h1>
+                    <p class="text-muted">User Registration</p>
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="email"   formControlName="email" [ngClass]="{ 'has-error': isSubmitted && formControls.email.errors }">
+                     
+                    </div>
+                    <div *ngIf="isSubmitted && formControls.email.errors" >
+                        <div *ngIf="formControls.email.errors.required" style="color:red">Email is required</div>
+                        <div *ngIf="formControls.email.errors.email" style="color:red">Email must be a valid email address</div>
+                     </div>
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                      </div>
+                      <input type="password" formControlName="password" class="form-control" placeholder="Password" autocomplete="current-password" [ngClass]="{ 'has-error': isSubmitted && formControls.password.errors }">
+                    </div>
+                    <div *ngIf="isSubmitted && formControls.password.errors" class="help-block">
+                        <div *ngIf="formControls.password.errors.required" style="color:red">Password is required</div>
+                      </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="icon-lock"></i></span>
+                        </div>
+                        <input type="password" class="form-control" formControlName="cnfpassword" placeholder="Confirm Password" autocomplete="current-password" required>
+                      </div>
+                      <div *ngIf="isSubmitted && formControls.cnfpassword.errors" class="help-block">
+                        <div *ngIf="formControls.cnfpassword.errors.required" style="color:red">Confirm Password is required</div>
+                        <div *ngIf="formControls  .cnfpassword.errors.mustMatch" style="color:red">Passwords must match</div>
+
+                      </div>
+                    <div class="row">
+                      <div class="col-6" >
+                        <button type="submit" class="btn btn-primary px-4">Register</button>
+                      </div>
+                      
+                    </div>
+                  </form>
+                </div>
+             
+              </div>
+              <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+                <div class="card-body text-center">
+                  <div>
+                  
+                    <p>Login with Social network</p>
+                    <p><button type="button" class="btn btn-danger px-4" (click)="signInWithFB()" >Gmail</button></p>
+                    <p><button type="button" class="btn btn-info px-4" (click)="signInWithFB()">FaceBook</button></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+    </main>
+  </div>

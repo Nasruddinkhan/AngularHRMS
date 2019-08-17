@@ -3,7 +3,10 @@ import { CanActivate } from '@angular/router/src/interfaces';
 import { RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router/src/router_state';
 import { LoginService } from '../service/login.service';
 import { Router } from '@angular/router';
-
+/**
+ * Created By, Nasruddin Khan
+ * Created Date Aug 17, 2019 
+ */
 @Injectable({
   providedIn: 'root'
 })

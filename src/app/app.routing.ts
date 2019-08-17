@@ -9,7 +9,10 @@ import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { AuthGuardService } from './views/auth/auth-guard.service';
-
+/**
+ * Created By, Nasruddin Khan
+ * Created Date Aug 17, 2019 
+ */
 export const routes: Routes = [
   {
     path: 'dashboard',
@@ -68,8 +71,24 @@ export const routes: Routes = [
         path: 'master',
         loadChildren: './views/master/master.module#MasterModule',
         canActivate: [AuthGuardService],
-      }
-    ]
+      },
+      {
+        path: 'user',
+        loadChildren: './views/user-information/user-module#UserModule',
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'documents',
+        loadChildren: './views/documents/documents.module#DocumentModule',
+        canActivate: [AuthGuardService],
+      },
+    
+      {
+        path: 'workremark',
+        loadChildren: './views/work-remark/work-remark.module#WorkRemarkModule',
+        canActivate: [AuthGuardService],
+      },
+    ]  
   },
   { path: '**', component: P404Component }
 ];
