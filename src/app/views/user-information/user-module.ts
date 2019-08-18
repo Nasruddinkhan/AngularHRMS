@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserRoutingModule } from './user-routing.module';
 import { EductionDetailsComponent } from './eduction-details/eduction-details.component';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { OnlyCharecterDirective } from '../directive/onlycharecter.directive';
 
 /**
  * Created By, Nasruddin Khan
@@ -11,10 +15,15 @@ import { EductionDetailsComponent } from './eduction-details/eduction-details.co
 @NgModule({
     declarations:[
      UserDetailsComponent,
-     EductionDetailsComponent
+     EductionDetailsComponent,
+     OnlyCharecterDirective
     ],
     imports:[
-        UserRoutingModule
+        UserRoutingModule,
+        CollapseModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule
     ]
 
 })

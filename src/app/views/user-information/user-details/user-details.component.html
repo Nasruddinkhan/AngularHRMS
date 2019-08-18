@@ -1,3 +1,130 @@
-<p>
-  user-details works!
-</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i>{{headerTitle}}
+        <div class="card-header-actions">
+          <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse('P')">
+            <i class={{iconCollapse}}></i>
+          </button>
+        </div>
+      </div>
+      <form [formGroup]="userForm" (ngSubmit)="userRegister()">
+      <div class="card-body" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
+        <div class="row">
+          <div class="form-group col-sm-3">
+            <label for="firstName">First Name <span style="color:red">*</span></label>
+            <input type="text" appCharisAllow class="form-control" formControlName="firstName" [ngClass]="{ 'has-error': isSubmitted && formControls.firstName.errors }">
+            <div *ngIf="isSubmitted && formControls.firstName.errors">
+                <div *ngIf="formControls.firstName.errors.required" style="color:red">First Name is required</div>
+                <div *ngIf="formControls.firstName.errors.minlength"  style="color:red">Must be at least 3 characters</div>
+                <div *ngIf="formControls.firstName.errors.max"  style="color:red">Not more then 20 characters</div>
+               
+                
+             </div>
+          </div>
+          
+          <div class="form-group col-sm-3">
+            <label for="lastName"> Last Name <span style="color:red">*</span></label>
+            <input type="text" class="form-control" formControlName="lastName" [ngClass]="{ 'has-error': isSubmitted && formControls.lastName.errors }">
+            <div *ngIf="isSubmitted && formControls.lastName.errors">
+                <div *ngIf="formControls.lastName.errors.required" style="color:red">Last Name is required</div>
+             </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <label for="fatherName">Father's Name <span style="color:red">*</span></label>
+            <input type="text" class="form-control" formControlName="fatherName" [ngClass]="{ 'has-error': isSubmitted && formControls.fatherName.errors }">
+            <div *ngIf="isSubmitted && formControls.fatherName.errors">
+                <div *ngIf="formControls.fatherName.errors.required" style="color:red">fatherName Name is required</div>
+             </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <label for="gender">Gender <span style="color:red">*</span></label>
+            <select class="form-control" formControlName="gender" [ngClass]="{ 'has-error': isSubmitted && formControls.gender.errors }">
+                <option value="">Select</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select> 
+            <div *ngIf="isSubmitted && formControls.gender.errors">
+                <div *ngIf="formControls.gender.errors.required" style="color:red">Gender is required</div>
+             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-3">
+            <label for="DOB">Date Of Birth <span style="color:red">*</span></label>
+            <input type="text" class="form-control" formControlName="dob" [ngClass]="{ 'has-error': isSubmitted && formControls.dob.errors }">
+            <div *ngIf="isSubmitted && formControls.dob.errors">
+                <div *ngIf="formControls.dob.errors.required" style="color:red">Date Of Birth is required</div>
+             </div>
+          </div>
+         
+          <div class="form-group col-sm-3">
+            <label for="firstName">Maritial Status <span style="color:red">*</span></label>
+            <select class="form-control" formControlName="maritial" [ngClass]="{ 'has-error': isSubmitted && formControls.maritial.errors }">
+                <option value="">Select</option>
+              <option value="M">Married</option>
+              <option value="U">Unmarried</option>
+            </select>
+            <div *ngIf="isSubmitted && formControls.maritial.errors">
+                <div *ngIf="formControls.maritial.errors.required" style="color:red">Maitial is required</div>
+             </div>
+          </div>
+          
+          <div class="form-group col-sm-3">
+            <label for="Date OF Joining">Date Of Joining <span style="color:red">*</span></label>
+            <input type="text" class="form-control" formControlName="doj" [ngClass]="{ 'has-error': isSubmitted && formControls.doj.errors }">
+            <div *ngIf="isSubmitted && formControls.doj.errors">
+                <div *ngIf="formControls.doj.errors.required" style="color:red">Date Of Joining is required</div>
+             </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <label for="firstName">Email Address <span style="color:red">*</span></label>
+            <input type="text" class="form-control"  formControlName="email">
+          </div>
+        </div><div class="row">
+          <div class="form-group col-sm-3">
+            <label for="firstName">Contact Number <span style="color:red">*</span></label>
+            <input type="text" class="form-control" formControlName="mNumber" [ngClass]="{ 'has-error': isSubmitted && formControls.mNumber.errors }">
+            <div *ngIf="isSubmitted && formControls.mNumber.errors">
+                <div *ngIf="formControls.mNumber.errors.required" style="color:red">Contact Number is required</div>
+             </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <label for="firstName"> Guardian Contact Number <span style="color:red">*</span></label>
+            <input type="text" class="form-control" formControlName="gNumber" [ngClass]="{ 'has-error': isSubmitted && formControls.gNumber.errors }">
+            <div *ngIf="isSubmitted && formControls.gNumber.errors">
+                <div *ngIf="formControls.gNumber.errors.required" style="color:red">Guardian Number is required</div>
+             </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <label for="firstName">Aadhar Details <span style="color:red">*</span></label>
+            <input type="text" class="form-control" required>
+          </div>
+          <div class="form-group col-sm-3">
+            <label for="firstName">PAN Details <span style="color:red">*</span></label>
+            <input type="text" class="form-control" required>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+      </div>
+      </form>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i>{{addheaderTitle}}
+        <div class="card-header-actions">
+          <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse('A')">
+            <i class={{iconCollapse}}></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed1">
+
+      </div>
+    </div>
+  </div>
+</div>

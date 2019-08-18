@@ -17,7 +17,6 @@ import {MatAutocompleteModule,MatInputModule} from '@angular/material'; */
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { UploadMasterComponent } from './upload-master/upload-master.component';
-import { P500Component } from '../error/500.component';
 import { ShareCommonComonentModule } from '../../ShareCommonComonentModule';
 
 /**

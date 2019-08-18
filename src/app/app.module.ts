@@ -52,6 +52,7 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { SessionPromtModalComponent } from './session.promt.modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { OnlyCharecterDirective } from './views/directive/onlycharecter.directive';
 
 
 @NgModule({
@@ -92,7 +93,7 @@ import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
     RegisterComponent,
     SessionPromtModalComponent
   ],
-  providers: [ErrorHandling, OnlynumberDirective, {
+  providers: [ErrorHandling, OnlynumberDirective,OnlyCharecterDirective, {
     provide: [LocationStrategy,AuthServiceConfig],
     useClass: HashLocationStrategy
   },
