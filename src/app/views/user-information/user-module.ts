@@ -6,6 +6,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OnlyCharecterDirective } from '../directive/onlycharecter.directive';
+import { OnlynumberDirective } from '../directive/onlynumber.directive';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 /**
  * Created By, Nasruddin Khan
@@ -16,14 +18,16 @@ import { OnlyCharecterDirective } from '../directive/onlycharecter.directive';
     declarations:[
      UserDetailsComponent,
      EductionDetailsComponent,
-     OnlyCharecterDirective
+     OnlyCharecterDirective,
+     OnlynumberDirective
     ],
     imports:[
         UserRoutingModule,
         CollapseModule.forRoot(),
         FormsModule,
         ReactiveFormsModule,
-        CommonModule
+        CommonModule,
+        BsDatepickerModule.forRoot(),
     ]
 
 })

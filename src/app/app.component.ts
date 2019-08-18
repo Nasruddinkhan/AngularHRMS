@@ -22,10 +22,10 @@ export class AppComponent implements OnInit {
     private element: ElementRef, private idle: Idle, private keepalive: Keepalive, private ngbModal: NgbModal) {
     // sets an idle timeout of 15 minutes.
 
-    location.onPopState(() => {
+   /*  location.onPopState(() => {
       console.log(this.router);
       // this.router.navigate(['/expiresession']);
-    });
+    }); */
     idle.setIdle(180);
     // sets a timeout period of 5 minutes.
     idle.setTimeout(60);

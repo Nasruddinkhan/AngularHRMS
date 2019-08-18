@@ -55,6 +55,7 @@ import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { OnlyCharecterDirective } from './views/directive/onlycharecter.directive';
 
 
+
 @NgModule({
   imports: [
     BrowserModule,

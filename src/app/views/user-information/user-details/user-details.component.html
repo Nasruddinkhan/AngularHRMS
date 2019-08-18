@@ -14,38 +14,40 @@
         <div class="row">
           <div class="form-group col-sm-3">
             <label for="firstName">First Name <span style="color:red">*</span></label>
-            <input type="text" appCharisAllow class="form-control" formControlName="firstName" [ngClass]="{ 'has-error': isSubmitted && formControls.firstName.errors }">
-            <div *ngIf="isSubmitted && formControls.firstName.errors">
+            <input type="text" appCharisAllow class="form-control" formControlName="firstName" [ngClass]="{ 'is-invalid': isSubmitted  && formControls.firstName.touched && formControls.firstName.errors }">
+            <div *ngIf="isSubmitted && formControls.firstName.touched  && formControls.firstName.errors" class="invalid-feedback">
                 <div *ngIf="formControls.firstName.errors.required" style="color:red">First Name is required</div>
                 <div *ngIf="formControls.firstName.errors.minlength"  style="color:red">Must be at least 3 characters</div>
-                <div *ngIf="formControls.firstName.errors.max"  style="color:red">Not more then 20 characters</div>
-               
-                
+                <div *ngIf="formControls.firstName.errors.maxlength"  style="color:red">Not more then 20 characters</div>
              </div>
           </div>
           
           <div class="form-group col-sm-3">
             <label for="lastName"> Last Name <span style="color:red">*</span></label>
-            <input type="text" class="form-control" formControlName="lastName" [ngClass]="{ 'has-error': isSubmitted && formControls.lastName.errors }">
-            <div *ngIf="isSubmitted && formControls.lastName.errors">
+            <input type="text" appCharisAllow class="form-control" formControlName="lastName" [ngClass]="{ 'is-invalid': isSubmitted && formControls.lastName.touched  && formControls.lastName.errors }">
+            <div *ngIf="isSubmitted &&  formControls.lastName.touched && formControls.lastName.errors" class="invalid-feedback">
                 <div *ngIf="formControls.lastName.errors.required" style="color:red">Last Name is required</div>
+                <div *ngIf="formControls.lastName.errors.minlength"  style="color:red">Must be at least 3 characters</div>
+                <div *ngIf="formControls.lastName.errors.maxlength"  style="color:red">Not more then 15 characters</div>
              </div>
           </div>
           <div class="form-group col-sm-3">
             <label for="fatherName">Father's Name <span style="color:red">*</span></label>
-            <input type="text" class="form-control" formControlName="fatherName" [ngClass]="{ 'has-error': isSubmitted && formControls.fatherName.errors }">
-            <div *ngIf="isSubmitted && formControls.fatherName.errors">
+            <input type="text" appCharisAllow class="form-control" formControlName="fatherName" [ngClass]="{ 'is-invalid': isSubmitted && formControls.fatherName.touched && formControls.fatherName.errors }">
+            <div *ngIf="isSubmitted && formControls.fatherName.touched && formControls.fatherName.errors" class="invalid-feedback">
                 <div *ngIf="formControls.fatherName.errors.required" style="color:red">fatherName Name is required</div>
+                <div *ngIf="formControls.fatherName.errors.minlength"  style="color:red">Must be at least 3 characters</div>
+                <div *ngIf="formControls.fatherName.errors.maxlength"  style="color:red">Not more then 35 characters</div>
              </div>
           </div>
           <div class="form-group col-sm-3">
             <label for="gender">Gender <span style="color:red">*</span></label>
-            <select class="form-control" formControlName="gender" [ngClass]="{ 'has-error': isSubmitted && formControls.gender.errors }">
+            <select class="form-control"  formControlName="gender" [ngClass]="{ 'is-invalid': isSubmitted && formControls.gender.touched && formControls.gender.errors }">
                 <option value="">Select</option>
               <option value="M">Male</option>
               <option value="F">Female</option>
             </select> 
-            <div *ngIf="isSubmitted && formControls.gender.errors">
+            <div *ngIf="isSubmitted  && formControls.gender.touched &&  formControls.gender.errors" class="invalid-feedback">
                 <div *ngIf="formControls.gender.errors.required" style="color:red">Gender is required</div>
              </div>
           </div>
@@ -53,63 +55,75 @@
         <div class="row">
           <div class="form-group col-sm-3">
             <label for="DOB">Date Of Birth <span style="color:red">*</span></label>
-            <input type="text" class="form-control" formControlName="dob" [ngClass]="{ 'has-error': isSubmitted && formControls.dob.errors }">
-            <div *ngIf="isSubmitted && formControls.dob.errors">
+            <input type="text" class="form-control"  bsDatepicker
+            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+             formControlName="dob" [ngClass]="{ 'is-invalid': isSubmitted && formControls.dob.touched && formControls.dob.errors }">
+            <div *ngIf="isSubmitted && formControls.dob.touched &&  formControls.dob.errors" class="invalid-feedback">
                 <div *ngIf="formControls.dob.errors.required" style="color:red">Date Of Birth is required</div>
              </div>
           </div>
          
           <div class="form-group col-sm-3">
             <label for="firstName">Maritial Status <span style="color:red">*</span></label>
-            <select class="form-control" formControlName="maritial" [ngClass]="{ 'has-error': isSubmitted && formControls.maritial.errors }">
+            <select class="form-control" formControlName="maritial" [ngClass]="{ 'is-invalid': isSubmitted && formControls.maritial.touched && formControls.maritial.errors }">
                 <option value="">Select</option>
               <option value="M">Married</option>
               <option value="U">Unmarried</option>
             </select>
-            <div *ngIf="isSubmitted && formControls.maritial.errors">
+            <div *ngIf="isSubmitted && formControls.maritial.touched && formControls.maritial.errors" class="invalid-feedback">
                 <div *ngIf="formControls.maritial.errors.required" style="color:red">Maitial is required</div>
              </div>
           </div>
           
           <div class="form-group col-sm-3">
             <label for="Date OF Joining">Date Of Joining <span style="color:red">*</span></label>
-            <input type="text" class="form-control" formControlName="doj" [ngClass]="{ 'has-error': isSubmitted && formControls.doj.errors }">
-            <div *ngIf="isSubmitted && formControls.doj.errors">
+            <input type="text" class="form-control" formControlName="doj"
+            bsDatepicker
+            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+            [ngClass]="{ 'is-invalid': isSubmitted && formControls.doj.touched && formControls.doj.errors }">
+            <div *ngIf="isSubmitted && formControls.doj.touched && formControls.doj.errors"  class="invalid-feedback">
                 <div *ngIf="formControls.doj.errors.required" style="color:red">Date Of Joining is required</div>
              </div>
           </div>
           <div class="form-group col-sm-3">
             <label for="firstName">Email Address <span style="color:red">*</span></label>
-            <input type="text" class="form-control"  formControlName="email">
+            <input type="text" class="form-control"  formControlName="email" readonly="true" >
           </div>
         </div><div class="row">
           <div class="form-group col-sm-3">
-            <label for="firstName">Contact Number <span style="color:red">*</span></label>
-            <input type="text" class="form-control" formControlName="mNumber" [ngClass]="{ 'has-error': isSubmitted && formControls.mNumber.errors }">
-            <div *ngIf="isSubmitted && formControls.mNumber.errors">
-                <div *ngIf="formControls.mNumber.errors.required" style="color:red">Contact Number is required</div>
+            <label for="contactno">Contact Number <span style="color:red">*</span></label>
+            <input type="text" appOnlynumber class="form-control" formControlName="contactno" [ngClass]="{ 'is-invalid': isSubmitted && formControls.contactno.touched  && formControls.contactno.errors }">
+            <div *ngIf="isSubmitted && formControls.contactno.touched && formControls.contactno.errors" class="invalid-feedback">
+                <div *ngIf="formControls.contactno.errors.required" style="color:red">Contact Number is required</div>
              </div>
           </div>
           <div class="form-group col-sm-3">
-            <label for="firstName"> Guardian Contact Number <span style="color:red">*</span></label>
-            <input type="text" class="form-control" formControlName="gNumber" [ngClass]="{ 'has-error': isSubmitted && formControls.gNumber.errors }">
-            <div *ngIf="isSubmitted && formControls.gNumber.errors">
-                <div *ngIf="formControls.gNumber.errors.required" style="color:red">Guardian Number is required</div>
+            <label for="guardian"> Guardian Contact Number <span style="color:red">*</span></label>
+            <input type="text" appOnlynumber class="form-control" formControlName="guardian" [ngClass]="{ 'is-invalid': isSubmitted && formControls.guardian.touched  && formControls.guardian.errors }">
+            <div *ngIf="isSubmitted && formControls.guardian.touched  && formControls.guardian.errors" class="invalid-feedback">
+                <div *ngIf="formControls.guardian.errors.required" style="color:red">Guardian Number is required</div>
              </div>
           </div>
           <div class="form-group col-sm-3">
-            <label for="firstName">Aadhar Details <span style="color:red">*</span></label>
-            <input type="text" class="form-control" required>
+            <label for="firstName">Aadhar Details </label>
+            <input type="text" appOnlynumber class="form-control" maxlength="12" formControlName="aadhaarno" [ngClass]="{ 'is-invalid': isSubmitted && formControls.aadhaarno.touched  && formControls.aadhaarno.errors }">
+            <div *ngIf="isSubmitted && formControls.aadhaarno.touched && formControls.aadhaarno.errors" class="invalid-feedback">
+              <div *ngIf="formControls.aadhaarno.errors.minlength"  style="color:red">At least 12 digits</div>
+             
+           </div>
           </div>
           <div class="form-group col-sm-3">
-            <label for="firstName">PAN Details <span style="color:red">*</span></label>
-            <input type="text" class="form-control" required>
+            <label for="firstName">pan Details </label>
+            <input type="text" class="form-control" formControlName="pancard" [ngClass]="{ 'is-invalid': isSubmitted && formControls.pancard.touched  && formControls.pancard.errors }">
+            <div *ngIf="isSubmitted && formControls.pancard.touched  && formControls.pancard.errors" class="invalid-feedback">
+              <div *ngIf="formControls.pancard.errors.pattern" style="color:red">first 5 characters 4 digits 1 characters</div>
+           </div>
           </div>
         </div>
       </div>
-      <div class="card-footer">
-          <button type="submit" class="btn btn-primary">Submit</button>
-
+      <div class="card-footer" style="text-align: center">
+          <button type="submit" class="btn btn-primary" >Submit</button>
+          <button type="reset"  class="btn btn-warning">Reset</button>
       </div>
       </form>
     </div>
