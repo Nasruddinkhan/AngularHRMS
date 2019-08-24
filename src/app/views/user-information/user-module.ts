@@ -5,9 +5,9 @@ import { EductionDetailsComponent } from './eduction-details/eduction-details.co
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { OnlyCharecterDirective } from '../directive/onlycharecter.directive';
-import { OnlynumberDirective } from '../directive/onlynumber.directive';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ShareCommonComonentModule } from '../../ShareCommonComonentModule';
+import { CommonDirective } from '../../common.directives.module';
 
 /**
  * Created By, Nasruddin Khan
@@ -17,9 +17,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 @NgModule({
     declarations:[
      UserDetailsComponent,
-     EductionDetailsComponent,
-     OnlyCharecterDirective,
-     OnlynumberDirective
+     EductionDetailsComponent
+     
     ],
     imports:[
         UserRoutingModule,
@@ -28,6 +27,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
         ReactiveFormsModule,
         CommonModule,
         BsDatepickerModule.forRoot(),
+        ShareCommonComonentModule,
+        CommonDirective
     ]
 
 })

@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-lg-12">
+
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i>{{headerTitle}}
+      </div>
+      <form #newRoleForm="ngForm" (ngSubmit)="onSubmit(newRoleForm, 'I')">
+        <div class="card-body">
+           <div class="row">
+              <div class="form-group col-sm-3">
+                 <label for="rolename">Role Name <span style="color:red">*</span></label>
+                 <input type="text" class="form-control" required [(ngModel)]="rolename" name="rolename"
+                    [ngClass]="{'red-border-class': !rolename1.valid && rolename1.touched}" #rolename1="ngModel">
+                 <div *ngIf="!rolename1.valid && rolename1.touched" style="color:red">
+                    role name is required
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="card-footer">
+           <button type="submit" class="btn btn-primary" [disabled]="!newRoleForm.form.valid">Submit</button>
+           <button type="reset" class="btn btn-warning">Reset</button>
+        </div>
+     </form>
+    </div>
+  </div>
+</div>

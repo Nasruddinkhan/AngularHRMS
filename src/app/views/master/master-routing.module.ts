@@ -6,6 +6,7 @@ import { UploadMasterComponent } from './upload-master/upload-master.component';
 import { P500Component } from '../error/500.component';
 import { AuthGuardService } from '../auth/auth-guard.service';
 import { UnAthorizeComponent } from '../error/unathorize.component';
+import { RolesComponent } from './roles/roles.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -41,6 +42,14 @@ const routes: Routes=[{
             title:'Upload master'
         },
         component:UploadMasterComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path:'role',
+        data:{
+            title:'role master'
+        },
+        component:RolesComponent,
         canActivate: [AuthGuardService],
     },
     {

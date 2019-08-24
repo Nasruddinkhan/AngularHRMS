@@ -55,7 +55,14 @@ export const navItems: NavData[] = [
         name: 'upload',
         url: '/master/uploadmaster',
         icon: 'fa fa-fw fa-user'
+      },
+      {
+        name: 'Role',
+        url: '/master/role',
+        icon: 'fa fa-fw fa-user'
       }
+
+      
     ]
   },
   {

@@ -1,18 +1,19 @@
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
 
-<div class="app-body" style="background-image: url(assets/img/motivation.jpg);background-repeat: no-repeat;background-size: 1500px 800px;">
+<div class="app-body" style="background-image: url(assets/img/motivation.jpg);background-repeat: repeat;">
   <main class="main d-flex">
     <div class="container">
       <div class="row">
         <div class="col-md-4 ">
           <div class="card-group">
-            <div>
+            <div  class="card p-6">
               <div class="card-body">
                 <form class="form-horizontal" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
+                  <h1>HRMS</h1>
                 
-                 <!--  <p class="text-muted">Sign In to your account</p> -->
+                  <p class="text-muted">Sign In to your account</p>
                   <div class="form-group">
-                  <div class="input-group">
+                  <div class="input-group ">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-user"></i></span>
                     </div>

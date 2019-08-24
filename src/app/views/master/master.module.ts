@@ -18,6 +18,8 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { UploadMasterComponent } from './upload-master/upload-master.component';
 import { ShareCommonComonentModule } from '../../ShareCommonComonentModule';
+import { CommonDirective } from '../../common.directives.module';
+import { RolesComponent } from './roles/roles.component';
 
 /**
  * Created By, Nasruddin Khan
@@ -41,9 +43,10 @@ import { ShareCommonComonentModule } from '../../ShareCommonComonentModule';
       ApplicationPipesModule,
       TypeaheadModule.forRoot(),
       ModalModule.forRoot(),
+      CommonDirective,
       ShareCommonComonentModule
     ],
-    declarations: [ SkillComponent, SkillElementComponent, OnlynumberDirective, UploadMasterComponent],
+    declarations: [ SkillComponent, SkillElementComponent, UploadMasterComponent, RolesComponent],
     bootstrap:[SkillElementComponent]
   })
 export class MasterModule{

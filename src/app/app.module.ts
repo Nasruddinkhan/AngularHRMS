@@ -53,6 +53,7 @@ import { SessionPromtModalComponent } from './session.promt.modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { OnlyCharecterDirective } from './views/directive/onlycharecter.directive';
+import { CommonDirective } from './common.directives.module';
 
 
 
@@ -76,6 +77,7 @@ import { OnlyCharecterDirective } from './views/directive/onlycharecter.directiv
     CollapseModule.forRoot(),
     WebcamModule,
     ShareCommonComonentModule,
+    CommonDirective,
     ReactiveFormsModule,
     BrowserModule,
     ToastrModule.forRoot({
@@ -94,7 +96,7 @@ import { OnlyCharecterDirective } from './views/directive/onlycharecter.directiv
     RegisterComponent,
     SessionPromtModalComponent
   ],
-  providers: [ErrorHandling, OnlynumberDirective,OnlyCharecterDirective, {
+  providers: [ErrorHandling, {
     provide: [LocationStrategy,AuthServiceConfig],
     useClass: HashLocationStrategy
   },
