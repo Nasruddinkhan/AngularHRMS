@@ -41,7 +41,7 @@ idle: number;
     this.loginService.loginUser(userObj).subscribe((loginUser:any)=>{
       let userObj=loginUser;
       sessionStorage.setItem('username',userObj.username); 
-      
+      sessionStorage.setItem('token',loginUser.token );
     
     
   

@@ -19,11 +19,11 @@ export class LoginService {
   }
 
   getToken() {
-    console.log("token ::::::::: "+localStorage.getItem('token'));
-    return localStorage.getItem('token')
+    console.log("token ::::::::: "+sessionStorage.getItem('token'));
+    return sessionStorage.getItem('token')
   }
 
   loggedIn() {
-    return !!localStorage.getItem('token')    
+    return !!sessionStorage.getItem('token')    
   }
 }
