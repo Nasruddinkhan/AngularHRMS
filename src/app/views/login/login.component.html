@@ -1,65 +1,109 @@
-<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
-
-<div class="app-body" style="background-image: url(assets/img/motivation.jpg);background-repeat: repeat;">
-  <main class="main d-flex">
+<!--<div class="app-body">
+  <main class="main  align-items-center">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 ">
+        <div class="col-md-5 mx-auto">
           <div class="card-group">
-            <div  class="card p-6">
+            <div class="card p-4">
               <div class="card-body">
-                <form class="form-horizontal" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
-                  <h1>HRMS</h1>
-                
-                  <p class="text-muted">Sign In to your account</p>
-                  <div class="form-group">
-                  <div class="input-group ">
+                <form>
+                  <h4>DeMS-Login</h4>
+                 
+                  <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-user"></i></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Username"name="username" #Username="ngModel" [(ngModel)]="username"autocomplete="username" required>
+                    <input type="text" class="form-control" placeholder="Username" autocomplete="username" required>
                   </div>
-                  <div *ngIf="isSubmit&&Username.errors">
-                    <div style="color:red" *ngIf="Username.errors.required">Username is required</div> 
-                  </div></div>
-                  <div class="form-group">
-                  <div class="input-group">
+                  <div class="input-group mb-4">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" name="password" #Password="ngModel"[(ngModel)]="password"autocomplete="current-password" required>
+                    <input type="password" class="form-control" placeholder="Password" autocomplete="current-password" required>
                   </div>
-                  <div *ngIf="isSubmit&&Password.errors">
-                    <div style="color:red" *ngIf="Password.errors.required">Password is required</div> 
-                  </div></div>
                   <div class="row">
-                    <div class="col-4">
-                      <button type="submit" class="btn btn-sm btn-primary px-4" >Login</button>
+                    <div class="col-6">
+                      <button type="button" class="btn btn-primary px-4" (click)="onSubmit()">Login</button>
                     </div>
-                    <div class="col-4">
-                        <a class="btn" [routerLink]="['/register']"> &nbsp;New User</a>
-                    </div>
-                    <div class="col-4">
-                        
-                      <button type="button" class="btn btn-link px-4">Forgot password?</button>
-                    </div>
-                    <div *ngIf="loginErrMsg" style="color: red;">{{loginErrMsg}}</div>
+                 
                   </div>
                 </form>
               </div>
             </div>
-           <!--  <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
-              <div class="card-body text-center">
-                <div>
-                  <h2>Sign up</h2>
-                  <p>A HRMS (Human Resource Management System) is a combination of systems and processes that connect human resource management and information technology through HR software.</p>
-                  <button type="button" class="btn btn-primary active mt-3">Register Now!</button>
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
     </div>
   </main>
-</div>
+</div>-->
+
+<ngx-loading [show]="loading">
+  </ngx-loading>
+<div class="app-body" style="background-image: url(assets/img/hrms-main.jpg);background-repeat: repeat;">
+    <main class="main d-flex align-items-center">
+      <div class="container">
+        <!-- <div class="row">
+            <div class="col-md-12 mx-auto">
+                <img src="assets/img/logo.png" height="100%" />
+            </div>
+        </div> -->
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <div class="card-group">
+              <div class="card p-4">
+                <div class="card-body">
+                  <form class="form-horizontal" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
+                    <h3 class="text-muted" style="white-space: nowrap">User Management System</h3>
+                    <p class="text-muted">Sign In to your account</p>
+                    <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Username"name="username" #Username="ngModel" [(ngModel)]="username" autocomplete="username" required>
+                    </div>
+                    <div *ngIf="isSubmit&&Username.errors">
+                      <div style="color:white" *ngIf="Username.errors.required">Username is required</div> 
+                    </div></div>
+                    <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                      </div>
+                      <input type="password" class="form-control" placeholder="Password" name="password" #Password="ngModel" [(ngModel)]="password" autocomplete="current-password" required>
+                    </div>
+                    <div *ngIf="isSubmit&&Password.errors">
+                      <div style="color:white" *ngIf="Password.errors.required">Password is required</div> 
+                    </div></div>
+                    
+                    <div class="row">
+                      <div class="col-4">
+                        <button type="submit" class="btn btn-primary px-4" >Login</button>
+                      </div>
+                      <div class="col-4 text-right">
+                        <button type="button" class="btn btn-link px-0"  style="color: white;">Forgot password?</button>
+                      </div>
+                      <div class="col-4 text-right">
+                          <button type="button" class="btn btn-link px-0"  (click)="register();" style="color: white;">New user</button>
+                        </div>
+                      <div *ngIf="loginErrMsg" style="color: white;">{{loginErrMsg}}</div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+                <!--<div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+                <div class="card-body text-center">
+                  <div>
+                    <h2>HRMS</h2>
+                    <p>User Management System  to maintain the demand and check the employee status</p>
+                   
+                  </div>
+                </div>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  

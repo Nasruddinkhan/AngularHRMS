@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MustMatch } from '../service/must-match.validator';
-import { AuthService } from 'angularx-social-login';
-import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+//import { AuthService } from 'angularx-social-login';
+//mport { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 
 /**
  * Created By, Nasruddin Khan
@@ -12,7 +12,7 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-logi
 @Component({
     selector: 'app-dashboard',
     templateUrl: 'register.component.html',
-    styleUrls:['./register.component.css']
+    styleUrls:['./register.component.scss']
   })
   export class RegisterComponent implements OnInit {
     regForm: FormGroup;

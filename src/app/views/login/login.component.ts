@@ -8,7 +8,8 @@ import { UserIdleService } from 'angular-user-idle';
  */
 @Component({
   selector: 'app-dashboard',
-  templateUrl: 'login.component.html'
+  templateUrl: 'login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
 constructor(private router:Router, private loginService:LoginService){}
@@ -25,11 +26,11 @@ idle: number;
     if(null!==sessionStorage.getItem('token')){
       this.logoutUser();
     }
-    
-    
   }
 
-  
+  register(){
+    this.router.navigate(["/register"]);
+  }
   onSubmit(loginForm){
    this.isSubmit=true;
    this.loginErrMsg="";
@@ -42,12 +43,9 @@ idle: number;
       let userObj=loginUser;
       sessionStorage.setItem('username',userObj.username); 
       sessionStorage.setItem('token',loginUser.token );
-    
-    
-  
-    this.loading = true;
+      this.loading = false;
       console.log('redirect properly');
-     this.router.navigate(["/dashboard"]);
+      this.router.navigate(["/dashboard"]);
 
 
     },err=>{
@@ -59,8 +57,8 @@ idle: number;
   }
   logoutUser() {
     console.log("calling logoutUser ::::::::: ");
-    localStorage.removeItem('token')
-    this.router.navigate(['/'])
+    localStorage.removeItem('token');
+    this.router.navigate(['/']);
   }
  
  
