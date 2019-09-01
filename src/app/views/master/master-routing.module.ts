@@ -7,6 +7,7 @@ import { P500Component } from '../error/500.component';
 import { AuthGuardService } from '../auth/auth-guard.service';
 import { UnAthorizeComponent } from '../error/unathorize.component';
 import { RolesComponent } from './roles/roles.component';
+import { AppStatusComponent } from './app-status/app-status.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -50,6 +51,14 @@ const routes: Routes=[{
             title:'role master'
         },
         component:RolesComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path:'status',
+        data:{
+            title:'status master'
+        },
+        component:AppStatusComponent,
         canActivate: [AuthGuardService],
     },
     {

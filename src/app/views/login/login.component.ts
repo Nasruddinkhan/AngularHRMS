@@ -42,7 +42,7 @@ idle: number;
     this.loginService.loginUser(userObj).subscribe((loginUser:any)=>{
       let userObj=loginUser;
       sessionStorage.setItem('username',userObj.username); 
-      sessionStorage.setItem('token',loginUser.token );
+      
       this.loading = false;
       console.log('redirect properly');
       this.router.navigate(["/dashboard"]);

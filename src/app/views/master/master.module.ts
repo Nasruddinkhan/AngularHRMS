@@ -20,6 +20,7 @@ import { UploadMasterComponent } from './upload-master/upload-master.component';
 import { ShareCommonComonentModule } from '../../ShareCommonComonentModule';
 import { CommonDirective } from '../../common.directives.module';
 import { RolesComponent } from './roles/roles.component';
+import { AppStatusComponent } from './app-status/app-status.component';
 
 /**
  * Created By, Nasruddin Khan
@@ -46,7 +47,7 @@ import { RolesComponent } from './roles/roles.component';
       CommonDirective,
       ShareCommonComonentModule
     ],
-    declarations: [ SkillComponent, SkillElementComponent, UploadMasterComponent, RolesComponent],
+    declarations: [ SkillComponent, SkillElementComponent, UploadMasterComponent, RolesComponent, AppStatusComponent],
     bootstrap:[SkillElementComponent]
   })
 export class MasterModule{

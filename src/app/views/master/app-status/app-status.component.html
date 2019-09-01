@@ -1,0 +1,112 @@
+<div class="row">
+  <div class="col-lg-12">
+
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i>{{headerTitle}}
+      </div>
+      <form #newstatusForm="ngForm" (ngSubmit)="onSubmit(newstatusForm)">
+        <div class="card-body">
+           <div class="row">
+              <div class="form-group col-sm-3">
+                  <label for="statusId">status id <span style="color:red">*</span></label>
+                  <input type="text" maxlength="3"   minlength="3" class="form-control" required [(ngModel)]="statusId" name="statusId"
+                     [ngClass]="{'red-border-class': !statusId1.valid && statusId1.touched}" #statusId1="ngModel" appCharisAllow>
+                  <div *ngIf="!statusId1.valid && statusId1.touched" style="color:red">
+                     status id is required
+                  </div>
+                  
+                  <!-- <div *ngIf="!statusId1.valid && statusList?.length? !=3" style="color:red">
+                     atleast 3 charecter is required
+                   </div> -->
+                  
+               </div>
+              <div class="form-group col-sm-3">
+                 <label for="statusname">status Name <span style="color:red">*</span></label>
+                 <input type="text" class="form-control" required [(ngModel)]="statusname" name="statusname"
+                    [ngClass]="{'red-border-class': !statusname1.valid && statusname1.touched}" #statusname1="ngModel">
+                 <div *ngIf="!statusname1.valid && statusname1.touched" style="color:red">
+                    status name is required
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="card-footer">
+           <button type="submit" class="btn btn-primary" [disabled]="!newstatusForm.form.valid">Submit</button>
+           <button type="reset" class="btn btn-warning">Reset</button>
+        </div>
+     </form>
+    </div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+   </ngx-loading>
+   <div *ngIf="statusList?.length > 0">
+      <div class="card">
+         <div class="card-header">
+            <i class="icon-people"></i>Skill Details
+            <div class="card-header-actions">
+               <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse()">
+                  <i class={{iconCollapse}}></i>
+               </button>
+            </div>
+         </div>
+
+         <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed"
+            class="card-body">
+            <div class="form-group row">
+               <div class="col-md-12">
+                  <div class="input-group">
+                     <span class="input-group-prepend">
+                        <button type="button" class="btn btn-primary"><i class="icon-people"></i></button>
+                     </span>
+                     <input type="text" style="height: calc(2.0625rem + 2px) !important;" id="input3-group2"
+                        [(ngModel)]="searchText" class="form-control" placeholder="Search">
+                     <span class="input-group-append">
+                        <button type="button" class="btn btn-primary"><i class="icon-magnifier"></i></button>
+                     </span>
+                  </div>
+               </div>
+             
+            </div>
+            <div class="card-body table-responsive" style="padding: 0.25rem !important">
+               <table class="table table-bordered table-striped table-sm">
+                  <thead style="background-color: darkcyan;color: white;">
+                     <tr>
+                       <th>Sr.</th> 
+                        <th>status ID</th>
+                        <th>status Name</th>
+                        <th>Created On</th>
+                        <th>Created By</th>
+                        <th>Action</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                      <tr
+                        *ngFor="let status of statusList | grdFilter:{statusName:searchText} | paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index">
+                       <td> {{ initialPageSize * (p - 1) + i+1 }}</td> 
+                        <td>{{status.statusID}}</td>
+                        <td>{{status.statusName}}</td>
+                        <td>{{status.createdDate  | date: 'MM/dd/yyyy'}}</td>
+                        <td>{{status.createdBy}}</td>
+                        <td>
+                           <span><button class="badge badge-danger"
+                                 (click)="openstatusModal(template, status);">Delete</button></span>
+                        </td>
+                     </tr> 
+                  </tbody>
+               </table>
+               <pagination-controls class="my-pagination" (pageChange)="p = $event" *ngIf="statusList?.length > 4">
+               </pagination-controls> 
+            </div>
+         </div>
+      </div>
+
+   </div>
+  </div>
+</div>
+<ng-template #template>
+      <div class="modal-body text-center">
+            <p>Do you want to delete {{message}}  status</p>
+            <button type="button" class="btn btn-success" (click)="confirm()">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+      </div>
+   </ng-template>

@@ -60,9 +60,12 @@ export const navItems: NavData[] = [
         name: 'Role',
         url: '/master/role',
         icon: 'fa fa-fw fa-user'
+      },
+      {
+        name: 'Status',
+        url: '/master/status',
+        icon: 'fa fa-fw fa-user'
       }
-
-      
     ]
   },
   {

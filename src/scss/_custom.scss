@@ -16,6 +16,8 @@
    font-size: 12px !important;
    transition: unset !important;
    outline: none;
+   border: 1px solid #e4e7ea;
+   box-shadow: 2px 1px 2px 0px #e4e7ea;
    //padding-left: 15px !important;
    //padding-right: 15px !important;
 }
@@ -46,19 +48,7 @@ label{
    color: white !important;
 }
 
-.ngx-dropdown-container[_ngcontent-c2] .ngx-dropdown-button[_ngcontent-c2] {
 
-   padding: 3px 10px 5px 10px;
-   height: 30px !important;
-   font-weight: 400  !important;
-   line-height: 1.5;
-   color: #5c6873  !important;
-   background-color: #fff !important;
-   background-clip: padding-box  !important;;
-   border: 1px solid #e4e7ea  !important;
-   font-size: 12px;
-   outline-color: #63c2de ;
-}
 th{
    font-weight: bold;
 }
@@ -150,7 +140,10 @@ transition: all 0.3s;
    background-color: #63c2de !important;
    border-bottom-right-radius: 9px !important;;
 }
-
+.red-border-class{
+   border: 1px solid red;
+   box-shadow: 2px 1px 2px 0px red;
+ }
 .sidebar-minimized .sidebar .nav-dropdown-items .nav-item .nav-link {
    background: #fff !important;
 }
