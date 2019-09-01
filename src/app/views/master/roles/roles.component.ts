@@ -18,7 +18,6 @@ export class RolesComponent implements OnInit {
   iconCollapse: string = 'icon-arrow-up';
   rolename:string;
   roleList: any;
-  skillService: any;
   role:Roles;
   deleteRoleID :number;
   public loading = false;
