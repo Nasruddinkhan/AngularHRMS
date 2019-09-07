@@ -8,6 +8,7 @@ import { AuthGuardService } from '../auth/auth-guard.service';
 import { UnAthorizeComponent } from '../error/unathorize.component';
 import { RolesComponent } from './roles/roles.component';
 import { AppStatusComponent } from './app-status/app-status.component';
+import { SearchEmployeesComponent } from './search-employees/search-employees.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -67,6 +68,14 @@ const routes: Routes=[{
             title:'error'
         },
         component:P500Component,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path:'searchemployee',
+        data:{
+            title:'Serarch Employee'
+        },
+        component:SearchEmployeesComponent,
         canActivate: [AuthGuardService],
     },
     {

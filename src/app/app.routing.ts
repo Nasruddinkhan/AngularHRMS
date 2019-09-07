@@ -10,6 +10,7 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { AuthGuardService } from './views/auth/auth-guard.service';
 import { UnAthorizeComponent } from './views/error/unathorize.component';
+import { ChgpasswordComponent } from './views/chgpassword/chgpassword.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -63,6 +64,13 @@ export const routes: Routes = [
     component: RegisterComponent,
     data: {
       title: 'Register Page'
+    }
+  },
+    {
+    path: 'changepassword',
+    component: ChgpasswordComponent,
+    data: {
+      title: 'Change Password'
     }
   },
   {

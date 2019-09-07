@@ -52,8 +52,10 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { SessionPromtModalComponent } from './session.promt.modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
-import { OnlyCharecterDirective } from './views/directive/onlycharecter.directive';
 import { CommonDirective } from './common.directives.module';
+import { ChgpasswordComponent } from './views/chgpassword/chgpassword.component';
+
+
 
 
 
@@ -80,6 +82,7 @@ import { CommonDirective } from './common.directives.module';
     CommonDirective,
     ReactiveFormsModule,
     BrowserModule,
+
     ToastrModule.forRoot({
       maxOpened: 1,
       autoDismiss: true
@@ -92,9 +95,10 @@ import { CommonDirective } from './common.directives.module';
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
+    ChgpasswordComponent,
     LoginComponent,
     RegisterComponent,
-    SessionPromtModalComponent
+        SessionPromtModalComponent
   ],
   providers: [ErrorHandling, {
     provide: [LocationStrategy,AuthServiceConfig],

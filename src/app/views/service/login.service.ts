@@ -14,8 +14,8 @@ export class LoginService {
   constructor(private http: HttpClient) { }
   private baseURL=environment.baseUrl;
 
-  loginUser(user) {
-    return this.http.post<any>(this.baseURL+'login/validateUser', user)
+  async loginUser(user) :Promise<any>{
+    return await this.http.post<any>(this.baseURL+'login/validateUser', user).toPromise();
   }
 
   getToken() {

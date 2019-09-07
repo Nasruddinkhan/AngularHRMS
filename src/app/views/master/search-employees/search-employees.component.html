@@ -1,0 +1,100 @@
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+</ngx-loading>
+<div class="row">
+<div class="col-lg-12">
+  <div class="card">
+    <div class="card-header">
+      <i class="icon-people"></i>Search Employee
+      
+    </div>
+    <div  class="card-body">
+      <div class="row">
+        
+        <div class="col-lg-12">
+            
+          <div class="force-to-the-bottom">
+           <!--  <div id="demotext" [style.margin-top]="getMarginTop()" [style.font-size]="getfontSize()"
+              *ngIf="!searchLabel"> Search Employee</div> -->
+              <div id="logo-default" title="Google" class="show-logo"></div>
+            <tag-input [(ngModel)]="search" id="fakebox-search-icon"
+              style="box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);padding-left: 15px;padding-right: 12px;border-radius: 22px;"
+               secondaryPlaceholder=" ">
+              <tag-input-dropdown [autocompleteItems]="searchDrop" [displayBy]="'key'" [identifyBy]="'property'">
+              </tag-input-dropdown>
+            </tag-input>
+    
+
+            <div class=" form-actions text-center" >
+              <label for="search" style="margin-top: 2rem"></label>
+              <button type="submit" class="btn btn-primary" (click)="searchEmployee()">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+
+      
+    </div>
+  </div>
+  
+  <div *ngIf="searchList?.length > 0">
+     <div class="card">
+        <div class="card-header">
+           <i class="icon-people"></i>Skill Details
+           <div class="card-header-actions">
+              <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse()">
+                 <i class={{iconCollapse}}></i>
+              </button>
+           </div>
+        </div>
+
+        <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed"
+           class="card-body">
+           <div class="form-group row">
+              <div class="col-md-12">
+                 <div class="input-group">
+                    <span class="input-group-prepend">
+                       <button type="button" class="btn btn-primary"><i class="icon-people"></i></button>
+                    </span>
+                    <input type="text" style="height: calc(2.0625rem + 2px) !important;" id="input3-group2"
+                       [(ngModel)]="searchText" class="form-control" placeholder="Search">
+                    <span class="input-group-append">
+                       <button type="button" class="btn btn-primary"><i class="icon-magnifier"></i></button>
+                    </span>
+                 </div>
+              </div>
+            
+           </div>
+           <div class="card-body table-responsive" style="padding: 0.25rem !important">
+              <table class="table table-bordered table-striped table-sm">
+                 <thead style="background-color: #63c2de;color: white;">
+                    <tr>
+                      <th>Sr.</th> 
+                       <th>User ID</th>
+                   
+                    </tr>
+                 </thead>
+                 <tbody>
+                      <tr
+                       *ngFor="let emp of searchList | grdFilter:{statusName:searchText} | paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index">
+                      <td> {{ initialPageSize * (p - 1) + i+1 }}</td> 
+                       <td>{{emp.userID}}</td>
+                       
+                    </tr> 
+                 </tbody>
+              </table>
+               <pagination-controls class="my-pagination" (pageChange)="p = $event" *ngIf="searchList?.length > 4">
+              </pagination-controls> 
+           </div>
+        </div>
+     </div>
+
+  </div>
+</div>
+
+
+
+<!--/.col-->
+</div>
+<!--/.row-->

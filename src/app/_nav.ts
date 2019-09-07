@@ -65,7 +65,14 @@ export const navItems: NavData[] = [
         name: 'Status',
         url: '/master/status',
         icon: 'fa fa-fw fa-user'
+      },
+      {
+        name: 'Search Employee',
+        url: '/master/searchemployee',
+        icon: 'fa fa-fw fa-user'
       }
+    
+
     ]
   },
   {

@@ -45,10 +45,11 @@ export class AppComponent implements OnInit {
     });
 
     idle.onIdleStart.subscribe(() => {
-      //alert(this.router.url);
+      ///alert(this.router.url);
       if (this.router.url != '/') {
-        if (this.router.url != '/register')
+        if (this.router.url != '/register'){
           this.idleState = 'IDLE_START', this.openProgressForm(1);
+        }
       }
     });
 

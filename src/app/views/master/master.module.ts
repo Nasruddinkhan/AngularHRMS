@@ -21,6 +21,8 @@ import { ShareCommonComonentModule } from '../../ShareCommonComonentModule';
 import { CommonDirective } from '../../common.directives.module';
 import { RolesComponent } from './roles/roles.component';
 import { AppStatusComponent } from './app-status/app-status.component';
+import { SearchEmployeesComponent } from './search-employees/search-employees.component';
+import { TagInputModule } from 'ngx-chips';
 
 /**
  * Created By, Nasruddin Khan
@@ -36,7 +38,6 @@ import { AppStatusComponent } from './app-status/app-status.component';
       BrowserAnimationsModule,
       MatAutocompleteModule,
       MatInputModule, */
-      FormsModule,
       ReactiveFormsModule,
       CollapseModule.forRoot(),
       ToastrModule.forRoot(),
@@ -45,9 +46,10 @@ import { AppStatusComponent } from './app-status/app-status.component';
       TypeaheadModule.forRoot(),
       ModalModule.forRoot(),
       CommonDirective,
-      ShareCommonComonentModule
+      ShareCommonComonentModule,
+      TagInputModule
     ],
-    declarations: [ SkillComponent, SkillElementComponent, UploadMasterComponent, RolesComponent, AppStatusComponent],
+    declarations: [ SkillComponent, SkillElementComponent, UploadMasterComponent, RolesComponent, AppStatusComponent, SearchEmployeesComponent],
     bootstrap:[SkillElementComponent]
   })
 export class MasterModule{

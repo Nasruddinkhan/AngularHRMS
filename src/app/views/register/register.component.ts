@@ -14,9 +14,8 @@ import { UserService } from '../service/user.service';
     regForm: FormGroup;
     isSubmitted  =  false;
     public loading = false;
-    constructor(private  formBuilder:FormBuilder, private userService:UserService, private toastr: ToastrService, private router: Router){
-
-    }
+    status :string= "PRN";
+    constructor(private  formBuilder:FormBuilder, private userService:UserService, private toastr: ToastrService, private router: Router){}
     public ngOnInit() {
       this.regForm  =  this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
@@ -36,7 +35,7 @@ import { UserService } from '../service/user.service';
         return;
       }
      this.loading = true;
-      this.userService.registerUser(JSON.stringify(this.regForm.value)).subscribe((response:any)=>{
+      this.userService.registerUser(JSON.stringify(this.regForm.value), this.status).subscribe((response:any)=>{
         this.loading = false;
         let msg="successfully please check email";
         this.toastr.success(msg, 'Registration', {
