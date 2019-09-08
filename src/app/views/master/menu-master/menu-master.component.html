@@ -1,0 +1,95 @@
+<div class="row">
+  <div class="col-lg-12">
+
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i>{{headerTitle}}
+      </div>
+      <form #newMenuForm="ngForm" (ngSubmit)="onSubmit(newMenuForm)">
+        <div class="card-body">
+           <div class="row">
+              <div class="form-group col-sm-3">
+                 <label for="menuname">MenuName <span style="color:red">*</span></label>
+                 <input type="text" class="form-control" required [(ngModel)]="menuname" name="menuname"
+                    [ngClass]="{'red-border-class': !menuname1.valid && menuname1.touched}" #menuname1="ngModel">
+                 <div *ngIf="!menuname1.valid && menuname1.touched" style="color:red">
+                    menu name is required
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="card-footer">
+           <button type="submit" class="btn btn-primary" [disabled]="!newMenuForm.form.valid">Submit</button>
+           <button type="reset" class="btn btn-warning">Reset</button>
+        </div>
+     </form>
+    </div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+    </ngx-loading>
+    <div *ngIf="menuList?.length > 0">
+       <div class="card">
+          <div class="card-header">
+             <i class="icon-people"></i>Skill Details
+             <div class="card-header-actions">
+                <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse()">
+                   <i class={{iconCollapse}}></i>
+                </button>
+             </div>
+          </div>
+ 
+          <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed"
+             class="card-body">
+             <div class="form-group row">
+                <div class="col-md-12">
+                   <div class="input-group">
+                      <span class="input-group-prepend">
+                         <button type="button" class="btn btn-primary"><i class="icon-people"></i></button>
+                      </span>
+                      <input type="text" style="height: calc(2.0625rem + 2px) !important;" id="input3-group2"
+                         [(ngModel)]="searchText" class="form-control" placeholder="Search">
+                      <span class="input-group-append">
+                         <button type="button" class="btn btn-primary"><i class="icon-magnifier"></i></button>
+                      </span>
+                   </div>
+                </div>
+              
+             </div>
+             <div class="card-body table-responsive" style="padding: 0.25rem !important">
+                <table class="table table-bordered table-striped table-sm">
+                   <thead style="background-color: darkcyan;color: white;">
+                      <tr>
+                        <th>Sr.</th> 
+                         <th>Menu ID</th>
+                         <th>Menu Name</th>
+                         <th>Created On</th>
+                         <th>Created By</th>
+                         <th>Action</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                       <tr
+                         *ngFor="let menu of menuList | grdFilter:{menuName:searchText} | paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index">
+                        <td> {{ initialPageSize * (p - 1) + i+1 }}</td> 
+                         <td>{{menu.menuID}}</td>
+                         <td>{{menu.menuName}}</td>
+                  
+                         <td>{{menu.createdDate  | date: 'MM/dd/yyyy'}}</td>
+                         <td>{{menu.createdBy}}</td>
+                         <td>
+                          
+                           
+                            <span><button class="badge badge-danger"
+                                  (click)="openmenuModal(template, menu);">Delete</button></span>
+                         </td>
+                      </tr> 
+                   </tbody>
+                </table>
+                <pagination-controls class="my-pagination" (pageChange)="p = $event" *ngIf="!isShow">
+                </pagination-controls> 
+             </div>
+          </div>
+       </div>
+ 
+    </div>
+  </div>
+</div>

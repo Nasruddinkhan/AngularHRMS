@@ -9,6 +9,8 @@ import { UnAthorizeComponent } from '../error/unathorize.component';
 import { RolesComponent } from './roles/roles.component';
 import { AppStatusComponent } from './app-status/app-status.component';
 import { SearchEmployeesComponent } from './search-employees/search-employees.component';
+import { MenuMasterComponent } from './menu-master/menu-master.component';
+import { SubMenuComponent } from './sub-menu/sub-menu.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -85,9 +87,27 @@ const routes: Routes=[{
         },
         component:UnAthorizeComponent,
         canActivate: [AuthGuardService],
-    }
+    },
+    {
+        path:'menumaster',
+        data:{
+            title:'Menu Master'
+        },
+        component:MenuMasterComponent,
+        canActivate: [AuthGuardService],
 
-    
+    } 
+    ,
+    {
+        path:'submenumaster',
+        data:{
+            title:'Sub Menu Master'
+        },
+        component:SubMenuComponent,
+        canActivate: [AuthGuardService],
+
+    }    
+     
     ]
     }]
 @NgModule({

@@ -71,8 +71,18 @@ export const navItems: NavData[] = [
         url: '/master/searchemployee',
         icon: 'fa fa-fw fa-user'
       }
-    
-
+      ,
+      {
+        name: 'Menu Master',
+        url: '/master/menumaster',
+        icon: 'fa fa-fw fa-user'
+      },
+      {
+        name: 'Sub Menu Master',
+        url: '/master/submenumaster',
+        icon: 'fa fa-fw fa-user'
+      }
+      
     ]
   },
   {

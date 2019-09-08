@@ -191,7 +191,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text" [ngClass]="{ 'red-border-class': isSubmitted && formControls.email.errors }"><i class="icon-user"></i></span>
                       </div>
-                      <input type="text" class="form-control" placeholder="email"   formControlName="email" [ngClass]="{ 'red-border-class': isSubmitted && formControls.email.errors }">
+                      <input type="text" class="form-control" placeholder="email"  oninput="this.value=this.value.toLowerCase()"  formControlName="email" [ngClass]="{ 'red-border-class': isSubmitted && formControls.email.errors }">
                      
                     </div>
                     <div *ngIf="isSubmitted && formControls.email.errors" >

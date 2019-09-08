@@ -26,6 +26,7 @@ export class RolesComponent implements OnInit {
   isShow: boolean = false;
   modalRef: BsModalRef;
   message: string;
+  
   constructor(private roleService:RolesService, private toastr: ToastrService, private router: Router, private modalService: BsModalService) { }
 
   ngOnInit() {

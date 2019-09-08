@@ -60,7 +60,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="icon-user"></i></span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username"name="username" #Username="ngModel" [(ngModel)]="username" autocomplete="username" required>
+                      <input type="text" class="form-control" placeholder="Username"  oninput="this.value=this.value.toLowerCase()" name="username" #Username="ngModel" [(ngModel)]="username" autocomplete="username" required>
                     </div>
                     <div *ngIf="isSubmit&&Username.errors">
                       <div style="color:white" *ngIf="Username.errors.required">Username is required</div> 
