@@ -20,4 +20,8 @@ export class MenuService {
     return this.http.post(this.baseURL+`menu/add`, menu).pipe(
       catchError(this.errorHandling.handleError))
   }
+  deleteMenus(menuID:number):Observable<any>{
+    return this.http.delete(this.baseURL + `menu/${menuID}/delete`).pipe(
+      catchError(this.errorHandling.handleError));
+  }
 }

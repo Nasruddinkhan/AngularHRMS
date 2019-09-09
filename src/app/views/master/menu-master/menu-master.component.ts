@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BsModalService } from 'ngx-bootstrap/modal/';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal/';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MenuService } from '../../service/menu.service';
@@ -27,6 +27,9 @@ export class MenuMasterComponent implements OnInit {
   p: number = 1;
   initialPageSize: number = 5;
   isShow: boolean = false;
+  deleteMenuID:number;
+  modalRef: BsModalRef;
+  message: string;
   constructor(private menuService: MenuService,private toastr: ToastrService, private router: Router, private modalService: BsModalService) { }
 
   
@@ -56,7 +59,34 @@ export class MenuMasterComponent implements OnInit {
       console.log(err);
     });
   }
+  openmenuModal(template: TemplateRef<any>, menu){
+    this.deleteMenuID =menu.menuID;
+    this.message =   menu.menuName;
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+  confirm(): void {
+    this.deleteRole();
+    this.modalRef.hide();
+  }
+  deleteRole(){
+    this.loading=true;
+    this.menuService.deleteMenus(this.deleteMenuID).subscribe((msg: any) => {
+      this.getMenuList();
+      this.loading = false;
+      this.toastr.success(this.message + ' has been  successfully', 'Delete Menu', {
+        positionClass: 'toast-bottom-right'
+      });
+    }, err => {
   
+      this.loading = false;
+      this.toastr.error(err.error.message, 'Internal Errors', {
+        positionClass: 'toast-bottom-right'
+      });
+    });
+  }
+  decline(){
+    this.modalRef.hide();
+  }
   onSubmit(form: NgForm) {
     
     if (form.valid) {

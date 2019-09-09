@@ -5,6 +5,44 @@
       <div class="card-header">
         <i class="icon-people"></i>{{headerTitle}}
       </div>
+      <form #newsubmenuForm="ngForm" (ngSubmit)="onSubmit(newsubmenuForm, 'I')">
+        <div class="card-body">
+           <div class="row">
+             <div class="form-group col-sm-4">
+                 <label for="subMenuID">Sub Menu ID <span style="color:red">*</span></label>
+                 <input type="text" class="form-control" required [(ngModel)]="subMenuID" name="subMenuID"
+                    [ngClass]="{'red-border-class': !subMenuID1.valid && subMenuID1.touched}" #subMenuID1="ngModel">
+                 <div *ngIf="!subMenuID1.valid && subMenuID1.touched" style="color:red">
+                    submenu id is required
+                 </div>
+              </div>
+              <div class="form-group col-sm-4">
+                 <label for="submenuname">Sub Menu Name <span style="color:red">*</span></label>
+                 <input type="text" class="form-control" required [(ngModel)]="submenuname" name="submenuname"
+                    [ngClass]="{'red-border-class': !submenuname1.valid && submenuname1.touched}" #submenuname1="ngModel">
+                 <div *ngIf="!submenuname1.valid && submenuname1.touched" style="color:red">
+                    submenu name is required
+                 </div>
+              </div>
+              <div class="form-group col-sm-4">
+                  <label for="submenu"> Menus <span style="color:red">*</span></label>
+                  <select required [(ngModel)]="menuID"  name="submenu"
+                    [ngClass]="{'red-border-class': !submenu1.valid && submenu1.touched}" #submenu1="ngModel"
+                    class="form-control">
+                    <option value="">Select skill</option>
+                    <option *ngFor="let menu of menuList" [value]="menu.menuID">{{menu.menuName}}</option>
+                  </select>
+                  <div *ngIf="!submenu1.valid && submenu1.touched" style="color:red">
+                    Skill Name is required
+                  </div>
+                </div>
+           </div>
+        </div>
+        <div class="card-footer">
+           <button type="submit" class="btn btn-primary" [disabled]="!newsubmenuForm.form.valid">Submit</button>
+           <button type="reset" class="btn btn-warning">Reset</button>
+        </div>
+     </form>
     </div>
   </div>
 </div>

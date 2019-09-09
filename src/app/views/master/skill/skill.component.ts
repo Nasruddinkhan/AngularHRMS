@@ -53,6 +53,7 @@ export class SkillComponent implements OnInit {
     this.iconCollapse = this.isCollapsed ? 'icon-arrow-down' : 'icon-arrow-up';
   }
   ngOnInit(): void {
+    console.log(this.router.url);
     this.getSkillList();
   }
 
