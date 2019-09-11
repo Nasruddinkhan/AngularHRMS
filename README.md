@@ -88,10 +88,10 @@ npm install -g @angular/cli
 
 ``` bash
 # clone the repo
-$ git clone https://github.com/coreui/coreui-free-angular-admin-template.git my-project
+$ git clone https://github.com/Nasruddinkhan/AngularHRMS/
 
 # go into app's directory
-$ cd my-project
+$ cd HRMS
 
 # install app's dependencies
 $ npm install
@@ -112,7 +112,7 @@ $ ng build
 Within the download you'll find the following directories and files, logically grouping common assets and providing both compiled and minified variations. You'll see something like this:
 
 ```
-free-angular-admin-template/
+https://github.com/Nasruddinkhan/HRMS/
 ├── e2e/
 ├── src/
 │   ├── app/
