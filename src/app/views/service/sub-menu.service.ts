@@ -16,10 +16,19 @@ export class SubMenuService {
     return this.http.get(this.baseURL+`submenu/menus`).pipe(
       catchError(this.errorHandling.handleError))
   }
+  getSubMenuDetails():Observable<any>{
+    return this.http.get(this.baseURL+`submenu/submenus`).pipe(
+      catchError(this.errorHandling.handleError))
+  }
 
   saveSubMenuDetails(menuID:number, submenu:SubMenus):Observable<any>{
  console.log(menuID, JSON.stringify(submenu));
     return this.http.post(this.baseURL+`submenu/${menuID}/savesubmenus`, submenu).pipe(
       catchError(this.errorHandling.handleError))
+  }
+  deleteSubMenus(subMenuID:string):Observable<any>{
+    alert(this.baseURL + `submenu/${subMenuID}/delete`);
+    return this.http.delete(this.baseURL + `submenu/${subMenuID}/delete`).pipe(
+      catchError(this.errorHandling.handleError));
   }
 }

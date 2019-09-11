@@ -5,7 +5,7 @@
       <div class="card-header">
         <i class="icon-people"></i>{{headerTitle}}
       </div>
-      <form #newsubmenuForm="ngForm" (ngSubmit)="onSubmit(newsubmenuForm, 'I')">
+      <form #newsubmenuForm="ngForm" (ngSubmit)="onSubmit(newsubmenuForm)">
         <div class="card-body">
            <div class="row">
              <div class="form-group col-sm-4">
@@ -44,5 +44,77 @@
         </div>
      </form>
     </div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+   </ngx-loading>
+   <div *ngIf="subMenuList?.length > 0">
+      <div class="card">
+         <div class="card-header">
+            <i class="icon-people"></i> SubMenu Details
+            <div class="card-header-actions">
+               <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse()">
+                  <i class={{iconCollapse}}></i>
+               </button>
+            </div>
+         </div>
+
+         <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed"
+            class="card-body">
+            <div class="form-group row">
+               <div class="col-md-12">
+                  <div class="input-group">
+                     <span class="input-group-prepend">
+                        <button type="button" class="btn btn-primary"><i class="icon-people"></i></button>
+                     </span>
+                     <input type="text" style="height: calc(2.0625rem + 2px) !important;" id="input3-group2"
+                        [(ngModel)]="searchText" class="form-control" placeholder="Search">
+                     <span class="input-group-append">
+                        <button type="button" class="btn btn-primary"><i class="icon-magnifier"></i></button>
+                     </span>
+                  </div>
+               </div>
+             
+            </div>
+            <div class="card-body table-responsive" style="padding: 0.25rem !important">
+               <table class="table table-bordered table-striped table-sm">
+                  <thead style="background-color: #63c2de;color: white;">
+                     <tr>
+                       <th>Sr.</th> 
+                        <th>Sub Menu</th>
+                        <th>Menu Name</th>
+                        <th>Created On</th>
+                        <th>Created By</th>
+                        <th>Action</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                      <tr
+                        *ngFor="let menu of subMenuList | grdFilter:{menuName:searchText} | paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index">
+                       <td> {{ initialPageSize * (p - 1) + i+1 }}</td> 
+                        <td>{{menu.subMenuName}}</td>
+                        <td>{{menu.menuName}}</td>
+                        <td>{{menu.createdDate  | date: 'MM/dd/yyyy'}}</td>
+                        <td>{{menu.createdBy}}</td>
+                        <td>
+                         
+                           <span><button class="badge badge-danger"
+                                 (click)="opensubmenuModal(template, menu);">Delete</button></span>
+                        </td>
+                     </tr> 
+                  </tbody>
+               </table>
+               <pagination-controls class="my-pagination" (pageChange)="p = $event" *ngIf="subMenuList?.length > 5">
+               </pagination-controls> 
+            </div>
+         </div>
+      </div>
+
+   </div>
   </div>
 </div>
+<ng-template #template>
+   <div class="modal-body text-center">
+         <p>Do you want to delete {{message}} sub menu</p>
+         <button type="button" class="btn btn-success" (click)="confirm()">Yes</button>
+         <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+   </div>
+</ng-template>

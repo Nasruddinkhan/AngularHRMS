@@ -11,6 +11,7 @@ import { AppStatusComponent } from './app-status/app-status.component';
 import { SearchEmployeesComponent } from './search-employees/search-employees.component';
 import { MenuMasterComponent } from './menu-master/menu-master.component';
 import { SubMenuComponent } from './sub-menu/sub-menu.component';
+import { AsingMenuAccessComponent } from './asing-menu-access/asing-menu-access.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -32,6 +33,15 @@ const routes: Routes=[{
         component:SkillComponent,
         canActivate: [AuthGuardService],
     },
+    {
+        path:'asingmenu',
+        data:{
+            title:'Asing Menu to Access'
+        },
+        component:AsingMenuAccessComponent,
+        canActivate: [AuthGuardService],
+    },
+    
     {
         path:'skillelements',
         data:{

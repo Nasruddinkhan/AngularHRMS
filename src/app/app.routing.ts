@@ -111,6 +111,7 @@ export const routes: Routes = [
         loadChildren: './views/payroll/payroll.module#PayrollModule',
         canActivate: [AuthGuardService],
       },
+      
     ]  
   },
   { path: '**', component: P404Component }

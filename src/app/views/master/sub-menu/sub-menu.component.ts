@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { SubMenuService } from '../../service/sub-menu.service';
 import { MenuService } from '../../service/menu.service';
 import { ToastrService } from 'ngx-toastr';
@@ -21,14 +21,58 @@ export class SubMenuComponent implements OnInit {
   menuID:number;
   loading:boolean;
   submenu:SubMenus;
-  upsubMenuId:string;
-  upmenuID:string;
-  updatedCreatedBy:string;
-  upCreatedDate:Date;
   modalRef: BsModalRef;
+  deleteSubMenuID:string;
+  subMenuList:any;
+  isCollapsed: boolean = false;
+  iconCollapse: string = 'icon-arrow-up';
+  searchText:string;
+  p: number = 1;
+  initialPageSize: number = 5;
+  message:string;
   constructor(private subMenuService:SubMenuService,private menuService: MenuService, private toastr:ToastrService,  private modalService: BsModalService) { }
   ngOnInit() {
     this.getMenuList();
+    this.getSubMenuList();
+  }
+  confirm(): void {
+    this.deleteSubMeu();
+    this.modalRef.hide();
+  }
+   opensubmenuModal(template: TemplateRef<any>, menu){
+     //alert(JSON.stringify(menu));
+    this.deleteSubMenuID   = new String(menu.subMenuId).replace("/","-").replace("/","-");
+    alert( this.deleteSubMenuID);
+    this.message =   menu.subMenuName;
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+  deleteSubMeu(){
+    this.loading=true;
+    this.subMenuService.deleteSubMenus(this.deleteSubMenuID).subscribe((msg: any) => {
+      this.getSubMenuList();
+      this.loading = false;
+      this.toastr.success(this.message + ' has been  successfully', 'Delete Sub Menu', {
+        positionClass: 'toast-bottom-right'
+      });
+    }, err => {
+  
+      this.loading = false;
+      this.toastr.error(err.error.message, 'Internal Errors', {
+        positionClass: 'toast-bottom-right'
+      });
+    });
+  }
+  decline(){
+    this.modalRef.hide();
+  }
+  getSubMenuList(){
+    this.loading = true;
+    this.subMenuService.getSubMenuDetails().subscribe((response:any)=>{
+      this.subMenuList = response;
+      this.loading = false;
+    },err=>{
+      this.loading = false;
+    });
   }
   getMenuList(){
     this.menuService.getMenuDetails().subscribe((response:any)=>{
@@ -39,45 +83,36 @@ export class SubMenuComponent implements OnInit {
       });
     });
   }
-  closePopUP(): void {
-    this.modalRef.hide();
+  collapsed(event: any): void {
+    // console.log(event);
   }
-  onSubmit(form: NgForm, pageFlag) {
+  expanded(event: any): void {
+    // console.log(event);
+  }
+  
+  onSubmit(form: NgForm) {
     let msg;
     let menuId;
     if (form.valid) {
       this.loading = true;
       this.submenu = new SubMenus;
-      if (pageFlag === 'I') {
+  
         msg = "Add Sub Menu Successfully";
       this.submenu.subMenuId = form.value.subMenuID;
       this.submenu.subMenuName = form.value.submenuname;
         this.submenu.createdBy = "Nasruddin";
         this.submenu.createdDate = new Date();
         menuId = this.menuID;
-      } else {
-        msg = "Update Sub menu Successfully";
-        this.submenu.subMenuId = this.upsubMenuId;
-        this.submenu.subMenuName = form.value.upsubmenunamre
-        this.submenu.modifiedBy = "Nasruddin";
-        this.submenu.modifiedDate = new Date();
-        menuId = this.upmenuID;
-        this.submenu.createdBy = this.updatedCreatedBy;
-        this.submenu.createdDate = this.upCreatedDate;
-      } 
-      this.submenu.activeStatus = 1;
+        this.submenu.activeStatus = 1;
 
 
 
       this.subMenuService.saveSubMenuDetails(menuId, this.submenu).subscribe((response: any) => {
         this.loading = false;
-      //  this.getSkillElementsDetails();
+       this.getSubMenuList();
         this.toastr.success(msg, 'Sub Menu Details', {
           positionClass: 'toast-bottom-right'
         });
-        if (pageFlag === 'U')
-          this.closePopUP();
-
       }, err => {
         this.loading = false;
         this.toastr.error(err.error.message, 'Internal Errors', {

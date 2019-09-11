@@ -70,6 +70,11 @@ export const navItems: NavData[] = [
         name: 'Search Employee',
         url: '/master/searchemployee',
         icon: 'fa fa-fw fa-user'
+      },
+      {
+        name: 'Menu Acess',
+        url: '/master/asingmenu',
+        icon: 'fa fa-fw fa-user'
       }
       ,
       {
