@@ -1,4 +1,4 @@
-<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" >
 </ngx-loading>
 <div class="row">
    <div class="col-lg-12">
@@ -68,7 +68,7 @@
                   <table class="table table-bordered table-striped table-sm">
                      <thead style="background-color: #63c2de;color: white;">
                         <tr>
-                           <th>Sr.</th>
+                           <th></th>
                            <th>User ID</th>
                            <th>Status</th>
                            <th>Email</th>
@@ -78,7 +78,10 @@
                      <tbody>
                         <tr
                            *ngFor="let emp of searchList | grdFilter:{email:searchText, userID:searchText} | paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index">
-                           <td> {{ initialPageSize * (p - 1) + i+1 }}</td>
+                           <td style="text-align: left"> <button class="badge badge-danger" *ngIf="emp.statusMaster.statusID  === 'APP' || emp.statusMaster.statusID  === 'PRN'">Reject</button>
+                              <button class="badge badge-success" *ngIf="emp.statusMaster.statusID  === 'PRN'" (click)="openApproveModalComponent(emp)">Approved</button>
+                           </td>
+                           
                            <td>{{emp.userID}}</td>
                            <td>{{emp.statusMaster.statusName | titlecase}}</td>
                            <td>{{emp.email}}</td>

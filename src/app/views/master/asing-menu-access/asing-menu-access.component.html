@@ -1,3 +1,46 @@
-<p>
-  asing-menu-access works!
-</p>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" >
+</ngx-loading>
+<div class="row">
+   <div class="col-lg-12">
+         <div class="card">
+            <div class="card-header">
+              <i class="icon-people"></i>{{headerTitle}}
+            </div>
+            <form #newSkillElementForm="ngForm" (ngSubmit)="onSubmit(newSkillElementForm)">
+              <div class="card-body">
+                <div class="row">
+                     <div class="form-group col-sm-4">
+                           <label for="menuname">Menu Name <span style="color:red">*</span></label>
+                           <select required [(ngModel)]="menuID" typeaheadOptionField="code" name="menuname"
+                             [ngClass]="{'red-border-class': !menuname1.valid && menuname1.touched}" #menuname1="ngModel"
+                             class="form-control">
+                             <option value="">Select Menu</option>
+                             <option *ngFor="let menu of menuList" [value]="menu.id">{{menu.code}}</option>
+                           </select>
+                           <div *ngIf="!menuname1.valid && menuname1.touched" style="color:red">
+                             Menu Name is required
+                           </div>
+                         </div>
+                         <div class="form-group col-sm-4">
+                              <label for="employeeId">Employee ID <span style="color:red">*</span></label>
+                              <select required [(ngModel)]="employeeId" typeaheadOptionField="code" name="employeeId"
+                                [ngClass]="{'red-border-class': !employeeId1.valid && employeeId1.touched}" #employeeId1="ngModel"
+                                class="form-control">
+                                <option value="">Select Employee</option>
+                                <option *ngFor="let usr of userList" [value]="usr.id">{{usr.code}}</option>
+                              </select>
+                              <div *ngIf="!employeeId1.valid && employeeId1.touched" style="color:red">
+                               Employee Id is required
+                              </div>
+                            </div>
+                  
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary" [disabled]="!newSkillElementForm.form.valid">Submit</button>
+                <button type="reset" class="btn btn-warning">Reset</button>
+              </div>
+            </form>
+          </div>
+      </div>
+      </div>

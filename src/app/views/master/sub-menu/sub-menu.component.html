@@ -8,7 +8,7 @@
       <form #newsubmenuForm="ngForm" (ngSubmit)="onSubmit(newsubmenuForm)">
         <div class="card-body">
            <div class="row">
-             <div class="form-group col-sm-4">
+             <div class="form-group col-sm-3">
                  <label for="subMenuID">Sub Menu ID <span style="color:red">*</span></label>
                  <input type="text" class="form-control" required [(ngModel)]="subMenuID" name="subMenuID"
                     [ngClass]="{'red-border-class': !subMenuID1.valid && subMenuID1.touched}" #subMenuID1="ngModel">
@@ -16,7 +16,7 @@
                     submenu id is required
                  </div>
               </div>
-              <div class="form-group col-sm-4">
+              <div class="form-group col-sm-3">
                  <label for="submenuname">Sub Menu Name <span style="color:red">*</span></label>
                  <input type="text" class="form-control" required [(ngModel)]="submenuname" name="submenuname"
                     [ngClass]="{'red-border-class': !submenuname1.valid && submenuname1.touched}" #submenuname1="ngModel">
@@ -24,7 +24,7 @@
                     submenu name is required
                  </div>
               </div>
-              <div class="form-group col-sm-4">
+              <div class="form-group col-sm-3">
                   <label for="submenu"> Menus <span style="color:red">*</span></label>
                   <select required [(ngModel)]="menuID"  name="submenu"
                     [ngClass]="{'red-border-class': !submenu1.valid && submenu1.touched}" #submenu1="ngModel"
@@ -36,6 +36,18 @@
                     Skill Name is required
                   </div>
                 </div>
+                <div class="form-group col-sm-3">
+                  <label for="role"> Role <span style="color:red">*</span></label>
+                  <select required [(ngModel)]="role"  name="role"
+              [ngClass]="{'red-border-class': !role1.valid && role1.touched}" #role1="ngModel"
+              class="form-control">
+              <option value="">Select ROle</option>
+              <option *ngFor="let role of roleList" [value]="role.roleID">{{role.roleName}}</option>
+            </select>
+                  <div *ngIf="!role1.valid && role1.touched" style="color:red">
+                   role Name is required
+                  </div>
+                </div>
            </div>
         </div>
         <div class="card-footer">
@@ -44,7 +56,7 @@
         </div>
      </form>
     </div>
-    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" >
    </ngx-loading>
    <div *ngIf="subMenuList?.length > 0">
       <div class="card">
@@ -81,6 +93,7 @@
                        <th>Sr.</th> 
                         <th>Sub Menu</th>
                         <th>Menu Name</th>
+                        <th>UserRole Name</th>
                         <th>Created On</th>
                         <th>Created By</th>
                         <th>Action</th>
@@ -92,10 +105,10 @@
                        <td> {{ initialPageSize * (p - 1) + i+1 }}</td> 
                         <td>{{menu.subMenuName}}</td>
                         <td>{{menu.menuName}}</td>
+                        <td>{{menu.roleName}}</td>
                         <td>{{menu.createdDate  | date: 'MM/dd/yyyy'}}</td>
                         <td>{{menu.createdBy}}</td>
                         <td>
-                         
                            <span><button class="badge badge-danger"
                                  (click)="opensubmenuModal(template, menu);">Delete</button></span>
                         </td>

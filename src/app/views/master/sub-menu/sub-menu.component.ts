@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SubMenus } from '../../model/submenu.model';
 import { NgForm } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal/';
+import { RolesService } from '../../service/roles.service';
 
 /**
  * Created By, Nasruddin Khan
@@ -28,12 +29,25 @@ export class SubMenuComponent implements OnInit {
   iconCollapse: string = 'icon-arrow-up';
   searchText:string;
   p: number = 1;
+  subMenuID:string;
   initialPageSize: number = 5;
+  role:number;
   message:string;
-  constructor(private subMenuService:SubMenuService,private menuService: MenuService, private toastr:ToastrService,  private modalService: BsModalService) { }
+  submenuname:string;
+  roleList:any;
+  constructor(private subMenuService:SubMenuService,
+    private menuService: MenuService, private toastr:ToastrService,  
+    private modalService: BsModalService,
+    private roleService:RolesService) { }
   ngOnInit() {
     this.getMenuList();
     this.getSubMenuList();
+    this.getUserRole();
+  }
+  getUserRole(){
+    this.roleService.getRolesDetails().subscribe((response:any)=>{
+      this.roleList=response;
+    });
   }
   confirm(): void {
     this.deleteSubMeu();
@@ -104,10 +118,10 @@ export class SubMenuComponent implements OnInit {
         this.submenu.createdDate = new Date();
         menuId = this.menuID;
         this.submenu.activeStatus = 1;
+        this.role=form.value.role
 
 
-
-      this.subMenuService.saveSubMenuDetails(menuId, this.submenu).subscribe((response: any) => {
+      this.subMenuService.saveSubMenuDetails(menuId, this.submenu,  this.role).subscribe((response: any) => {
         this.loading = false;
        this.getSubMenuList();
         this.toastr.success(msg, 'Sub Menu Details', {

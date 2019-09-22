@@ -51,7 +51,6 @@ import { ShareCommonComonentModule } from './ShareCommonComonentModule';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { SessionPromtModalComponent } from './session.promt.modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { CommonDirective } from './common.directives.module';
 import { ChgpasswordComponent } from './views/chgpassword/chgpassword.component';
 
@@ -88,8 +87,7 @@ import { ChgpasswordComponent } from './views/chgpassword/chgpassword.component'
       autoDismiss: true
     }),
     NgIdleKeepaliveModule.forRoot(),
-    NgbModule.forRoot(),
-    SocialLoginModule
+    NgbModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -101,7 +99,7 @@ import { ChgpasswordComponent } from './views/chgpassword/chgpassword.component'
         SessionPromtModalComponent
   ],
   providers: [ErrorHandling, {
-    provide: [LocationStrategy,AuthServiceConfig],
+    provide: [LocationStrategy],
     useClass: HashLocationStrategy
   },
     {

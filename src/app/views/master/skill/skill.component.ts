@@ -27,6 +27,7 @@ export class SkillComponent implements OnInit {
   initialPageSize: number = 5;
   isShow: boolean = false;
   message: string;
+  orderlevel:number;
   deletesklid: number;
   modalRef: BsModalRef;
   showDeleteModal :boolean=false;

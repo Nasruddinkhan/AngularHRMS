@@ -23,10 +23,10 @@ import { RolesComponent } from './roles/roles.component';
 import { AppStatusComponent } from './app-status/app-status.component';
 import { SearchEmployeesComponent } from './search-employees/search-employees.component';
 import { TagInputModule } from 'ngx-chips';
-import { RoleAccessComponent } from './role-access/role-access.component';
 import { MenuMasterComponent } from './menu-master/menu-master.component';
 import { SubMenuComponent } from './sub-menu/sub-menu.component';
 import { AsingMenuAccessComponent } from './asing-menu-access/asing-menu-access.component';
+import { ApprovedModalComponent } from './search-employees/search-modal-component';
 
 /**
  * Created By, Nasruddin Khan
@@ -53,8 +53,9 @@ import { AsingMenuAccessComponent } from './asing-menu-access/asing-menu-access.
       ShareCommonComonentModule,
       TagInputModule
     ],
-    declarations: [ SkillComponent, SkillElementComponent, UploadMasterComponent, RolesComponent, AppStatusComponent, SearchEmployeesComponent, RoleAccessComponent, MenuMasterComponent, SubMenuComponent, AsingMenuAccessComponent],
-    bootstrap:[SkillElementComponent]
+    declarations: [ SkillComponent, ApprovedModalComponent ,SkillElementComponent, UploadMasterComponent, RolesComponent, AppStatusComponent, SearchEmployeesComponent, MenuMasterComponent, SubMenuComponent, AsingMenuAccessComponent],
+    bootstrap:[SkillElementComponent],
+    entryComponents:[ApprovedModalComponent]
   })
 export class MasterModule{
 

@@ -37,7 +37,7 @@
         </div>
      </form>
     </div>
-    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" >
    </ngx-loading>
    <div *ngIf="statusList?.length > 0">
       <div class="card">
@@ -84,7 +84,7 @@
                         *ngFor="let status of statusList | grdFilter:{statusName:searchText} | paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index">
                        <td> {{ initialPageSize * (p - 1) + i+1 }}</td> 
                         <td>{{status.statusID}}</td>
-                        <td>{{status.statusName}}</td>
+                        <td>{{status.statusName | titlecase}}</td>
                         <td>{{status.createdDate  | date: 'MM/dd/yyyy'}}</td>
                         <td>{{status.createdBy}}</td>
                         <td>

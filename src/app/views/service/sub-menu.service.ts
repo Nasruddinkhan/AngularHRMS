@@ -21,9 +21,9 @@ export class SubMenuService {
       catchError(this.errorHandling.handleError))
   }
 
-  saveSubMenuDetails(menuID:number, submenu:SubMenus):Observable<any>{
- console.log(menuID, JSON.stringify(submenu));
-    return this.http.post(this.baseURL+`submenu/${menuID}/savesubmenus`, submenu).pipe(
+  saveSubMenuDetails(menuID:number, submenu:SubMenus,  roleID:number):Observable<any>{
+ console.log(menuID, JSON.stringify(submenu), roleID);
+    return this.http.post(this.baseURL+`submenu/${menuID}/${roleID}/savesubmenus`, submenu).pipe(
       catchError(this.errorHandling.handleError))
   }
   deleteSubMenus(subMenuID:string):Observable<any>{
