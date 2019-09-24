@@ -15,4 +15,8 @@ export class SearchEmployeesService {
     return this.http.get(this.baseURL+`searchemployees/emplist`).pipe(
       catchError(this.errorHandling.handleError))
   }
+  userApprovedStatus(emailID:string,status:string,approver:string,roleId:number):Observable<any>{
+    return this.http.get(this.baseURL+`user/email/${emailID}/status/${status}/approver/${approver}/role/${roleId}/approvedetails`).pipe(
+      catchError(this.errorHandling.handleError))
+  }
 }

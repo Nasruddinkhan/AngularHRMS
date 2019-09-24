@@ -39,6 +39,7 @@ export const navItems: NavData[] = [
    name: 'Master Details',
     url: '/master',
     icon: 'icon-user',
+    
     children: [
       {
         name: 'Skills',

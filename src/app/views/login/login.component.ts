@@ -42,7 +42,7 @@ idle: number;
      this.loginService.loginUser(userObj).then((loginUser:any)=>{
       let userObj=loginUser;
       sessionStorage.setItem('username',userObj.username); 
-   
+      sessionStorage.setItem('token',userObj.token); 
       sessionStorage.setItem('user',JSON.stringify(loginUser.user));
       
       this.loading = false;

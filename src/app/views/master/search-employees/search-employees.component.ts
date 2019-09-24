@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { SearchEmployeesService } from '../../service/search-employees.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal/';
-import { ApprovedModalComponent } from './search-modal-component';
+import { RolesService } from '../../service/roles.service';
+import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-search-employees',
@@ -12,14 +14,21 @@ export class SearchEmployeesComponent implements OnInit {
   public search: any;
   bsModalRef: BsModalRef;
   searchDrop: any;
-  searchList:any;
+  searchList: any;
   isCollapsed: boolean = false;
   iconCollapse: string = 'icon-arrow-up';
-  loading :boolean= false;
-  searchText :string;
+  loading: boolean = false;
+  searchText: string;
   p: number = 1;
   initialPageSize: number = 5;
-  constructor(private serachEmpService:SearchEmployeesService, private modalService: BsModalService) { }
+  email: string;
+  roleList: any;
+  role: string;
+  status: string = 'Approved';
+  statusID: string = 'APP';
+  closeBtnName: string;
+  constructor(private serachEmpService: SearchEmployeesService, private toastr: ToastrService,
+    private modalService: BsModalService, private roleService: RolesService) { }
   ngOnInit() {
   }
   collapsed(event: any): void {
@@ -32,23 +41,47 @@ export class SearchEmployeesComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed;
     this.iconCollapse = this.isCollapsed ? 'icon-arrow-down' : 'icon-arrow-up';
   }
-  searchEmployee(){
-    this.loading= true;
-    this.serachEmpService.findAllUser().subscribe((response:any)=>{
+  searchEmployee() {
+    this.loading = true;
+    this.serachEmpService.findAllUser().subscribe((response: any) => {
       this.searchList = response;
-      this.loading=false;
-     //console.log(JSON.stringify(response));
-    },err=>{
-      this.loading=false;
+      this.loading = false;
+      //console.log(JSON.stringify(response));
+    }, err => {
+      this.loading = false;
     });
   }
-  openApproveModalComponent(emp) {
-    const initialState = {
-      title: 'Approved Status Details',
-      email:emp.email
-    };
 
-    this.bsModalRef = this.modalService.show(ApprovedModalComponent, {initialState});
-    this.bsModalRef.content.closeBtnName = 'Close';
+  openApproveModalComponent(template: TemplateRef<any>, emp) {
+    this.email = emp.email;
+     this.getRolesDetails();
+    this.bsModalRef = this.modalService.show( template,{class: 'modal-lg' });
+
+  }
+  getRolesDetails() {
+    this.loading = true;
+    this.roleService.getRolesDetails().subscribe((respose: any) => {
+      this.roleList = respose;
+      this.loading = false;
+    }, err => {
+      this.loading = false;
+    });
+  }
+  onApproveSubmit(form: NgForm) {
+   this.loading = true;
+    this.serachEmpService.userApprovedStatus(this.email,this.statusID,
+      'nasruddinkhan44@gmail.com',form.value.role).subscribe((response:any)=>{
+        this.bsModalRef.hide();
+        this.loading = false;
+        this.toastr.success(response.errorMessage, 'Approved', {
+          positionClass: 'toast-bottom-right'
+        });
+        this.searchEmployee();
+      },err=>{
+        this.loading = false;
+        this.toastr.error(err.error.message, 'Internal Errors', {
+          positionClass: 'toast-bottom-right'
+        });
+      });
   }
 }

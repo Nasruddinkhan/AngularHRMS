@@ -29,6 +29,13 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'logout',
+    component: LoginComponent,
+    data: {
+      title: 'Logout Sucess'
+    }
+  },
+  {
     path:'error',
     data:{
         title:'error'

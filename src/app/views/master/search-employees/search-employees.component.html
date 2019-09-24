@@ -79,7 +79,7 @@
                         <tr
                            *ngFor="let emp of searchList | grdFilter:{email:searchText, userID:searchText} | paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index">
                            <td style="text-align: left"> <button class="badge badge-danger" *ngIf="emp.statusMaster.statusID  === 'APP' || emp.statusMaster.statusID  === 'PRN'">Reject</button>
-                              <button class="badge badge-success" *ngIf="emp.statusMaster.statusID  === 'PRN'" (click)="openApproveModalComponent(emp)">Approved</button>
+                              <button class="badge badge-success" *ngIf="emp.statusMaster.statusID  === 'PRN'" (click)="openApproveModalComponent(template, emp)">Approved</button>
                            </td>
                            
                            <td>{{emp.userID}}</td>
@@ -98,4 +98,51 @@
    </div>
    <!--/.col-->
 </div>
+<ng-template #template>
+<div class="modal-body">
+   <div class="card">
+      <div class="card-header">
+                 <i class="icon-people"></i>Approved Details
+              </div>
+              <form #approvedForm="ngForm" (ngSubmit)="onApproveSubmit(approvedForm)">
+          <div class="card-body">
+          <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" >
+      </ngx-loading>
+             <div class="row">
+                <div class="form-group col-sm-12">
+                    <label for="email">email id <span style="color:red">*</span></label>
+                    <input type="text" maxlength="3"   minlength="3" class="form-control" [disabled]="true" required [(ngModel)]="email" name="email"
+                      #email1="ngModel">
+                 </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-12">
+                    <label for="approve">Status <span style="color:red">*</span></label>
+                    <input type="text" maxlength="3"   minlength="3" class="form-control" [disabled]="true" required [(ngModel)]="status" name="approve"
+                      #approve1="ngModel">
+                 </div>
+              </div>
+              <div class="row">
+              <div class="form-group col-sm-12">
+              <label for="role">role <span style="color:red">*</span></label>
+              <select required [(ngModel)]="skillId" typeaheadOptionField="code" name="role"
+                [ngClass]="{'red-border-class': !role1.valid && role1.touched}" #role1="ngModel"
+                class="form-control">
+                <option value="">Select skill</option>
+                <option *ngFor="let role of roleList" [value]="role.roleID">{{role.roleName}}</option>
+              </select>
+              <div *ngIf="!role1.valid && role1.touched" style="color:red">
+                role is required
+              </div>
+              </div>
+              
+              </div>
+          </div>
+          <div class="card-footer">
+             <button type="submit" class="btn btn-primary" [disabled]="!approvedForm.form.valid">Submit</button>
+          </div>
+       </form>
+  </div>
+  </div>
+</ng-template>
 <!--/.row-->
