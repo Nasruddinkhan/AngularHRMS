@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AsingMenuService } from '../../service/asing-menu.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-asing-menu-access',
@@ -9,14 +10,25 @@ import { NgForm } from '@angular/forms';
 })
 export class AsingMenuAccessComponent implements OnInit {
 
-  constructor(private service:AsingMenuService) { }
+  constructor(private service:AsingMenuService, private router:Router) { }
  userList:any;
  menuList:any;
  loading:false;
  menuID:string;
  employeeId:number;
  headerTitle ="Asing menu";
-  ngOnInit() {
+ menuAccessList:any;
+    chckPapeAccess:boolean=false;
+  async ngOnInit() {
+    
+    this.menuAccessList = JSON.parse(sessionStorage.getItem("menuacess"));
+    await this.menuAccessList.forEach(obj=>{
+      if(this.router.url  == obj)
+        this.chckPapeAccess=true;
+     });
+     if(!this.chckPapeAccess)
+     this.router.navigate(["/master/unathorize"]);
+  
     this.getDropDownData();
   }
   async getDropDownData(){

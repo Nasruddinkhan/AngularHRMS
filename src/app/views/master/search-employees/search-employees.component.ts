@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal/';
 import { RolesService } from '../../service/roles.service';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-employees',
@@ -27,9 +28,18 @@ export class SearchEmployeesComponent implements OnInit {
   status: string = 'Approved';
   statusID: string = 'APP';
   closeBtnName: string;
+  menuAccessList:any;
+  chckPapeAccess:boolean=false;
   constructor(private serachEmpService: SearchEmployeesService, private toastr: ToastrService,
-    private modalService: BsModalService, private roleService: RolesService) { }
-  ngOnInit() {
+    private modalService: BsModalService, private roleService: RolesService, private router:Router) { }
+  async ngOnInit() {
+     this.menuAccessList = JSON.parse(sessionStorage.getItem("menuacess"));
+     await this.menuAccessList.forEach(obj=>{
+       if(this.router.url  == obj)
+         this.chckPapeAccess=true;
+      });
+      if(!this.chckPapeAccess)
+      this.router.navigate(["/master/unathorize"]);
   }
   collapsed(event: any): void {
     // console.log(event);

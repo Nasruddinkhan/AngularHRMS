@@ -40,6 +40,8 @@ export class SkillComponent implements OnInit {
   updatedBY: string;
   updatedDate: string;
   updateskills: string;
+  menuAccessList:any;
+  chckPapeAccess:boolean=false;
   constructor(private skillService: SkillService, private toastr: ToastrService, private router: Router, private modalService: BsModalService) {
     //  this.loadStates();
   }
@@ -53,7 +55,14 @@ export class SkillComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed;
     this.iconCollapse = this.isCollapsed ? 'icon-arrow-down' : 'icon-arrow-up';
   }
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.menuAccessList = JSON.parse(sessionStorage.getItem("menuacess"));
+    await this.menuAccessList.forEach(obj=>{
+      if(this.router.url  == obj)
+        this.chckPapeAccess=true;
+     });
+     if(!this.chckPapeAccess)
+     this.router.navigate(["/master/unathorize"]);
     console.log(this.router.url);
     this.getSkillList();
   }

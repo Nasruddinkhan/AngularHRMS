@@ -59,6 +59,14 @@ const routes: Routes=[{
         canActivate: [AuthGuardService],
     },
     {
+        path:'unathorize',
+        data:{
+            title:'unathorize user'
+        },
+        component:UnAthorizeComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
         path:'role',
         data:{
             title:'role master'

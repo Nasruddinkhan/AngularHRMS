@@ -35,6 +35,8 @@ export class UserDetailsComponent implements OnInit {
       aadhaarno:['', [ Validators.minLength(12)]],
       pancard:['',[Validators.pattern('^[A-Za-z]{5}[0-9]{4}[A-Za-z]$')]]
     });
+    let user = JSON.parse(sessionStorage.getItem("user"));
+    alert(JSON.stringify(user));
   }
   //^[A-Za-z]{5}[0-9]{4}[A-Za-z]$
   get formControls() { return this.userForm.controls; }

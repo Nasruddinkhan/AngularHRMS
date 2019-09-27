@@ -17,11 +17,13 @@ export class LoginComponent implements OnInit {
 constructor(private router:Router, private loginService:LoginService, private toastr: ToastrService){}
 username:string;
 password:string;
+
 idle: number;
   timeout: number;
   ping: number;
   public loading = false;
   isSubmit=false;
+  menuArr = new Array<String>();
   ngOnInit(): void {
     console.log("hi i'm logincomponent");
     if(null!==sessionStorage.getItem('token')){
@@ -44,10 +46,12 @@ idle: number;
       sessionStorage.setItem('username',userObj.username); 
       sessionStorage.setItem('token',userObj.token); 
       sessionStorage.setItem('user',JSON.stringify(loginUser.user));
-      
+      loginUser.map.menus.forEach(element => {
+        this.menuArr.push(element.id);
+      });
+      sessionStorage.setItem('menuacess',JSON.stringify( this.menuArr));
       this.loading = false;
      // alert(JSON.stringify(loginUser.user));
-      
       if(loginUser.errorCode==205){
         this.router.navigate(["/changepassword"]);
       }else{

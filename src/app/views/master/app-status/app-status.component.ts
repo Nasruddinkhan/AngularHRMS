@@ -27,12 +27,21 @@ export class AppStatusComponent implements OnInit {
   statusId: string;
   statmodel:StatusMaster;
   deleteStateID:string;
+  menuAccessList:any;
+  chckPapeAccess:boolean=false;
   constructor(private toastr: ToastrService, private router: Router, 
     private statusService: AppStatusService,
     private modalService: BsModalService) { }
 
-  ngOnInit() { 
-    this.getStatusList();
+ async ngOnInit() { 
+     this.menuAccessList = JSON.parse(sessionStorage.getItem("menuacess"));
+    await this.menuAccessList.forEach(obj=>{
+      if(this.router.url  == obj)
+        this.chckPapeAccess=true;
+     });
+     if(!this.chckPapeAccess)
+     this.router.navigate(["/master/unathorize"]);
+     this.getStatusList();
   }
   getStatusList(){
     this.loading = true;

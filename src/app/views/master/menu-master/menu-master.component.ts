@@ -30,11 +30,21 @@ export class MenuMasterComponent implements OnInit {
   deleteMenuID:number;
   modalRef: BsModalRef;
   message: string;
+  menuAccessList:any;
+  chckPapeAccess:boolean=false;
   constructor(private menuService: MenuService,private toastr: ToastrService, private router: Router, private modalService: BsModalService) { }
 
   
-  ngOnInit() {
-    this.getMenuList();
+ async ngOnInit() {
+
+    this.menuAccessList = JSON.parse(sessionStorage.getItem("menuacess"));
+    await this.menuAccessList.forEach(obj=>{
+      if(this.router.url  == obj)
+        this.chckPapeAccess=true;
+     });
+     if(!this.chckPapeAccess)
+     this.router.navigate(["/master/unathorize"]);
+     this.getMenuList();
   }
   collapsed(event: any): void {
     // console.log(event);

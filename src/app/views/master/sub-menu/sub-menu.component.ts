@@ -6,6 +6,7 @@ import { SubMenus } from '../../model/submenu.model';
 import { NgForm } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal/';
 import { RolesService } from '../../service/roles.service';
+import { Router } from '@angular/router';
 
 /**
  * Created By, Nasruddin Khan
@@ -35,11 +36,21 @@ export class SubMenuComponent implements OnInit {
   message:string;
   submenuname:string;
   roleList:any;
+  menuAccessList:any;
+  chckPapeAccess:boolean=false;
   constructor(private subMenuService:SubMenuService,
     private menuService: MenuService, private toastr:ToastrService,  
     private modalService: BsModalService,
-    private roleService:RolesService) { }
-  ngOnInit() {
+    private roleService:RolesService, private router:Router) { }
+  async ngOnInit() {
+    
+    this.menuAccessList = JSON.parse(sessionStorage.getItem("menuacess"));
+    await this.menuAccessList.forEach(obj=>{
+      if(this.router.url  == obj)
+        this.chckPapeAccess=true;
+     });
+     if(!this.chckPapeAccess)
+     this.router.navigate(["/master/unathorize"]);
     this.getMenuList();
     this.getSubMenuList();
     this.getUserRole();

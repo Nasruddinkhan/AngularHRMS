@@ -5,6 +5,7 @@ import { SkillelementService } from '../../service/skillelement.service';
 
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -45,8 +46,17 @@ export class SkillElementComponent implements OnInit {
   updatedBY: string;
   updatedDate: string;
   updateskills: string;
-  constructor(private sklelementSrvice: SkillelementService, private toastr: ToastrService, private modalService: BsModalService) { }
-  ngOnInit() {
+  menuAccessList:any;
+  chckPapeAccess:boolean=false;
+  constructor(private router:Router ,private sklelementSrvice: SkillelementService, private toastr: ToastrService, private modalService: BsModalService) { }
+  async ngOnInit() {
+    this.menuAccessList = JSON.parse(sessionStorage.getItem("menuacess"));
+    await this.menuAccessList.forEach(obj=>{
+      if(this.router.url  == obj)
+        this.chckPapeAccess=true;
+     });
+     if(!this.chckPapeAccess)
+     this.router.navigate(["/master/unathorize"]);
     this.getSkillsList();
     this.getSkillElementsDetails();
   }
