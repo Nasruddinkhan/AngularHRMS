@@ -52,11 +52,11 @@ export const navItems: NavData[] = [
         url: '/master/skillelements',
         icon: 'fa fa-fw fa-user'
       },
-      {
+     /*  {
         name: 'upload',
         url: '/master/uploadmaster',
         icon: 'fa fa-fw fa-user'
-      },
+      }, */
       {
         name: 'Role',
         url: '/master/role',

@@ -4,10 +4,11 @@ import { UserRoutingModule } from './user-routing.module';
 import { EductionDetailsComponent } from './eduction-details/eduction-details.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ShareCommonComonentModule } from '../../ShareCommonComonentModule';
 import { CommonDirective } from '../../common.directives.module';
+import {  NgxLoadingModule } from 'ngx-loading';
 
 /**
  * Created By, Nasruddin Khan
@@ -28,8 +29,10 @@ import { CommonDirective } from '../../common.directives.module';
         CommonModule,
         BsDatepickerModule.forRoot(),
         ShareCommonComonentModule,
-        CommonDirective
-    ]
+        CommonDirective,
+        NgxLoadingModule
+    ],
+    providers: [DatePipe]
 
 })
 export class UserModule{

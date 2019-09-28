@@ -1,3 +1,5 @@
+<ngx-loading [show]="loading">
+</ngx-loading>
 <div class="row">
   <div class="col-lg-12">
     <div class="card">
@@ -11,6 +13,7 @@
       </div>
       <form [formGroup]="userForm" (ngSubmit)="userRegister()">
       <div class="card-body" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
+          
         <div class="row">
           <div class="form-group col-sm-3">
             <label for="firstName">First Name <span style="color:red">*</span></label>
@@ -56,7 +59,7 @@
           <div class="form-group col-sm-3">
             <label for="DOB">Date Of Birth <span style="color:red">*</span></label>
             <input type="text" class="form-control"  bsDatepicker
-            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+            [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }"
              formControlName="dob" [ngClass]="{ 'is-invalid': isSubmitted && formControls.dob.touched && formControls.dob.errors }">
             <div *ngIf="isSubmitted && formControls.dob.touched &&  formControls.dob.errors" class="invalid-feedback">
                 <div *ngIf="formControls.dob.errors.required" style="color:red">Date Of Birth is required</div>
@@ -79,7 +82,7 @@
             <label for="Date OF Joining">Date Of Joining <span style="color:red">*</span></label>
             <input type="text" class="form-control" formControlName="doj"
             bsDatepicker
-            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+            [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }"
             [ngClass]="{ 'is-invalid': isSubmitted && formControls.doj.touched && formControls.doj.errors }">
             <div *ngIf="isSubmitted && formControls.doj.touched && formControls.doj.errors"  class="invalid-feedback">
                 <div *ngIf="formControls.doj.errors.required" style="color:red">Date Of Joining is required</div>
@@ -92,14 +95,14 @@
         </div><div class="row">
           <div class="form-group col-sm-3">
             <label for="contactno">Contact Number <span style="color:red">*</span></label>
-            <input type="text" appOnlynumber class="form-control" formControlName="contactno" [ngClass]="{ 'is-invalid': isSubmitted && formControls.contactno.touched  && formControls.contactno.errors }">
+            <input type="text" appOnlynumber class="form-control" formControlName="contactno" maxlength="10" [ngClass]="{ 'is-invalid': isSubmitted && formControls.contactno.touched  && formControls.contactno.errors }">
             <div *ngIf="isSubmitted && formControls.contactno.touched && formControls.contactno.errors" class="invalid-feedback">
                 <div *ngIf="formControls.contactno.errors.required" style="color:red">Contact Number is required</div>
              </div>
           </div>
           <div class="form-group col-sm-3">
             <label for="guardian"> Guardian Contact Number <span style="color:red">*</span></label>
-            <input type="text" appOnlynumber class="form-control" formControlName="guardian" [ngClass]="{ 'is-invalid': isSubmitted && formControls.guardian.touched  && formControls.guardian.errors }">
+            <input type="text" appOnlynumber class="form-control" formControlName="guardian" maxlength="10"  [ngClass]="{ 'is-invalid': isSubmitted && formControls.guardian.touched  && formControls.guardian.errors }">
             <div *ngIf="isSubmitted && formControls.guardian.touched  && formControls.guardian.errors" class="invalid-feedback">
                 <div *ngIf="formControls.guardian.errors.required" style="color:red">Guardian Number is required</div>
              </div>

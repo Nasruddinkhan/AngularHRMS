@@ -23,4 +23,10 @@ export class UserService {
     return this.http.get(this.baseURL+`user/${email}/${password}/${userType}/chgpassword`).pipe(
       catchError(this.errorHandling.handleError))
   }
+  savePersonalDetails(user:String):Observable<any>{
+    console.log(this.baseURL+status);
+    return this.http.post(this.baseURL+`user/personaldetails`, user).pipe(
+      catchError(this.errorHandling.handleError))
+  }
+  
 }
