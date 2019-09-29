@@ -5,17 +5,15 @@
     <div class="card">
       <div class="card-header">
         <i class="icon-people"></i>{{headerTitle}}
-        <div class="card-header-actions">
-          <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse('P')">
-            <i class={{iconCollapse}}></i>
-          </button>
-        </div>
+      
       </div>
       <form [formGroup]="userForm" (ngSubmit)="userRegister()">
+          <!-- <div class="card-body" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
+
+          </div> -->
       <div class="card-body" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
-          
-        <div class="row">
-          <div class="form-group col-sm-3">
+        <div class="row" style="margin-top: 1rem;">
+          <div class="form-group col-sm-3"  >
             <label for="firstName">First Name <span style="color:red">*</span></label>
             <input type="text" appCharisAllow class="form-control" formControlName="firstName" [ngClass]="{ 'is-invalid': isSubmitted  && formControls.firstName.touched && formControls.firstName.errors }">
             <div *ngIf="isSubmitted && formControls.firstName.touched  && formControls.firstName.errors" class="invalid-feedback">

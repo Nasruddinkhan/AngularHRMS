@@ -22,12 +22,13 @@ export class UserDetailsComponent implements OnInit {
   userForm:FormGroup;
   isSubmitted  =  false;
   loading:boolean=false;
+  fullname :string;
   constructor(private formBuiler:FormBuilder, private userService: UserService, private toastr:ToastrService, public datepipe: DatePipe) { }
   editEmplyeess(){
     var user = JSON.parse(sessionStorage.getItem("user"));
-    alert(user.isPersonalFlag==null || user.isPersonalFlag==='N');
+    //alert(user.isPersonalFlag==null || user.isPersonalFlag==='N');
     
-     alert(this.datepipe.transform(user.dob, 'yyyy-MM-dd'));
+    // alert(this.datepipe.transform(user.dob, 'yyyy-MM-dd'));
     this.userForm.setValue({  
       firstName:user.firstName,
       lastName: user.lastName,
@@ -43,6 +44,7 @@ export class UserDetailsComponent implements OnInit {
       pancard:user.panCard,
       isPersonalFlag:'Y'
   }); 
+  this.fullname  = user.firstName +" "+user.fatherName+" "+user.lastName;
   }
   ngOnInit() {
    
@@ -74,9 +76,9 @@ export class UserDetailsComponent implements OnInit {
   }
   toggleCollapse(flag): void {
   if(flag=='P'){
-    this.isCollapsed = !this.isCollapsed;
-    this.iconCollapse = this.isCollapsed ? 'icon-arrow-down' : 'icon-arrow-up';
-  }else{
+  //  this.isCollapsed = !this.isCollapsed;
+  //this.iconCollapse = this.isCollapsed ? 'icon-arrow-down' : 'icon-arrow-up';
+  
     this.isCollapsed1 = !this.isCollapsed1;
     this.iconCollapse1 = this.isCollapsed1 ? 'icon-arrow-down' : 'icon-arrow-up';
   }
