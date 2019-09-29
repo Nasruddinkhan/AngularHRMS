@@ -8,11 +8,25 @@
       
       </div>
       <form [formGroup]="userForm" (ngSubmit)="userRegister()">
-          <!-- <div class="card-body" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
+          <div class="card-body" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
 
-          </div> -->
+          </div>
       <div class="card-body" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
+          <div class="row" style=" box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28); border-radius: 10px">
+              <div class="form-group col-sm-11" style="margin-top: 1rem;">
+                <p style="    margin-bottom: 0;"> <i class="icon-people" style="color:black"></i><span style="padding-left: 1%">{{fullname}}</span></p>
+                <p  style="    margin-bottom: 0;"> <i class="icon-phone" style="color:black"></i><span style="padding-left: 1%">9987353738</span>
+                <p  style="    margin-bottom: 0;"> <i class="  icon-envelope-letter" style="color:black"></i><span style="padding-left: 1%">Nasruddinkhan44@gmail.com</span>
+                </div>
+                <div class="form-group col-sm-1"  style="margin-top: 1rem;">
+                    <p  style="margin-bottom: 0;">&nbsp;</p>
+                    <p style="margin-bottom:  0;"> <i class="icon-pencil" style="cursor: pointer;padding: 10px;color:black;box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);font-size: 19px;border-radius: 50%;height: 18%;"></i></p>
+                    <p  style="margin-bottom: 0;"> </p>
+          
+                </div>
+          </div>
         <div class="row" style="margin-top: 1rem;">
+
           <div class="form-group col-sm-3"  >
             <label for="firstName">First Name <span style="color:red">*</span></label>
             <input type="text" appCharisAllow class="form-control" formControlName="firstName" [ngClass]="{ 'is-invalid': isSubmitted  && formControls.firstName.touched && formControls.firstName.errors }">
