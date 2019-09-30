@@ -29,6 +29,8 @@ export class SearchEmployeesComponent implements OnInit {
   statusID: string = 'APP';
   closeBtnName: string;
   menuAccessList:any;
+  marginTop:string="8%";
+  searchLabel:boolean=false;
   chckPapeAccess:boolean=false;
   constructor(private serachEmpService: SearchEmployeesService, private toastr: ToastrService,
     private modalService: BsModalService, private roleService: RolesService, private router:Router) { }
@@ -56,6 +58,9 @@ export class SearchEmployeesComponent implements OnInit {
     this.serachEmpService.findAllUser().subscribe((response: any) => {
       this.searchList = response;
       this.loading = false;
+      this.marginTop="";
+      this.searchLabel = true;
+
       //console.log(JSON.stringify(response));
     }, err => {
       this.loading = false;
@@ -76,6 +81,9 @@ export class SearchEmployeesComponent implements OnInit {
     }, err => {
       this.loading = false;
     });
+  }
+  getMarginTop(){
+    return this.marginTop;
   }
   onApproveSubmit(form: NgForm) {
    this.loading = true;

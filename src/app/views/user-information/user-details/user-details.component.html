@@ -8,23 +8,21 @@
       
       </div>
       <form [formGroup]="userForm" (ngSubmit)="userRegister()">
-          <div class="card-body" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
-
-          </div>
-      <div class="card-body" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
-          <div class="row" style=" box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28); border-radius: 10px">
+      <div class="card-body" >
+          <div class="row" style=" box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28); border-radius: 10px" *ngIf="isPerFlg">
               <div class="form-group col-sm-11" style="margin-top: 1rem;">
                 <p style="    margin-bottom: 0;"> <i class="icon-people" style="color:black"></i><span style="padding-left: 1%">{{fullname}}</span></p>
-                <p  style="    margin-bottom: 0;"> <i class="icon-phone" style="color:black"></i><span style="padding-left: 1%">9987353738</span>
-                <p  style="    margin-bottom: 0;"> <i class="  icon-envelope-letter" style="color:black"></i><span style="padding-left: 1%">Nasruddinkhan44@gmail.com</span>
+                <p  style="    margin-bottom: 0;"> <i class="icon-phone" style="color:black"></i><span style="padding-left: 1%">{{mobno}}</span>
+                <p  style="    margin-bottom: 0;"> <i class="  icon-envelope-letter" style="color:black"></i><span style="padding-left: 1%">{{email}}</span>
                 </div>
                 <div class="form-group col-sm-1"  style="margin-top: 1rem;">
                     <p  style="margin-bottom: 0;">&nbsp;</p>
-                    <p style="margin-bottom:  0;"> <i class="icon-pencil" style="cursor: pointer;padding: 10px;color:black;box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);font-size: 19px;border-radius: 50%;height: 18%;"></i></p>
+                    <p style="margin-bottom:  0;"> <i class={{iconCollapse}}  (click)="toggleCollapse('P')" style="cursor: pointer;padding: 10px;color:black;box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);font-size: 19px;border-radius: 50%;height: 18%;"></i></p>
                     <p  style="margin-bottom: 0;"> </p>
           
                 </div>
           </div>
+          <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
         <div class="row" style="margin-top: 1rem;">
 
           <div class="form-group col-sm-3"  >
@@ -104,7 +102,8 @@
             <label for="firstName">Email Address <span style="color:red">*</span></label>
             <input type="text" class="form-control"  formControlName="email" readonly="true" >
           </div>
-        </div><div class="row">
+        </div>
+        <div class="row">
           <div class="form-group col-sm-3">
             <label for="contactno">Contact Number <span style="color:red">*</span></label>
             <input type="text" appOnlynumber class="form-control" formControlName="contactno" maxlength="10" [ngClass]="{ 'is-invalid': isSubmitted && formControls.contactno.touched  && formControls.contactno.errors }">
@@ -135,11 +134,12 @@
            </div>
           </div>
         </div>
+        <div class="row col-6" style="text-align: center">
+          <button type="submit" class="btn btn-sm btn-primary" >Submit</button> 
+        </div>
       </div>
-      <div class="card-footer" style="text-align: center">
-          <button type="submit" class="btn btn-primary" >Submit</button>
-          <button type="reset"  class="btn btn-warning">Reset</button>
-      </div>
+    </div>
+     
       </form>
     </div>
     <div class="card">
@@ -147,7 +147,7 @@
         <i class="icon-people"></i>{{addheaderTitle}}
         <div class="card-header-actions">
           <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse('A')">
-            <i class={{iconCollapse}}></i>
+            <i class={{iconCollapse1}}></i>
           </button>
         </div>
       </div>
