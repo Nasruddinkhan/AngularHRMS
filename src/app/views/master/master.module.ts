@@ -26,6 +26,9 @@ import { TagInputModule } from 'ngx-chips';
 import { MenuMasterComponent } from './menu-master/menu-master.component';
 import { SubMenuComponent } from './sub-menu/sub-menu.component';
 import { AsingMenuAccessComponent } from './asing-menu-access/asing-menu-access.component';
+import { CityComponent } from './city/city.component';
+import { StateMasterComponent } from './state-master/state-master.component';
+
 
 
 /**
@@ -53,7 +56,7 @@ import { AsingMenuAccessComponent } from './asing-menu-access/asing-menu-access.
       ShareCommonComonentModule,
       TagInputModule
     ],
-    declarations: [ SkillComponent ,SkillElementComponent, UploadMasterComponent, RolesComponent, AppStatusComponent, SearchEmployeesComponent, MenuMasterComponent, SubMenuComponent, AsingMenuAccessComponent],
+    declarations: [ SkillComponent ,SkillElementComponent,CityComponent, StateMasterComponent, UploadMasterComponent, RolesComponent, AppStatusComponent, SearchEmployeesComponent, MenuMasterComponent, SubMenuComponent, AsingMenuAccessComponent],
     bootstrap:[SkillElementComponent]
   })
 export class MasterModule{

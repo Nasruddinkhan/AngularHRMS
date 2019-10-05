@@ -12,6 +12,8 @@ import { SearchEmployeesComponent } from './search-employees/search-employees.co
 import { MenuMasterComponent } from './menu-master/menu-master.component';
 import { SubMenuComponent } from './sub-menu/sub-menu.component';
 import { AsingMenuAccessComponent } from './asing-menu-access/asing-menu-access.component';
+import { CityComponent } from './city/city.component';
+import { StateMasterComponent } from './state-master/state-master.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -72,6 +74,22 @@ const routes: Routes=[{
             title:'role master'
         },
         component:RolesComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path:'state',
+        data:{
+            title:'state master'
+        },
+        component:StateMasterComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path:'city',
+        data:{
+            title:'city master'
+        },
+        component:CityComponent,
         canActivate: [AuthGuardService],
     },
     {

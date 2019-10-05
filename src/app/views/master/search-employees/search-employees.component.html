@@ -24,8 +24,10 @@
 
             </div> 
                      <div id="logo-default" title="Google" class="show-logo"></div>
-                     <tag-input [(ngModel)]="search" id="fakebox-search-icon" style="width: 80%"
-                        style="box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);padding-left: 15px;padding-right: 12px;border-radius: 22px;"
+                     <tag-input [(ngModel)]="search" id="fakebox-search-icon" [style.margin-right]="getMarginWidth()"
+                       [style.margin-left]="getMarginWidth()"
+                       
+                     style="margin-bottom: 2%;box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);padding-left: 15px;padding-right: 12px;border-radius: 22px;"
                         secondaryPlaceholder=" ">
                         <tag-input-dropdown [autocompleteItems]="searchDrop" [displayBy]="'key'"
                            [identifyBy]="'property'">
@@ -34,8 +36,8 @@
 
 
                      <div class=" form-actions text-center">
-                        <label for="search" style="margin-top: 2rem"></label>
-                        <button type="submit" class="btn btn-primary" (click)="searchEmployee()">Search</button>
+                        <label for="search" style="margin-top: 2rem !important"></label>
+                        <button type="submit" class="btn btn-primary" [style.margin-bottom]="getMarginWidth()"  (click)="searchEmployee()">Search</button>
                      </div>
                   </div>
                </div>

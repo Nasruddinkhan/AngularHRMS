@@ -63,6 +63,16 @@ export const navItems: NavData[] = [
         icon: 'fa fa-fw fa-user'
       },
       {
+        name: 'city',
+        url: '/master/city',
+        icon: 'fa fa-fw fa-user'
+      },
+      {
+        name: 'State',
+        url: '/master/state',
+        icon: 'fa fa-fw fa-user'
+      },
+      {
         name: 'Status',
         url: '/master/status',
         icon: 'fa fa-fw fa-user'

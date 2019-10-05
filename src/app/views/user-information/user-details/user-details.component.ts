@@ -18,7 +18,7 @@ export class UserDetailsComponent implements OnInit {
   isCollapsed: boolean = false;
   iconCollapse: string = 'icon-pencil';
   isCollapsed1: boolean = false;
-  iconCollapse1: string = 'icon-arrow-up';
+  iconCollapse1: string = 'icon-pencil';
   userForm: FormGroup;
   isSubmitted = false;
   loading: boolean = false;
@@ -93,7 +93,7 @@ export class UserDetailsComponent implements OnInit {
     }
     else {
       this.isCollapsed1 = !this.isCollapsed1;
-      this.iconCollapse1 = this.isCollapsed1 ? 'icon-arrow-down' : 'icon-arrow-up';
+      this.iconCollapse1 = this.isCollapsed1 ? 'icon-pencil' : 'icon-close';
     }
   }
   userRegister() {

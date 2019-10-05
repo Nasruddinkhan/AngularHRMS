@@ -32,6 +32,7 @@ export class SearchEmployeesComponent implements OnInit {
   marginTop:string="8%";
   searchLabel:boolean=false;
   chckPapeAccess:boolean=false;
+  marginWidth: string = "15%";
   constructor(private serachEmpService: SearchEmployeesService, private toastr: ToastrService,
     private modalService: BsModalService, private roleService: RolesService, private router:Router) { }
   async ngOnInit() {
@@ -59,6 +60,7 @@ export class SearchEmployeesComponent implements OnInit {
       this.searchList = response;
       this.loading = false;
       this.marginTop="";
+      this.marginWidth="";
       this.searchLabel = true;
 
       //console.log(JSON.stringify(response));
@@ -84,6 +86,9 @@ export class SearchEmployeesComponent implements OnInit {
   }
   getMarginTop(){
     return this.marginTop;
+  }
+  getMarginWidth() {
+    return this.marginWidth;
   }
   onApproveSubmit(form: NgForm) {
    this.loading = true;

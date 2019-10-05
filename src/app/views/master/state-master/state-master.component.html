@@ -1,0 +1,203 @@
+<div class="row">
+   <div class="col-lg-12">
+      <div class="card">
+         <div class="card-header">
+            <i class="icon-people"></i>{{headerTitle}}
+         </div>
+         <form #newStateForm="ngForm" (ngSubmit)="onSubmit(newStateForm, 'I')">
+            <div class="card-body">
+               <div class="row">
+                  <div class="form-group col-sm-3">
+                     <label for="stateName">State Name <span style="color:red">*</span></label>
+                     <input type="text" class="form-control" required [(ngModel)]="stateName" name="stateName"
+                        [ngClass]="{'red-border-class': !stateName1.valid && stateName1.touched}" #stateName1="ngModel">
+                     <div *ngIf="!stateName1.valid && stateName1.touched" style="color:red">
+                        state name is required
+                     </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                     <label for="countryCode">Country Code<span style="color:red">*</span></label>
+                     <input type="text" class="form-control"   [(ngModel)]="countryCode" value="IND"
+                        name="countryCode" [ngClass]="{'red-border-class': !countryCode1.valid && countryCode1.touched}"
+                        #countryCode1="ngModel">
+                     <div *ngIf="!countryCode1.valid && countryCode1.touched" style="color:red">
+                        country code is required
+                     </div>
+                  </div>
+               </div>
+           
+            </div>
+            <div class="card-footer">
+               <button type="submit" class="btn btn-primary" [disabled]="!newStateForm.form.valid">Submit</button>
+               <button type="reset" class="btn btn-warning">Reset</button>
+            </div>
+         </form>
+      </div>
+   <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+   </ngx-loading>
+   <div *ngIf="stateList?.length > 0">
+      <div class="card">
+         <div class="card-header">
+            <i class="icon-people"></i>State Details
+            <div class="card-header-actions">
+               <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse()">
+                  <i class={{iconCollapse}}></i>
+               </button>
+            </div>
+         </div>
+
+         <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed"
+            class="card-body">
+            <div class="form-group row">
+               <div class="col-md-10">
+                  <div class="input-group">
+                     <span class="input-group-prepend">
+                        <button type="button" class="btn btn-primary"><i class="icon-people"></i></button>
+                     </span>
+                     <input type="text" style="height: calc(2.0625rem + 2px) !important;" id="input3-group2"
+                        [(ngModel)]="searchText" class="form-control" placeholder="Search">
+                     <span class="input-group-append">
+                        <button type="button" class="btn btn-primary"><i class="icon-magnifier"></i></button>
+                     </span>
+                  </div>
+               </div>
+               <div class="col-md-2">
+                  <div class="form-group">
+                     <select class="form-control" (change)="showAll($event)">
+                        <option value=all>All</option>
+                        <option value=5>show 5</option>
+                     </select>
+                  </div>
+               </div>
+            </div>
+            <div class="card-body table-responsive" style="padding: 0.25rem !important">
+               <table class="table table-bordered table-striped table-sm">
+                  <thead style="background-color: darkcyan;color: white;">
+                     <tr>
+                        <th>Sr.</th>
+                        <th>State ID</th>
+                        <th>State Name</th>
+                        <th>Country Code</th>
+                        <th>Active Status</th>
+                        <th>Created On</th>
+                        <th>Created By</th>
+                        <th>Action</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr
+                        *ngFor="let stt of stateList | grdFilter:{stateID: searchText, stateName:searchText} | paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index">
+                        <td> {{ initialPageSize * (p - 1) + i+1 }}</td>
+                        <td>{{stt.stateID}}</td>
+                        <td>{{stt.stateName}}</td>
+                        <td>{{stt.countryCode}}</td>
+                        <td>
+
+                           <span *ngIf="stt.activeStatus ===1">Active</span>
+                           <span *ngIf="stt.activeStatus !==1">DeActive</span>
+                        </td>
+                        <td>{{stt.createdDate  | date: 'MM/dd/yyyy'}}</td>
+                        <td>{{stt.createdBy}}</td>
+                        <td>
+                           <!-- 
+                              <span><button  class="badge badge-info" >Edit</button></span> -->
+                           <span><button class="badge badge-primary"
+                                 (click)="openStatesModal(template,stt, 'V')">View</button></span>
+                           <span><button class="badge badge-info"
+                                 (click)="openStatesModal(template,stt, 'E')">Edit</button></span>
+                           <span><button class="badge badge-danger"
+                                 (click)="openStatesModal(template, stt, 'D' )">Delete</button></span>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <pagination-controls class="my-pagination" (pageChange)="p = $event" *ngIf="!isShow">
+               </pagination-controls>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+<ng-template #template>
+   <div class="modal-body text-center">
+      <div *ngIf="showDeleteModal">
+         <p>Do you want to delete this state {{message}}?</p>
+         <button type="button" class="btn btn-success" (click)="confirm()">Yes</button>
+         <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+      </div>
+      <div *ngIf="showViewModel">
+         <div class="card">
+            <div class="card-header">
+               <i class="icon-people"></i>View States {{message}}
+            </div>
+            <div class="card-body table-responsive" style="padding: 0.25rem !important">
+               <table class="table table-bordered table-striped table-sm">
+                  <tr>
+                     <th>State ID</th>
+                     <td style="background-color: white">{{upStates}}</td>
+
+                     <th>State Name</th>
+                     <td style="background-color: white">{{updatestates}}</td>
+
+                     <th>Country Code</th>
+                     <td style="background-color: white">{{upcountryCode}}</td>
+
+                     <th>Created Date</th>
+                     <td style="background-color: white">{{upCreatedDate  | date: 'MM/dd/yyyy'}}</td>
+
+                  </tr>
+                  <tr>
+
+                     <th>Created By</th>
+                     <td style="background-color: white">{{updatedCreatedBy}}</td>
+                     <th>Updated By</th>
+                     <td style="background-color: white">{{updatedBY}} </td>
+                     <th>Updated Date</th>
+                     <td style="background-color: white">{{updatedDate | date: 'MM/dd/yyyy'}}</td>
+                  </tr>
+
+               </table>
+            </div>
+         </div>
+      </div>
+      <div *ngIf="showEditModel">
+         <div class="card">
+            <div class="card-header">
+               <i class="icon-people"></i>{{message}}
+            </div>
+            <form #updateStateForm="ngForm" (ngSubmit)="onSubmit(updateStateForm, 'U')">
+               <div class="card-body">
+                  <div class="row">
+                     <div class="form-group col-sm-4">
+                        <label for="stateName">State Name <span style="color:red">*</span></label>
+                        <input type="text" class="form-control" required [(ngModel)]="updatestates"
+                           name="stateName"
+                           [ngClass]="{'red-border-class': !updatestates1.valid && updatestates1.touched}"
+                           #updatestates1="ngModel">
+                        <div *ngIf="!updatestates1.valid && updatestates1.touched" style="color:red">
+                           state name is required
+                        </div>
+                     </div>
+                     <div class="form-group col-sm-4">
+                        <label for="countryCode"> Country Code <span style="color:red">*</span></label>
+                        <input type="text" class="form-control"  required [(ngModel)]="upcountryCode"
+                           name="countryCode"
+                           [ngClass]="{'red-border-class': !countryCode1.valid && countryCode1.touched}"
+                           #countryCode1="ngModel">
+                        <div *ngIf="!countryCode1.valid && countryCode1.touched" style="color:red">
+                           country code is required
+                        </div>
+                     </div>
+                     
+                  </div>
+               </div>
+               <div class="card-footer">
+                  <button type="submit" class="btn btn-primary"
+                     [disabled]="!updateStateForm.form.valid">Update</button>
+                  <button type="reset" class="btn btn-warning">Reset</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</ng-template>

@@ -43,7 +43,7 @@ idle: number;
      this.loading = true;
      this.loginService.loginUser(userObj).then((loginUser:any)=>{
       let userObj=loginUser;
-      sessionStorage.setItem('username',userObj.username); 
+      sessionStorage.setItem('username',userObj.user.firstName); 
       sessionStorage.setItem('token',userObj.token); 
       sessionStorage.setItem('user',JSON.stringify(loginUser.user));
       loginUser.map.menus.forEach(element => {
