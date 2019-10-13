@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { CityMaster } from '../../model/CityMaster';
 import { CityService } from '../../service/cityService';
 import { ToastrService } from 'ngx-toastr';
@@ -21,6 +21,8 @@ export class CityComponent implements OnInit {
   isCollapsed: boolean = false;
   iconCollapse: string = 'icon-arrow-up';
   public loading = false;
+  initialPageSize: number = 5;
+  p: number = 1;
   upcityName: string;
   upcityid: number;
   upstateId: number;
@@ -30,13 +32,15 @@ export class CityComponent implements OnInit {
   updatedDate: string;
   updatecity: string;
   modalRef: BsModalRef;
-
+  stateID:number;
+  message: string;
+  deleteID:number;
   constructor(private citySrvices: CityService, private toastr: ToastrService, private modalService: BsModalService) 
   { }
 
-  ngOnInit() 
-  {
+  ngOnInit() {
     this.getStatesList();
+    this.getCityDetails();
   }
 
   getStatesList() {
@@ -75,16 +79,16 @@ export class CityComponent implements OnInit {
       this.citymst = new CityMaster;
       if (pageFlag === 'I') {
         citymsg = "Add City Successfully";
-        this.citymst.createdBy = "Daud";
+        this.citymst.createdBy = "Nasruddin khan";
         this.citymst.createdDate = new Date();
-        this.citymst.stateId = form.value.stateId;
+        this.stateID =form.value.stateName;
         cityid = this.cityId;
       } else {
         citymsg = "Update City Successfully";
         this.citymst.cityID = this.upcityid;
-        this.citymst.modifiedBy = "Daud";
+        this.citymst.modifiedBy = "Nasruddin khan";
         this.citymst.modifiedDate = new Date();
-        this.citymst.stateId = this.upstateId;
+        this.stateID = this.upstateId;
         cityid = this.upstateId;
         this.citymst.createdBy = this.updatedCreatedBy;
         this.citymst.createdDate = this.upCreatedDate;
@@ -93,7 +97,7 @@ export class CityComponent implements OnInit {
       this.citymst.activeStatus = 1;
       this.citymst.cityName = form.value.cityName;
 
-      this.citySrvices.saveCityDetail(this.citymst).subscribe((response: any) => {
+      this.citySrvices.saveCityDetail(this.citymst, this.stateID).subscribe((response: any) => {
         this.loading = false;
         this.getCityDetails();
         this.toastr.success(citymsg, 'City', {
@@ -113,5 +117,34 @@ export class CityComponent implements OnInit {
     // console.log(JSON.stringify(this.skillmodel));
     // ...our form is valid, we can submit the data
   }
+  openModal (template: TemplateRef<any>, status){
+    this.message =   status.cityName;
+    this.deleteID = status.cityID;
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+  confirm(): void {
+    this.deleteStatus();
+    this.modalRef.hide();
+  }
+  deleteStatus(){
 
+
+    this.loading=true;
+    this.citySrvices.deleteCity(this.deleteID).subscribe((msg: any) => {
+      this.getCityDetails();
+      this.loading = false;
+      this.toastr.success(this.message + 'has been successfully', 'Delete City', {
+        positionClass: 'toast-bottom-right'
+      });
+    }, err => {
+  
+      this.loading = false;
+      this.toastr.error(err.error.message, 'Internal Errors', {
+        positionClass: 'toast-bottom-right'
+      });
+    });
+  }
+  decline(){
+    this.modalRef.hide();
+  }
 }

@@ -30,7 +30,7 @@ export class StateMasterComponent implements OnInit {
   showDeleteModal :boolean=false;
   showEditModel :boolean=false;
   showViewModel :boolean=false;
-  upcountryCode: string;
+  upcountryCode: string='IND';
   upStates: number;
   upCreatedDate: Date;
   updatedCreatedBy: string;
@@ -38,7 +38,7 @@ export class StateMasterComponent implements OnInit {
   updatedDate: string;
   updatestates: string;
   constructor(private stateService: StateService, private toastr: ToastrService, private router: Router, private modalService: BsModalService) {
-    //  this.loadStates();
+    //  this.loadStates();A
   }
 
   collapsed(event: any): void {
@@ -56,6 +56,7 @@ export class StateMasterComponent implements OnInit {
     this.getStateList();
   }
   getStateList() {
+    
     this.loading = true;
     this.stateService.getAllStateDetails().subscribe((msg: any) => {
       this.loading = false;
