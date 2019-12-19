@@ -131,7 +131,6 @@ export class CityComponent implements OnInit {
 
     this.loading=true;
     this.citySrvices.deleteCity(this.deleteID).subscribe((msg: any) => {
-      this.getCityDetails();
       this.loading = false;
       this.toastr.success(this.message + 'has been successfully', 'Delete City', {
         positionClass: 'toast-bottom-right'
@@ -143,6 +142,7 @@ export class CityComponent implements OnInit {
         positionClass: 'toast-bottom-right'
       });
     });
+    this.getCityDetails();
   }
   decline(){
     this.modalRef.hide();

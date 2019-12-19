@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../service/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import { CityService } from '../../service/cityService';
+import { Address } from '../../model/address.model';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -21,12 +23,20 @@ export class UserDetailsComponent implements OnInit {
   iconCollapse1: string = 'icon-pencil';
   userForm: FormGroup;
   isSubmitted = false;
+  isAddrSubmitted = false;
   loading: boolean = false;
   fullname: string;
   mobno: string;
   email: string;
   isPerFlg: boolean = false;
-  constructor(private formBuiler: FormBuilder, private userService: UserService, private toastr: ToastrService, public datepipe: DatePipe) { }
+  cityList:any;
+  addressForm:FormGroup;
+  address:Address;
+  constructor(private formBuiler: FormBuilder, 
+    private userService: UserService,
+     private toastr: ToastrService, 
+     public datepipe: DatePipe,
+    private cityService: CityService) { }
   editEmplyeess() {
     var user = JSON.parse(sessionStorage.getItem("user"));
     //alert(user.isPersonalFlag == null || user.isPersonalFlag === 'N');
@@ -75,10 +85,22 @@ export class UserDetailsComponent implements OnInit {
       isPersonalFlag: ['Y',],
       pancard: ['', [Validators.pattern('^[A-Za-z]{5}[0-9]{4}[A-Za-z]$')]]
     });
+    this.addressForm=this.formBuiler.group({
+      addressDtl:['',Validators.required],
+      city:['',Validators.required],
+      pincode:['',Validators.required],
+      state:['',]
+    });
     this.editEmplyeess();
-
+    this.getAllCity();
   }
-  //^[A-Za-z]{5}[0-9]{4}[A-Za-z]$
+  getAllCity(){
+    this.cityService.getCityDetails().subscribe((cityList:any)=>{
+      this.cityList = cityList;
+    });
+  }
+  //^[A-Za-z]{5}[0-9]{4}[A-Za-z]$addformControls
+  get addformControls() { return this.addressForm.controls; }
   get formControls() { return this.userForm.controls; }
   collapsed(event: any): void {
     // console.log(event);
@@ -96,6 +118,20 @@ export class UserDetailsComponent implements OnInit {
       this.iconCollapse1 = this.isCollapsed1 ? 'icon-pencil' : 'icon-close';
     }
   }
+  saveAddress(){
+    this.isAddrSubmitted = true;
+    if (this.addressForm.invalid) {
+      return;
+    }
+    this.address=new Address;
+    this.address.activeStatus=1;
+    this.address.addressDetails=this.addressForm.value.addressDtl;
+    this.address.pinCode=this.addressForm.value.pincode
+   // this.address.createdDate=new Date
+    //this.address.addressDetails = this.addressForm.
+      alert(JSON.stringify(this.addressForm.value.addressDtl));
+  }
+  
   userRegister() {
     this.isSubmitted = true;
     if (this.userForm.invalid) {
@@ -109,7 +145,6 @@ export class UserDetailsComponent implements OnInit {
       });
 
       sessionStorage.setItem("user", JSON.stringify(response));
-
       this.loading = false;
       //this.userForm.reset(); 
       this.editEmplyeess();
@@ -120,5 +155,10 @@ export class UserDetailsComponent implements OnInit {
       this.loading = false;
     });
   }
-
+  onChange(obj){
+   this.cityList.forEach(element => {
+  if(element.cityID == obj)
+    this.addressForm.patchValue({state:element.stateName});
+   });
+  }
 }

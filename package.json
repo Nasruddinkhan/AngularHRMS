@@ -69,6 +69,7 @@
     "ngx-toastr": "^10.0.4",
     "ngx-webcam": "^0.2.5",
     "node-modules": "^1.0.1",
+    "node-sass": "^4.13.0",
     "rxjs": "^6.4.0",
     "simple-line-icons": "^2.4.1",
     "ts-helpers": "^1.1.2",
