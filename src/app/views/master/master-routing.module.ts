@@ -14,6 +14,7 @@ import { SubMenuComponent } from './sub-menu/sub-menu.component';
 import { AsingMenuAccessComponent } from './asing-menu-access/asing-menu-access.component';
 import { CityComponent } from './city/city.component';
 import { StateMasterComponent } from './state-master/state-master.component';
+import { CourseDetailsComponent } from './course-details/course-details.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -82,6 +83,14 @@ const routes: Routes=[{
             title:'state master'
         },
         component:StateMasterComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path:'course',
+        data:{
+            title:'course master'
+        },
+        component:CourseDetailsComponent,
         canActivate: [AuthGuardService],
     },
     {

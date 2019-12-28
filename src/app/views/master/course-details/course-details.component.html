@@ -15,16 +15,16 @@
                     <input type="text" class="form-control" required [(ngModel)]="courseID" name="courseID"
                        [ngClass]="{'red-border-class': !courseID1.valid && courseID1.touched}" #courseID1="ngModel">
                     <div *ngIf="!courseID1.valid && courseID1.touched" style="color:red">
-                       skill name is required
+                       course id is required
                     </div>
                  </div>
                  <div class="form-group col-sm-3">
                     <label for="courseName">Course Name <span style="color:red">*</span></label>
-                    <input type="text" class="form-control" appOnlynumber required [(ngModel)]="courseName"
+                    <input type="text" class="form-control"  required [(ngModel)]="courseName"
                        name="courseName" [ngClass]="{'red-border-class': !courseName1.valid && courseName1.touched}"
                        #courseName1="ngModel">
                     <div *ngIf="!courseName1.valid && courseName1.touched" style="color:red">
-                       order level is required
+                      course name is required
                     </div>
                  </div>
               </div>
@@ -37,62 +37,60 @@
      </div>
      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
      </ngx-loading>
-     <div *ngIf="eductionList?.length > 0">
+     <div *ngIf="corurseList?.length > 0">
         <div class="card">
            <div class="card-header">
-              <i class="icon-people"></i>Skill Details
-              <div class="card-header-actions">
-                 <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse()">
-                    <i class={{iconCollapse}}></i>
-                 </button>
-              </div>
+              <i class="icon-people"></i>Course Details
+             
            </div>
 
-           <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed"
+           <div 
               class="card-body">
-              <div class="form-group row">
-                 <div class="col-md-10">
-                    <div class="input-group">
-                       <span class="input-group-prepend">
-                          <button type="button" class="btn btn-primary"><i class="icon-people"></i></button>
-                       </span>
-                       <input type="text" style="height: calc(2.0625rem + 2px) !important;" id="input3-group2"
-                          [(ngModel)]="searchText" class="form-control" placeholder="Search">
-                       <span class="input-group-append">
-                          <button type="button" class="btn btn-primary"><i class="icon-magnifier"></i></button>
-                       </span>
-                    </div>
-                 </div>
-                 <div class="col-md-2">
-                    <div class="form-group">
-                       <select class="form-control" (change)="showAll($event)">
-                          <option value=all>All</option>
-                          <option value=5>show 5</option>
-                       </select>
-                    </div>
-                 </div>
-              </div>
+             
               <div class="card-body table-responsive" style="padding: 0.25rem !important">
                  <table class="table table-bordered table-striped table-sm">
                     <thead style="background-color: #63c2de;color: white;">
                        <tr>
                           <th>Sr.</th>
-                          <th>Skill ID</th>
-                          <th>Skill Name</th>
-                          <th>Order Level</th>
-                          <th>Active Status</th>
+                          <th>Course ID</th>
+                          <th>Course Name</th>
+                         
                           <th>Created On</th>
-                          <th>Created By</th>
+                          
                           <th>Action</th>
                        </tr>
                     </thead>
                     <tbody>
-                       
-                    </tbody>
-                 </table>
+                      <tr
+                         *ngFor="let cour of corurseList | paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index">
+                         <td> {{ initialPageSize * (p - 1) + i+1 }}</td>
+                         <td>{{cour.courseID}}</td>
+                         <td>{{cour.courseName}}</td>
+              
+                         <td>{{cour.createdDate  | date: 'MM/dd/yyyy'}}</td>
+                        
+                         <td>
+                            
+                            <span><button class="badge badge-danger"
+                                  (click)="openCourseModal(template, cour.courseID)">Delete</button></span>
+                         </td>
+                      </tr>
+                   </tbody>
+                </table>
+                <pagination-controls class="my-pagination" (pageChange)="p = $event" >
+                </pagination-controls>
               </div>
            </div>
         </div>
 
      </div>
   </div>
+  <ng-template #template>
+      <div class="modal-body text-center">
+                  
+                     <p>Do you want to delete this course {{delCourseID}}?</p>
+                     <button type="button" class="btn btn-success" (click)="confirm()">Yes</button>
+                     <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+                 
+            </div>
+</ng-template>

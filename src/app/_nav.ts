@@ -66,6 +66,11 @@ export const navItems: NavData[] = [
         name: 'city',
         url: '/master/city',
         icon: 'fa fa-fw fa-user'
+      },{
+        
+        name: 'course',
+        url: '/master/course',
+        icon: 'fa fa-fw fa-user'
       },
       {
         name: 'State',

@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./eduction-details.component.scss']
 })
 export class EductionDetailsComponent implements OnInit {
-
+  eductionList=[];
   constructor() { }
 
   ngOnInit() {
