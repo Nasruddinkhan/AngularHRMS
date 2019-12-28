@@ -181,18 +181,18 @@
         <i class="icon-people"></i>{{addheaderTitle}}
       </div>
       <div class="card-body">
-        <div class="row" style=" box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28); border-radius: 10px" *ngIf="isPerFlg">
+        <div class="row" style=" box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28); border-radius: 10px" *ngIf="isAddressFlg">
           <div class="form-group col-sm-11" style="margin-top: 1rem;">
             <p style="margin-bottom: 0;">
               <i class="icon-people" style="color:black"></i>
-              <span style="padding-left: 1%">{{fullname}}</span>
+              <span style="padding-left: 1%">{{fullname}} </span>
             </p>
             <p style="margin-bottom: 0;">
               <i class="icon-phone" style="color:black"></i>
-              <span style="padding-left: 1%">{{mobno}}</span>
+              <span style="padding-left: 1%">{{mobno}}</span> 
               <p style="margin-bottom: 0;">
                 <i class="  icon-envelope-letter" style="color:black"></i>
-                <span style="padding-left: 1%">{{email}}</span>
+                <span style="padding-left: 1%">{{addr}}</span>
           </div>
           <div class="form-group col-sm-1" style="margin-top: 1rem;">
             <p style="margin-bottom: 0;">&nbsp;</p>
@@ -204,21 +204,8 @@
           </div>
         </div>
         <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed1">
-          <form [formGroup]="addressForm" (ngSubmit)="saveAddress()">
+          <form autocomplete="off"   [formGroup]="addressForm" (ngSubmit)="saveAddress()">
             <div class="row" style="margin-top: 1rem;">
-
-              <div class="form-group col-sm-12">
-                <label for="Address1">Address1
-                  <span style="color:red">*</span>
-                </label>
-                <input type="text" class="form-control" formControlName="addressDtl" maxlength="10" [ngClass]="{ 'is-invalid': isAddrSubmitted && addformControls.addressDtl.touched  && addformControls.addressDtl.errors }">
-                <div *ngIf="isAddrSubmitted && addformControls.addressDtl.touched  && addformControls.addressDtl.errors" class="invalid-feedback">
-                  <div *ngIf="addformControls.addressDtl.errors.required" style="color:red">Address is required</div>
-                </div>
-              </div>
-
-            </div>
-            <div class="row">
               <div class="form-group col-sm-4">
                 <label for="firstName">CityID </label>
 
@@ -244,6 +231,22 @@
                 <div *ngIf="isAddrSubmitted && addformControls.pincode.touched  && addformControls.pincode.errors" class="invalid-feedback">
                     <div *ngIf="addformControls.pincode.errors.required" style="color:red">Pincode is required</div>
                   </div>
+             
+              </div>
+             
+
+            </div>
+            <div class="row">
+             
+              <div class="form-group col-sm-12">
+                <label for="Address1">Address1
+                  <span style="color:red">*</span>
+                </label>
+                <input type="text" class="form-control" formControlName="addressDtl" maxlength="250" [ngClass]="{ 'is-invalid': isAddrSubmitted && addformControls.addressDtl.touched  && addformControls.addressDtl.errors }">
+                <div *ngIf="isAddrSubmitted && addformControls.addressDtl.touched  && addformControls.addressDtl.errors" class="invalid-feedback">
+                  <div *ngIf="addformControls.addressDtl.errors.required" style="color:red">Address is required</div>
+                </div>
+                <div style="color: red; font-weight: bold">[note : same as aadhar address ]</div>
               </div>
             </div>
             <div class="row col-4" style="text-align: center">

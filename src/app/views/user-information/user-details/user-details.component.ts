@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { CityService } from '../../service/cityService';
 import { Address } from '../../model/address.model';
+import { AddressService } from '../../service/address.service';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -29,16 +30,22 @@ export class UserDetailsComponent implements OnInit {
   mobno: string;
   email: string;
   isPerFlg: boolean = false;
-  cityList:any;
-  addressForm:FormGroup;
-  address:Address;
-  constructor(private formBuiler: FormBuilder, 
+  isAddressFlg: boolean = false
+  cityList: any;
+  addressForm: FormGroup;
+  address: Address;
+  userid: number;
+  addr:string;
+  constructor(private formBuiler: FormBuilder,
+    private addressService: AddressService,
     private userService: UserService,
-     private toastr: ToastrService, 
-     public datepipe: DatePipe,
+    private toastr: ToastrService,
+    public datepipe: DatePipe,
     private cityService: CityService) { }
   editEmplyeess() {
     var user = JSON.parse(sessionStorage.getItem("user"));
+    this.userid = user.userID;
+  //  alert(this.userid);
     //alert(user.isPersonalFlag == null || user.isPersonalFlag === 'N');
     if (user.isPersonalFlag == null || user.isPersonalFlag === 'N') {
       this.isPerFlg = false;
@@ -68,6 +75,31 @@ export class UserDetailsComponent implements OnInit {
     this.mobno = user.contactNo;
     this.email = user.email;
   }
+    editAddress() {
+
+    this.addressService.getUserAddress(this.userid).subscribe((response: any) => {
+      this.isAddressFlg = true;
+      this.isCollapsed1 = true;
+      let stateName;
+      this.cityList.forEach(element => {
+        if (element.cityID == response.cityID)
+          stateName = element.stateName;
+      });
+      this.addr =  response.addressDetails; 
+      this.addressForm.setValue({
+        addressDtl: response.addressDetails,
+        city: response.cityID,
+        pincode: response.pinCode,
+        addressID: response.addressID,
+        state: stateName
+      });
+     // alert(JSON.stringify(this.addressForm.value));
+    }, err => {
+      this.isAddressFlg = false;
+      this.isCollapsed1 = false;
+    });
+
+  }
   ngOnInit() {
 
     this.userForm = this.formBuiler.group({
@@ -85,17 +117,19 @@ export class UserDetailsComponent implements OnInit {
       isPersonalFlag: ['Y',],
       pancard: ['', [Validators.pattern('^[A-Za-z]{5}[0-9]{4}[A-Za-z]$')]]
     });
-    this.addressForm=this.formBuiler.group({
-      addressDtl:['',Validators.required],
-      city:['',Validators.required],
-      pincode:['',Validators.required],
-      state:['',]
+    this.addressForm = this.formBuiler.group({
+      addressDtl: ['', Validators.required],
+      city: ['', Validators.required],
+      pincode: ['', Validators.required],
+      state: ['',],
+      addressID: ['',]
     });
     this.editEmplyeess();
     this.getAllCity();
+    this.editAddress();
   }
-  getAllCity(){
-    this.cityService.getCityDetails().subscribe((cityList:any)=>{
+  getAllCity() {
+    this.cityService.getCityDetails().subscribe((cityList: any) => {
       this.cityList = cityList;
     });
   }
@@ -118,20 +152,35 @@ export class UserDetailsComponent implements OnInit {
       this.iconCollapse1 = this.isCollapsed1 ? 'icon-pencil' : 'icon-close';
     }
   }
-  saveAddress(){
+  saveAddress() {
     this.isAddrSubmitted = true;
     if (this.addressForm.invalid) {
       return;
     }
-    this.address=new Address;
-    this.address.activeStatus=1;
-    this.address.addressDetails=this.addressForm.value.addressDtl;
-    this.address.pinCode=this.addressForm.value.pincode
-   // this.address.createdDate=new Date
+    this.address = new Address;
+    if(!this.isEmpty(this.addressForm.value.addressID))
+    this.address.addressID = this.addressForm.value.addressID;
+    this.address.activeStatus = 1;
+    this.address.addressDetails = this.addressForm.value.addressDtl;
+    this.address.pinCode = this.addressForm.value.pincode;
+    // this.address.createdDate=new Date;
     //this.address.addressDetails = this.addressForm.
-      alert(JSON.stringify(this.addressForm.value.addressDtl));
+
+    this.addressService.saveAddressDetail(this.address, this.userid, this.addressForm.value.city).subscribe((res: any) => {
+      this.toastr.success("Update record successfully", 'SUCCESS', {
+        positionClass: 'toast-bottom-right'
+      });
+      this.editEmplyeess();
+      this.editAddress();
+      this.loading = false;
+    }, err => {
+      this.toastr.error(err.error.message, 'Internal Errors', {
+        positionClass: 'toast-bottom-right'
+      });
+      this.loading = false;
+    });
   }
-  
+
   userRegister() {
     this.isSubmitted = true;
     if (this.userForm.invalid) {
@@ -148,6 +197,7 @@ export class UserDetailsComponent implements OnInit {
       this.loading = false;
       //this.userForm.reset(); 
       this.editEmplyeess();
+      this.editAddress();
     }, err => {
       this.toastr.error(err.error.message, 'Internal Errors', {
         positionClass: 'toast-bottom-right'
@@ -155,10 +205,14 @@ export class UserDetailsComponent implements OnInit {
       this.loading = false;
     });
   }
-  onChange(obj){
-   this.cityList.forEach(element => {
-  if(element.cityID == obj)
-    this.addressForm.patchValue({state:element.stateName});
-   });
+
+  onChange(obj) {
+    this.cityList.forEach(element => {
+      if (element.cityID == obj)
+        this.addressForm.patchValue({ state: element.stateName });
+    });
+  }
+  isEmpty(val) {
+    return (val === undefined || val == null || val.length <= 0) ? true : false;
   }
 }
