@@ -40,7 +40,7 @@
        <div *ngIf="univercityList?.length > 0">
           <div class="card">
              <div class="card-header">
-                <i class="icon-people"></i>Course Details
+                <i class="icon-people"></i>University Details
                
              </div>
   
@@ -64,13 +64,12 @@
                         <tr
                            *ngFor="let univerty of univercityList | paginate: { itemsPerPage: initialPageSize, currentPage: p }; let i = index">
                            <td> {{ initialPageSize * (p - 1) + i+1 }}</td>
-                           <td>{{univerty.univertyID}}</td>
-                           <td>{{univerty.univertyName}}</td>
+                           <td>{{univerty.universityID}}</td>
+                           <td>{{univerty.univercityName}}</td>
                            <td>{{univerty.createdDate  | date: 'MM/dd/yyyy'}}</td>
-                           <td>
-                              
+                           <td> 
                               <span><button class="badge badge-danger"
-                                    (click)="openCourseModal(template, cour.courseID)">Delete</button></span>
+                                    (click)="openUniversityModal(template, univerty.universityID)">Delete</button></span>
                            </td>
                         </tr>
                      </tbody>
