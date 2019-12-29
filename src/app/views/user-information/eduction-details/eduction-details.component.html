@@ -26,6 +26,14 @@
                     <div *ngIf="!courseName1.valid && courseName1.touched" style="color:red">
                        order level is required
                     </div>
+            <div class="col-sm-3 form-group">
+              <label for="fromYear">
+                <span>&nbsp;</span>
+              </label>
+                <input type="text" class="form-control" required [(ngModel)]="fromYear" name="fromYear" [ngClass]="{'red-border-class': !fromYear1.valid && fromYear1.touched}"
+                  #fromYear1="ngModel">
+                <div *ngIf="!fromYear1.valid && fromYear1.touched" style="color:red">
+                  year is required
                  </div>
               </div>
            </div>
