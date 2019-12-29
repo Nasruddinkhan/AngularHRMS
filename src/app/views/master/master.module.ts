@@ -29,6 +29,7 @@ import { AsingMenuAccessComponent } from './asing-menu-access/asing-menu-access.
 import { CityComponent } from './city/city.component';
 import { StateMasterComponent } from './state-master/state-master.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
+import { UnivercityComponent } from './univercity/univercity.component';
 
 
 
@@ -57,7 +58,7 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
       ShareCommonComonentModule,
       TagInputModule
     ],
-    declarations: [ SkillComponent ,SkillElementComponent,CityComponent, StateMasterComponent, UploadMasterComponent, RolesComponent, AppStatusComponent, SearchEmployeesComponent, MenuMasterComponent, SubMenuComponent, AsingMenuAccessComponent, CourseDetailsComponent],
+    declarations: [ SkillComponent ,SkillElementComponent,CityComponent, StateMasterComponent, UploadMasterComponent, RolesComponent, AppStatusComponent, SearchEmployeesComponent, MenuMasterComponent, SubMenuComponent, AsingMenuAccessComponent, CourseDetailsComponent, UnivercityComponent],
     bootstrap:[SkillElementComponent]
   })
 export class MasterModule{

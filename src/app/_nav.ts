@@ -91,6 +91,11 @@ export const navItems: NavData[] = [
         name: 'Menu Acess',
         url: '/master/asingmenu',
         icon: 'fa fa-fw fa-user'
+      },
+      {
+        name: 'Univercity',
+        url: '/master/univercity',
+        icon: 'fa fa-fw fa-user'
       }
       ,
       {
