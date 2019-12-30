@@ -30,7 +30,7 @@ export class CourseDetailsComponent implements OnInit {
   }
   getCourses() {
     this.loading = true;
-    this.service.findAllCourse().subscribe((res: any) => {
+    this.service.findAllCourse().then((res: any) => {
       this.corurseList= res;
       this.loading = false;
     },err=>{

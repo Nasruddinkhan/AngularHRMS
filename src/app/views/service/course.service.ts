@@ -15,9 +15,8 @@ export class CourseService {
   private baseURL = environment.baseUrl;
   constructor(private http: HttpClient, private errorHandling: ErrorHandling ) { }
 
-  findAllCourse():Observable<any>{
-    return this.http.get(this.baseURL + `course/getcourses`).pipe(
-      catchError(this.errorHandling.handleError));
+  findAllCourse():Promise<any>{
+    return this.http.get(this.baseURL + `course/getcourses`).toPromise();
   }
   async saveCourseDetails(course:CourseModel):Promise<any>{
     return await this.http.post(this.baseURL + `course/add`, course).toPromise();

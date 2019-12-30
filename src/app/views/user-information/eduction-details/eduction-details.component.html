@@ -13,7 +13,7 @@
               <label for="courseID">Course Name
                 <span style="color:red">*</span>
               </label>
-              <select required [(ngModel)]="courseID" name="courseID" [ngClass]="{'red-border-class': !courseID1.valid && courseID1.touched}"
+              <select required [(ngModel)]="courseID"  name="courseID" [ngClass]="{'red-border-class': !courseID1.valid && courseID1.touched}"
                 #courseID1="ngModel" class="form-control">
                 <option value="">Select Course</option>
                 <option *ngFor="let course of courseList" [value]="course.courseID">{{course.courseName}}</option>
@@ -84,7 +84,7 @@
               <label for="univercityID">University / Board
                 <span style="color:red">*</span>
               </label>
-              <select required [(ngModel)]="univercityID"  name="univercityID1" [ngClass]="{'red-border-class': !univercityID1.valid && univercityID1.touched}"
+              <select required [(ngModel)]="univercityID"  name="univercityID" [ngClass]="{'red-border-class': !univercityID1.valid && univercityID1.touched}"
                 #univercityID1="ngModel" class="form-control">
                 <option value="">Select University / Board</option>
                 <option *ngFor="let unv of univercityList" [value]="unv.universityID">{{unv.univercityName}}</option>
@@ -136,49 +136,31 @@
           </div>
         </div>
 
-        <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card-body">
-          <div class="form-group row">
-            <div class="col-md-10">
-              <div class="input-group">
-                <span class="input-group-prepend">
-                  <button type="button" class="btn btn-primary">
-                    <i class="icon-people"></i>
-                  </button>
-                </span>
-                <input type="text" style="height: calc(2.0625rem + 2px) !important;" id="input3-group2" [(ngModel)]="searchText" class="form-control"
-                  placeholder="Search">
-                <span class="input-group-append">
-                  <button type="button" class="btn btn-primary">
-                    <i class="icon-magnifier"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="form-group">
-                <select class="form-control" (change)="showAll($event)">
-                  <option value=all>All</option>
-                  <option value=5>show 5</option>
-                </select>
-              </div>
-            </div>
-          </div>
+        <div  class="card-body">
+         
           <div class="card-body table-responsive" style="padding: 0.25rem !important">
             <table class="table table-bordered table-striped table-sm">
               <thead style="background-color: #63c2de;color: white;">
                 <tr>
                   <th>Sr.</th>
-                  <th>Skill ID</th>
-                  <th>Skill Name</th>
-                  <th>Order Level</th>
+                  <th>COuse ID</th>
+                  <th>CourseName</th>
+                  <th>College</th>
                   <th>Active Status</th>
                   <th>Created On</th>
-                  <th>Created By</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-
+                <tr *ngFor="let edu of eductionList">
+                  <td>{{edu.collegeName}}</td>
+                  <td>{{edu.collegeName}}</td>
+                  <td>{{edu.collegeName}}</td>
+                  <td>{{edu.collegeName}}</td>
+                  <td>{{edu.collegeName}}</td>
+                  <td>{{edu.collegeName}}</td>
+                  <td>{{edu.collegeName}}</td>
+                </tr>
               </tbody>
             </table>
           </div>
