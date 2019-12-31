@@ -9,7 +9,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ShareCommonComonentModule } from '../../ShareCommonComonentModule';
 import { CommonDirective } from '../../common.directives.module';
 import {  NgxLoadingModule } from 'ngx-loading';
-
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -22,6 +22,7 @@ import {  NgxLoadingModule } from 'ngx-loading';
      
     ],
     imports:[
+        TooltipModule.forRoot(),
         UserRoutingModule,
         CollapseModule.forRoot(),
         FormsModule,
@@ -31,6 +32,7 @@ import {  NgxLoadingModule } from 'ngx-loading';
         ShareCommonComonentModule,
         CommonDirective,
         NgxLoadingModule
+        
     ],
     providers: [DatePipe]
 

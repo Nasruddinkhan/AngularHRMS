@@ -147,3 +147,11 @@ transition: all 0.3s;
 .sidebar-minimized .sidebar .nav-dropdown-items .nav-item .nav-link {
    background: #fff !important;
 }
+
+.longText{
+  width: 10em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}

@@ -13,7 +13,7 @@
               <label for="courseID">Course Name
                 <span style="color:red">*</span>
               </label>
-              <select required [(ngModel)]="courseID"  name="courseID" [ngClass]="{'red-border-class': !courseID1.valid && courseID1.touched}"
+              <select required [(ngModel)]="courseID" name="courseID" [ngClass]="{'red-border-class': !courseID1.valid && courseID1.touched}"
                 #courseID1="ngModel" class="form-control">
                 <option value="">Select Course</option>
                 <option *ngFor="let course of courseList" [value]="course.courseID">{{course.courseName}}</option>
@@ -67,12 +67,12 @@
               <label for="toYear">
                 <span>&nbsp;</span>
               </label>
-              <select required [(ngModel)]="toYear" name="toYear" [ngClass]="{'red-border-class': !toYear1.valid && toYear1.touched}"
-              #toYear1="ngModel" class="form-control">
-              <option value="">Select Year</option>
-              <option *ngFor="let year of yearList" [value]="year">{{year}}</option>
-            </select>
-              
+              <select required [(ngModel)]="toYear" name="toYear" [ngClass]="{'red-border-class': !toYear1.valid && toYear1.touched}" #toYear1="ngModel"
+                class="form-control">
+                <option value="">Select Year</option>
+                <option *ngFor="let year of yearList" [value]="year">{{year}}</option>
+              </select>
+
               <div *ngIf="!toYear1.valid && toYear1.touched" style="color:red">
                 year is required
               </div>
@@ -84,7 +84,7 @@
               <label for="univercityID">University / Board
                 <span style="color:red">*</span>
               </label>
-              <select required [(ngModel)]="univercityID"  name="univercityID" [ngClass]="{'red-border-class': !univercityID1.valid && univercityID1.touched}"
+              <select required [(ngModel)]="univercityID" name="univercityID" [ngClass]="{'red-border-class': !univercityID1.valid && univercityID1.touched}"
                 #univercityID1="ngModel" class="form-control">
                 <option value="">Select University / Board</option>
                 <option *ngFor="let unv of univercityList" [value]="unv.universityID">{{unv.univercityName}}</option>
@@ -97,7 +97,7 @@
               <label for="collegeName">College Name
                 <span style="color:red">*</span>
               </label>
-              <input type="text" class="form-control"  required [(ngModel)]="collegeName" name="collegeName" [ngClass]="{'red-border-class': !collegeName1.valid && collegeName1.touched}"
+              <input type="text" class="form-control" required [(ngModel)]="collegeName" name="collegeName" [ngClass]="{'red-border-class': !collegeName1.valid && collegeName1.touched}"
                 #collegeName1="ngModel">
               <div *ngIf="!collegeName1.valid && collegeName1.touched" style="color:red">
                 College is required
@@ -136,36 +136,56 @@
           </div>
         </div>
 
-        <div  class="card-body">
-         
+        <div class="card-body">
+
           <div class="card-body table-responsive" style="padding: 0.25rem !important">
             <table class="table table-bordered table-striped table-sm">
               <thead style="background-color: #63c2de;color: white;">
                 <tr>
                   <th>Sr.</th>
-                  <th>COuse ID</th>
-                  <th>CourseName</th>
-                  <th>College</th>
-                  <th>Active Status</th>
-                  <th>Created On</th>
-                  <th>Action</th>
+                  <th nowrap>COURSE NAME</th>
+                  <th nowrap>UNIVERCITY & Board</th>
+                  <th nowrap>FROM DATE</th>
+                  <th nowrap>TO DATE</th>
+                  <th nowrap>COLLEGE NAME</th>
+                  <th nowrap>COMMENTS</th>
+                  <th nowrap>ACTION</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let edu of eductionList">
-                  <td>{{edu.collegeName}}</td>
-                  <td>{{edu.collegeName}}</td>
-                  <td>{{edu.collegeName}}</td>
-                  <td>{{edu.collegeName}}</td>
-                  <td>{{edu.collegeName}}</td>
-                  <td>{{edu.collegeName}}</td>
-                  <td>{{edu.collegeName}}</td>
+                <tr *ngFor="let edu of eductionList; let i = index">
+                  <td>{{i+1}}</td>
+                  <td nowrap>{{edu.courseName}}</td>
+                  <td nowrap>{{edu.univercityName}}</td>
+                  <td nowrap>{{edu.fromDate}}</td>
+                  <td nowrap>{{edu.toDate}}</td>
+
+                  <td>
+                    <ng-template #searchCollege>
+                      <div> {{edu.collegeName}}</div>
+                    </ng-template>
+                    <div class="longText" [tooltip]="searchCollege">{{edu.collegeName}}</div>
+                  </td>
+
+                  <td>
+                    <ng-template #searchComments>
+                      <div> {{edu.comments}}</div>
+                    </ng-template>
+                    <div class="longText" [tooltip]="searchComments">{{edu.comments}}</div>
+                  </td>
+                  <td nowrap>
+                    <span>
+                      <button class="badge badge-info" >Edit</button>
+                    </span>
+                    <span>
+                      <button class="badge badge-danger">Delete</button>
+                    </span>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-
     </div>
   </div>

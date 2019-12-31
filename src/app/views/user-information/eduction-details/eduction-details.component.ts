@@ -105,4 +105,5 @@ export class EductionDetailsComponent implements OnInit {
       this.checkDropDownsBens();
     }
   }
+  
 }
