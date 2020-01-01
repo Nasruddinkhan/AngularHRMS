@@ -2,10 +2,11 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header">
-        <i class="icon-people"></i>Add Qualification
+        <i class="icon-people"></i>{{title}}
 
       </div>
       <form #newEducationForm="ngForm" (ngSubmit)="onSubmit(newEducationForm)">
+          <input type="hidden" class="form-control"  [(ngModel)]="educationID" name="educationID">
         <div class="card-body">
           <div class="row">
             <div class="form-group col-sm-4">
@@ -118,7 +119,7 @@
           </div>
         </div>
         <div class="card-footer">
-          <button type="submit" class="btn btn-primary" [disabled]="!newEducationForm.form.valid">Submit</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!newEducationForm.form.valid">{{btnName}}</button>
           <button type="reset" class="btn btn-warning">Reset</button>
         </div>
       </form>
@@ -175,10 +176,10 @@
                   </td>
                   <td nowrap>
                     <span>
-                      <button class="badge badge-info" (click)="openModalWithComponent(edu)" >Edit</button>
+                      <button class="badge badge-info" (click)="editEducationDetails(edu)" >Edit</button>
                     </span>
                     <span>
-                      <button class="badge badge-danger">Delete</button>
+                      <button class="badge badge-danger" (click)="deleteEducationDetails(edu.educationID)">Delete</button>
                     </span>
                   </td>
                 </tr>

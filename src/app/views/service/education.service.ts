@@ -23,7 +23,7 @@ export class EducationService {
   async saveEducationDetails(education:EducationModel, univId:string, curID:string, userID:number):Promise<any>{
     return await this.http.post(this.baseURL + `education/${userID}/${univId}/${curID}/add`, education).toPromise();
   }
-  async  deleteEducation(deleteEducation:string):Promise<any>{
+  async  deleteEducation(deleteEducation:number):Promise<any>{
     return await this.http.delete(this.baseURL + `education/${deleteEducation}/delete`).toPromise();
   }
 }

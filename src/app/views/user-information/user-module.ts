@@ -10,7 +10,7 @@ import { ShareCommonComonentModule } from '../../ShareCommonComonentModule';
 import { CommonDirective } from '../../common.directives.module';
 import {  NgxLoadingModule } from 'ngx-loading';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { EductionEditDetailsComponent } from './eduction-details/education-edit.details.component';
+
 import { ModalModule } from 'ngx-bootstrap/modal';
 /**
  * Created By, Nasruddin Khan
@@ -21,7 +21,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     declarations:[
      UserDetailsComponent,
      EductionDetailsComponent,
-     EductionEditDetailsComponent
+     
     ],
     imports:[
         TooltipModule.forRoot(),
@@ -37,10 +37,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
         ModalModule.forRoot(),
         
     ],
-    providers: [DatePipe],
-    entryComponents: [
-        EductionEditDetailsComponent
-    ]
+    providers: [DatePipe]
 })
 export class UserModule{
 

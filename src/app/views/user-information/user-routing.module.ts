@@ -31,6 +31,8 @@ const routes: Routes=[{
         component:EductionDetailsComponent,
         canActivate: [AuthGuardService]
     }
+   
+    
 ]
 }]
 @NgModule({
