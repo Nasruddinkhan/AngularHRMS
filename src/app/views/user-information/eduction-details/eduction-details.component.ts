@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { EducationService } from '../../service/education.service';
 import { EducationModel } from '../../model/education.model';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { EductionEditDetailsComponent } from './education-edit.details.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -31,10 +33,13 @@ export class EductionDetailsComponent implements OnInit {
   fromMonth: string;
   loading :boolean=false;
   userid:number;
+  bsModalRef: BsModalRef;
   constructor(private courseService: CourseService,
     private universityService: UniversityService,
     private educationService: EducationService,
-    private toastr:ToastrService) { }
+    private toastr:ToastrService,
+    private modalService: BsModalService) { }
+    
 
   async ngOnInit() {
     var user = JSON.parse(sessionStorage.getItem("user"));
@@ -105,5 +110,10 @@ export class EductionDetailsComponent implements OnInit {
       this.checkDropDownsBens();
     }
   }
-  
+  openModalWithComponent() {    
+    this.bsModalRef = this.modalService.show(EductionEditDetailsComponent,  { class: 'modal-lg' });
+    this.bsModalRef.content.closeBtnName = 'Close';
+    // (click)="bsModalRef.hide()"
+
+}
 }
