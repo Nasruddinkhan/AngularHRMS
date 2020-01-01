@@ -34,6 +34,7 @@ export class EductionDetailsComponent implements OnInit {
   loading :boolean=false;
   userid:number;
   bsModalRef: BsModalRef;
+  objString:string;
   constructor(private courseService: CourseService,
     private universityService: UniversityService,
     private educationService: EducationService,
@@ -110,9 +111,25 @@ export class EductionDetailsComponent implements OnInit {
       this.checkDropDownsBens();
     }
   }
-  openModalWithComponent() {    
-    this.bsModalRef = this.modalService.show(EductionEditDetailsComponent,  { class: 'modal-lg' });
-    this.bsModalRef.content.closeBtnName = 'Close';
+  openModalWithComponent(edu) { 
+    this.objString= JSON.stringify(edu)   
+    const initialState = {
+
+      title: 'Edit Education Details'+ edu.courseName,
+      closeBtnName: 'Closeedu',
+      educationID:edu.educationID,  
+      fromDate:edu.fromDate,     
+      toDate:edu.toDate,       
+      collegeName:edu.collegeName,  
+      courseID:edu.courseID,     
+      courseName:edu.courseName,   
+      universityID:edu.universityID, 
+      univercityName:edu.univercityName,
+      comments:edu.comments   
+      
+    };
+    this.bsModalRef = this.modalService.show(EductionEditDetailsComponent, { initialState, class: 'modal-lg'});
+  //  this.bsModalRef.content.closeBtnName = 'Close';
     // (click)="bsModalRef.hide()"
 
 }
