@@ -30,6 +30,7 @@ import { CityComponent } from './city/city.component';
 import { StateMasterComponent } from './state-master/state-master.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { UnivercityComponent } from './univercity/univercity.component';
+import { DocumentmasterComponent } from './documentmaster/documentmaster.component';
 
 
 
@@ -58,7 +59,7 @@ import { UnivercityComponent } from './univercity/univercity.component';
       ShareCommonComonentModule,
       TagInputModule
     ],
-    declarations: [ SkillComponent ,SkillElementComponent,CityComponent, StateMasterComponent, UploadMasterComponent, RolesComponent, AppStatusComponent, SearchEmployeesComponent, MenuMasterComponent, SubMenuComponent, AsingMenuAccessComponent, CourseDetailsComponent, UnivercityComponent],
+    declarations: [ SkillComponent ,SkillElementComponent,CityComponent, StateMasterComponent, UploadMasterComponent, RolesComponent, AppStatusComponent, SearchEmployeesComponent, MenuMasterComponent, SubMenuComponent, AsingMenuAccessComponent, CourseDetailsComponent, UnivercityComponent, DocumentmasterComponent],
     bootstrap:[SkillElementComponent]
   })
 export class MasterModule{

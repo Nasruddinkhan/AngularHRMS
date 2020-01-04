@@ -16,6 +16,7 @@ import { CityComponent } from './city/city.component';
 import { StateMasterComponent } from './state-master/state-master.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { UnivercityComponent } from './univercity/univercity.component';
+import { DocumentmasterComponent } from './documentmaster/documentmaster.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -162,7 +163,16 @@ const routes: Routes=[{
         canActivate: [AuthGuardService],
 
     }    
-     
+    ,
+    {
+        path:'documentmaster',
+        data:{
+            title:'Document Master'
+        },
+        component:DocumentmasterComponent,
+        canActivate: [AuthGuardService],
+
+    }   
     ]
     }]
 @NgModule({
