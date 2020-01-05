@@ -60,10 +60,16 @@ idle: number;
     },err=>{
       //alert("login failer ::: "+err.error.message);
       this.loading = false;
- 
+    // alert(typeof err.error.message == 'undefined');
+     if(typeof err.error.message == 'undefined'){
+      this.toastr.error('Please run your server side code', 'Backend not working', {
+        positionClass: 'toast-bottom-right'
+      });
+     }else{
       this.toastr.error(err.error.message, 'Internal Errors', {
         positionClass: 'toast-bottom-right'
       });
+    }
     })
     this.isSubmit=false;
   }
