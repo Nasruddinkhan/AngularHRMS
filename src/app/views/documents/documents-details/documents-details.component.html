@@ -1,52 +1,72 @@
-
-
 <div class="row">
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header">
-         <i class="icon-people"></i>Add Documents
+        <i class="icon-people"></i>Add Documents
       </div>
       <form #newUserDocumentForm="ngForm" (ngSubmit)="onSubmit(newUserDocumentForm)">
-         <div class="card-body">
-            <div class="row">
-               <div class="form-group col-sm-3">
-                  <label for="Documenttype">Document Type <span style="color:red">*</span></label>
-                     <select required [(ngModel)]="documentype" (change)="checkEducationDoc($event.target.value)" name="documentype" [ngClass]="{'red-border-class': !documentype1.valid && documentype1.touched}"
-                     #documentype1="ngModel" class="form-control">
-                     <option value="">Select Document Type</option>
-                     <option *ngFor="let docType of docTypeList" [value]="docType.documentID">{{docType.documentName}}</option>
-                   </select>
-                  <div *ngIf="!documentype1.valid && documentype1.touched" style="color:red">
-                     Document Type is required
-                  </div>
-               </div>
-               <div class="form-group col-sm-3" *ngIf="edudocFlag">
-                <label for="Education Document">Education Document <span style="color:red">*</span></label>
-                   <select required [(ngModel)]="educationdoc" name="educationdoc" [ngClass]="{'red-border-class': !educationdoc1.valid && educationdoc1.touched}"
-                   #educationdoc1="ngModel" class="form-control">
-                   <option value="">Select Education Document</option>
-                   <option *ngFor="let edu of eduDocList" [value]="edu.id">{{edu.code}}</option>
-                 </select>
-                <div *ngIf="!educationdoc1.valid && educationdoc1.touched" style="color:red">
-                  Education Document  is required
-                </div>
-             </div>
-               <div class="form-group col-sm-3">
-                  <label for="contentType">Course Name <span style="color:red">*</span></label>
-                  <input type="text" class="form-control"  required [(ngModel)]="contentType"
-                     name="contentType" [ngClass]="{'red-border-class': !contentType1.valid && contentType1.touched}"
-                     #contentType1="ngModel">
-                  <div *ngIf="!contentType1.valid && contentType1.touched" style="color:red">
-                    course name is required
-                  </div>
-               </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label for="Documenttype">Document Type
+                <span style="color:red">*</span>
+              </label>
+              <select required [(ngModel)]="documentype" (change)="checkEducationDoc($event.target.value)" name="documentype" [ngClass]="{'red-border-class': !documentype1.valid && documentype1.touched}"
+                #documentype1="ngModel" class="form-control">
+                <option value="">Select Document Type</option>
+                <option *ngFor="let docType of docTypeList" [value]="docType.documentID">{{docType.documentName}}</option>
+              </select>
+              <div *ngIf="!documentype1.valid && documentype1.touched" style="color:red">
+                Document Type is required
+              </div>
             </div>
-         </div>
-         <div class="card-footer">
-            <button type="submit" class="btn btn-primary" [disabled]="!newUserDocumentForm.form.valid">Submit</button>
-            <button type="reset" class="btn btn-warning">Reset</button>
-         </div>
+            <div class="form-group col-sm-3" *ngIf="edudocFlag">
+              <label for="Education Document">Education Document
+                <span style="color:red">*</span>
+              </label>
+              <select required [(ngModel)]="educationdoc" name="educationdoc" [ngClass]="{'red-border-class': !educationdoc1.valid && educationdoc1.touched}"
+                #educationdoc1="ngModel" class="form-control">
+                <option value="">Select Education Document</option>
+                <option *ngFor="let edu of eduDocList" [value]="edu.id">{{edu.code}}</option>
+              </select>
+              <div *ngIf="!educationdoc1.valid && educationdoc1.touched" style="color:red">
+                Education Document is required
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="contentType">Content Type
+                <span style="color:red">*</span>
+              </label>
+              <select class="form-control" required [(ngModel)]="contentType" (change)="enableFile();"  name="contentType" [ngClass]="{'red-border-class': !contentType1.valid && contentType1.touched}"
+                #contentType1="ngModel">
+                <option value="">Select Content Type</option>
+                <option *ngFor="let conType of conTypeList" [value]="conType.id">{{conType.value}}</option>
+              </select>
+              <div *ngIf="!contentType1.valid && contentType1.touched" style="color:red">
+                Content type is required
+              </div>
+            </div>
+            <div class="col-sm-3"  *ngIf="isFileChk">
+              <label for="contentType">Upload Document
+                <span style="color:red">*</span>
+              </label>
+              <div class="container custom-file">
+                <input type="file" accept="{{contentType}}"
+                class="custom-file-input" id="customFile" name="filename" (change)="fileEvent($event)" [(ngModel)]="fileContent"
+                  [ngClass]="{'red-border-class': !filename1.valid && filename1.touched}" #filename1="ngModel" required>
+                <label class="custom-file-label" for="customFile">{{customFile}}</label>
+              </div>
+              <div *ngIf="!filename1.valid && filename1.touched" style="color:red">
+                file is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="!newUserDocumentForm.form.valid">Submit</button>
+          <button type="reset" (click)="hideUploadDoc()" class="btn btn-warning">Reset</button>
+        </div>
       </form>
-   </div>
-    </div>  
+    </div>
+  </div>
 </div>

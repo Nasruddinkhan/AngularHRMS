@@ -18,19 +18,31 @@ export class DocumentsDetailsComponent implements OnInit {
   documentype: string;
   courseName: string;
   docTypeList = [];
+  conTypeList=[]
   eduDocList = [];
   userId:number;
   loading: boolean = false;
   edudocFlag:boolean = false;
+  customFile='Choose file';
+  fileContent:any;
+   isFileChk:boolean=false;
   constructor(private documentService:DocumentmasterService,
     private toastr:ToastrService,
-    private userDocService:UserdocumentService) { }
+    private userDocService:UserdocumentService) { 
+      this.conTypeList=[{"id":".jpg","value":"JPG"},{"id":".png","value":"PNG"},{"id":".jpeg","value":"JPEG"},{"id":".pdf","value":"PDF"}]
+    }
 
  async ngOnInit() {
   var user = JSON.parse(sessionStorage.getItem("user"));
   this.userId = user.userID;
    this.getDocumentType();
     this.getAlleducationList();
+  }
+  enableFile(){alert(4554);
+    this.isFileChk=true;
+  }
+  hideUploadDoc(){
+    this.isFileChk=false;
   }
  async getDocumentType(){
  await this.documentService.findAllDocuments().then((res:any)=>{
@@ -50,11 +62,21 @@ export class DocumentsDetailsComponent implements OnInit {
  
   }
   checkEducationDoc(eductionDoc:string){
-    alert(eductionDoc);
+   // alert(eductionDoc);
     if(eductionDoc == 'EDU'){
       this.edudocFlag=true;
     }else{
       this.edudocFlag=false;
     }
   }
+  fileEvent(fileInput){
+    let file = fileInput.target.files[0];
+    alert(file);
+  this.customFile=file.name;
+ 
+}
+onSubmit(newUserDocumentForm){
+  alert(JSON.stringify(newUserDocumentForm.value));
+  return false;
+}
 }
