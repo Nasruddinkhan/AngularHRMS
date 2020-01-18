@@ -36,6 +36,7 @@ export class EductionDetailsComponent implements OnInit {
   userid:number;
   bsModalRef: BsModalRef;
   educationID:number;
+  percentage:number
   title:string;
   btnName:string;
   constructor(private courseService: CourseService,
@@ -107,6 +108,7 @@ export class EductionDetailsComponent implements OnInit {
       } 
       education.activeStatus=1;
       education.collegeName = form.value.collegeName;
+      education.percentage = form.value.percentage;
       education.comments=form.value.comments;
       education.fromDate=form.value.fromMonth+"-"+form.value.fromYear;
       education.toDate=form.value.toMonth+"-"+form.value.toYear;
@@ -145,6 +147,7 @@ export class EductionDetailsComponent implements OnInit {
      this.courseID=edu.courseID;     
      this.univercityID=edu.universityID; 
      this.comments=edu.comments ;  
+     this.percentage = edu.percentage;
      this.yearList=this.yearList;
      this.userid=this.userid;
      this.univercityList =this.univercityList;

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { DocumentModel } from '../../model/document.model';
 import { DocumentmasterService } from '../../service/documentmaster.service';
-import { BsModalService } from 'ngx-bootstrap/modal';
+
 import { ToastrService } from 'ngx-toastr';
 import { TemplateRef } from '@angular/core';
 

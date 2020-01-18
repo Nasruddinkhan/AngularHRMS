@@ -79,7 +79,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="form-group col-sm-4">
+            <div class="form-group col-sm-3">
 
               <label for="univercityID">University / Board
                 <span style="color:red">*</span>
@@ -93,7 +93,7 @@
                 University / Board is required
               </div>
             </div>
-            <div class="col-sm-4 form-group">
+            <div class="col-sm-3 form-group">
               <label for="collegeName">College Name
                 <span style="color:red">*</span>
               </label>
@@ -103,7 +103,18 @@
                 College is required
               </div>
             </div>
-            <div class="col-sm-4 form-group">
+            <div class="col-sm-3 form-group">
+              <label for="percentage">
+                <span>percentage</span>
+              </label>
+              <input type="text" class="form-control" required [(ngModel)]="percentage" name="percentage" [ngClass]="{'red-border-class': !percentage1.valid && percentage1.touched}"
+                #percentage1="ngModel">
+              <div *ngIf="!percentage1.valid && percentage1.touched" style="color:red">
+                percentage is required
+              </div>
+            </div>
+
+            <div class="col-sm-3 form-group">
               <label for="comments">
                 <span>comments</span>
               </label>
@@ -129,7 +140,7 @@
     <div *ngIf="eductionList?.length > 0">
       <div class="card">
         <div class="card-header">
-          <i class="icon-people"></i>Skill Details
+          <i class="icon-people"></i>Education Details
           <div class="card-header-actions">
             <button type="button" class="card-header-action btn btn-link btn-minimize" (click)="toggleCollapse()">
               <i class={{iconCollapse}}></i>
@@ -149,6 +160,7 @@
                   <th nowrap>FROM DATE</th>
                   <th nowrap>TO DATE</th>
                   <th nowrap>COLLEGE NAME</th>
+                  <th nowrap>PERCENTAGE</th>
                   <th nowrap>COMMENTS</th>
                   <th nowrap>ACTION</th>
                 </tr>
@@ -160,6 +172,7 @@
                   <td nowrap>{{edu.univercityName}}</td>
                   <td nowrap>{{edu.fromDate}}</td>
                   <td nowrap>{{edu.toDate}}</td>
+                  <td nowrap>{{edu.percentage}}</td>
 
                   <td>
                     <ng-template #searchCollege>

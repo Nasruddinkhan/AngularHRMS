@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+//import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
@@ -99,10 +99,7 @@ import { ChgpasswordComponent } from './views/chgpassword/chgpassword.component'
     RegisterComponent,
         SessionPromtModalComponent
   ],
-  providers: [ErrorHandling, {
-    provide: [LocationStrategy],
-    useClass: HashLocationStrategy
-  },
+  providers: [ErrorHandling,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

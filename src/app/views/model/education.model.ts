@@ -9,4 +9,5 @@ export class EducationModel{
     activeStatus:number;
     createdBy:String;
     collegeName:string;
+    percentage:DoubleRange;
 }

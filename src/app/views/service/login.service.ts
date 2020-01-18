@@ -14,9 +14,11 @@ export class LoginService {
   constructor(private http: HttpClient) { }
   private baseURL=environment.baseUrl;
 
-  async loginUser(user) :Promise<any>{
-    return await this.http.post<any>('http://localhost:8081/login/validateUser', user).toPromise();
+  async loginUser(user) :Promise<any>{//
+    return await this.http.post<any>('http://localhost:8081/HRMS/login/validateUser', user).toPromise();
+    //return await this.http.post<any>('http://192.168.43.61:8081/HRMS/login/validateUser', user).toPromise();
   }
+
 
   getToken() {
     console.log("token ::::::::: "+sessionStorage.getItem('token'));
