@@ -6,6 +6,7 @@ import { UserUploadDoc } from '../../model/userdoc.model';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { PreviewApplicationComponent } from '../preview-application/preview-application.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -203,13 +204,28 @@ async deleteDocument(){
 }
 
 async checkDropDownsBens(){
- // if(this.documentList.length ==0)
- // await this.getDocumentType();
+  if(this.documentList.length ==0)
+    await this.getDocumentType();
   if(this.documentList.length !==0){
    this.documentList.forEach(edu=>{
-     const index :any= this.docTypeList.filter(cor=> cor.documentID == edu.docID);
-     this.docTypeList.splice(index, 1);
+  /*   const index :any= this.docTypeList.filter(cor=> cor.documentID == edu.docID);
+     alert(JSON.stringify(index));
+     this.docTypeList.splice(index, 1);*/
+     for (let obj of this.docTypeList) {
+      if (obj.documentID ===edu.docID) {
+         this.docTypeList.splice(this.docTypeList.indexOf(obj), 1);
+          break;
+      }
+  }
   });
  }
  }
+ openPreviewApplication(){
+  this.modalRef = this.modalService.show(PreviewApplicationComponent, {
+    animated: true,
+    class:'modal-lg',
+  });
+  this.modalRef.content.closeBtnName = 'Close';
+}
+ 
 }

@@ -17,8 +17,8 @@ export class EducationService {
   constructor(private http: HttpClient, private errorHandling: ErrorHandling ) { }
 
 
-  async findAllEducation():Promise<any>{
-    return await this.http.get(this.baseURL + `education/geteducations`).toPromise();
+  async findAllEducation(userID:number):Promise<any>{
+    return await this.http.get(this.baseURL + `education/${userID}/geteducations`).toPromise();
   }
   async saveEducationDetails(education:EducationModel, univId:string, curID:string, userID:number):Promise<any>{
     return await this.http.post(this.baseURL + `education/${userID}/${univId}/${curID}/add`, education).toPromise();

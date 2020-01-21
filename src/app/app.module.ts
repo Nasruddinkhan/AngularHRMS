@@ -53,6 +53,7 @@ import { SessionPromtModalComponent } from './session.promt.modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonDirective } from './common.directives.module';
 import { ChgpasswordComponent } from './views/chgpassword/chgpassword.component';
+//import { ModalModule } from 'ngx-bootstrap/modal';#
 
 
 
@@ -82,7 +83,7 @@ import { ChgpasswordComponent } from './views/chgpassword/chgpassword.component'
     CommonDirective,
     ReactiveFormsModule,
     BrowserModule,
-
+  //  ModalModule,
     ToastrModule.forRoot({
       maxOpened: 1,
       autoDismiss: true

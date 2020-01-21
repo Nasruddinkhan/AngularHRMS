@@ -68,7 +68,7 @@ export class EductionDetailsComponent implements OnInit {
   }
   }
   async getEducationList() {
-    await this.educationService.findAllEducation().then((res: any) => {
+    await this.educationService.findAllEducation(this.userid).then((res: any) => {
       this.eductionList = res;
     },err=>{
       this.eductionList=[];

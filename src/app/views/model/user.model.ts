@@ -19,4 +19,5 @@ export class User{
     modifiedBy:String;
     activeStatus:number;
     createdBy:String;
+    
 }

@@ -1,0 +1,144 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i>Personal Details
+        <span style="float: right;"><button type="button" (click)="editPersonalDetails()"  class="btn btn-sm btn-success">Edit</button></span>
+      </div>
+      <div class="card-body   table-responsive">
+        <div class="row">
+                <div class="col-md-10">
+        <table   class="table  table-sm ">
+        <tr>
+            <th style="background-color: black;color: white;text-align:right;white-space: nowrap;width: 20%">First Name :</th>
+            <td style="width: 30%">{{firstName}}</td>
+            <th style="background-color: black;color: white;text-align:right;white-space: nowrap;width: 20%">Last Name :</th>
+            <td style="width: 30%">{{lastName }}</td>
+          </tr>
+          <tr>
+            <th style="background-color: black;color: white;text-align:right;white-space: nowrap;">Father Name :</th>
+            <td>{{fatherName}}</td>
+            <th style="background-color: black;color: white;text-align:right;white-space: nowrap;">Emergency Contact :</th>
+            <td>{{guardian}}</td>
+        
+          </tr>
+         <tr>
+            <th style="background-color: black;color: white;text-align:right;white-space: nowrap;">Gender :</th>
+            <td>{{gender}}</td>
+            <th style="background-color: black;color: white;text-align:right;white-space: nowrap;">Maritial Status :</th>
+            <td>{{maritial}}</td>
+
+          </tr>
+          <tr>
+            <th style="background-color: black;color: white;text-align:right;white-space: nowrap;">Date Of Birth :</th>
+            <td>{{dob}}</td>
+            <th style="background-color: black;color: white;text-align:right;white-space: nowrap;">Date Of Joining :</th>
+            <td>{{doj}}</td>
+          </tr>
+          <tr>
+            <th style="background-color: black;color: white;text-align:right;white-space: nowrap;">Email ID :</th>
+            <td>{{email}}</td>
+            <th style="background-color: black;color: white;text-align:right;white-space: nowrap;">Contact Number :</th>
+            <td>{{contactno}}</td>
+          </tr>
+         
+        </table>
+      </div>
+      <div class="col-md-2">
+          <img [src]="transform()" height="100" width="100"/>
+        </div>
+        </div>
+      </div>
+    <!--   <div class="card-footer">
+      
+
+      </div> -->
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i>Address Details
+        <span style="float: right;"><button type="button" (click)="editPersonalDetails()"  class="btn btn-sm btn-success">Edit</button></span>
+      </div>
+      <div class="card-body   table-responsive">
+          <table   class="table  table-sm ">
+              <tr>
+                  <th style="background-color: black;color: white;text-align:right;white-space: nowrap;width: 20%">Country :</th>
+                  <td style="width: 30%">India</td>
+                  <th style="background-color: black;color: white;text-align:right;white-space: nowrap;width: 20%">State :</th>
+                  <td style="width: 30%">{{state }}</td>
+                </tr>
+                <tr>
+                  <th style="background-color: black;color: white;text-align:right;white-space: nowrap;">City :</th>
+                  <td>{{city}}</td>
+                  <th style="background-color: black;color: white;text-align:right;white-space: nowrap;">Pincode :  </th>
+                  <td>{{pinCode}}</td>
+              
+                </tr>
+               <tr>
+                  <th style="background-color: black;color: white;text-align:right;white-space: nowrap;">Address :</th>
+                  <td colspan="3">{{address}}</td>
+                </tr>
+              </table>
+      </div>
+      <div class="card-footer">
+        <button type="button" (click)="editPersonalDetails()" class="btn btn-sm btn-primary">Edit</button>
+
+      </div>
+    </div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+    </ngx-loading>
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i>Educational Details
+        <span style="float: right;"><button type="button" (click)="editEducationDetails()"  class="btn btn-sm btn-success">Edit</button></span>
+      </div>
+      <div class="card-body   table-responsive">
+        <table class="table  table-sm ">
+          <thead  style="background-color: #63c2de;color: white;">
+            <tr>
+              <th>SR.</th>
+              <th>COURSE</th>
+              <th>COLLEGE NAME </th>
+              <th>UNIVERCITY NAME </th>
+              <th>DURATION </th>
+              <th>PERCENTAGE </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let edu of educationLsit ; let i = index"  >
+              <td> {{i+1 }}</td>
+              <td>{{edu.course}}</td>
+              <td>{{edu.collegeName}}</td>
+              <td>{{edu.univercityName}}</td>
+              <td>{{edu.duration}}</td>
+              <td>{{edu.percentage}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i>Reference Details
+        <span style="float: right;"><button type="button" (click)="editPersonalDetails()"  class="btn btn-sm btn-success">Edit</button></span>
+      </div>
+      <div class="card-body   table-responsive">
+          <table   class="table  table-sm ">
+              <tr>
+                  <th style="background-color: black;color: white;text-align:right;white-space: nowrap;width: 15%"> Name :</th>
+                  <td style="width: 20%">{{refererName}}</td>
+                  <th style="background-color: black;color: white;text-align:right;white-space: nowrap;width: 15%">    Contact Number :</th>
+                  <td style="width: 15%">{{refererContact}}</td>
+                 <th style="background-color: black;color: white;text-align:right;white-space: nowrap;width: 10%"> Emai :</th>
+                  <td style="width: 20%">{{refererEmail }}</td>
+               </tr>
+               </table>
+      </div>
+      <div class="card-footer">
+        <button type="button"  (click)="getJsoftApplication()" class="btn btn-sm btn-primary">Download Application</button>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -69,7 +69,10 @@ export class UserDetailsComponent implements OnInit {
       guardian: user.gurdianContactNo,
       aadhaarno: user.aadhaarDetails,
       pancard: user.panCard,
-      isPersonalFlag: 'Y'
+      isPersonalFlag: 'Y',
+      refererName:this.isEmpty(user.refererName)?'':user.refererName,
+      refererEmail:this.isEmpty(user.refererEmail)?'':user.refererEmail,
+      refererContact:this.isEmpty(user.refererContact)?'':user.refererContact
     });
     this.fullname = user.firstName + " " + user.fatherName + " " + user.lastName;
     this.mobno = user.contactNo;
@@ -115,7 +118,10 @@ export class UserDetailsComponent implements OnInit {
       guardian: ['', Validators.required],
       aadhaarno: ['', [Validators.minLength(12)]],
       isPersonalFlag: ['Y',],
-      pancard: ['', [Validators.pattern('^[A-Za-z]{5}[0-9]{4}[A-Za-z]$')]]
+      pancard: ['', [Validators.pattern('^[A-Za-z]{5}[0-9]{4}[A-Za-z]$')]],
+      refererName:['',Validators.required],
+      refererEmail:['', Validators.required],
+      refererContact:['', [Validators.required, Validators.minLength(10)]]
     });
     this.addressForm = this.formBuiler.group({
       addressDtl: ['', Validators.required],

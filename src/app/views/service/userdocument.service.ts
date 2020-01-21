@@ -23,4 +23,10 @@ export class UserdocumentService {
   async uploadDocuments(formData:UserUploadDoc):Promise<any>{
     return await this.http.post(this.baseURL + `userdoc/upload`,formData ).toPromise();
   }
+  async getApplicationData(userId:number):Promise<any>{
+    return await this.http.get(this.baseURL + `appliction/${userId}/previewapplication` ).toPromise();
+  }
+  async getJsoftApplication(userID:number,applicationform:string):Promise<any>{
+    return await this.http.post(this.baseURL + `appliction/${userID}/downloadapplication`,  applicationform).toPromise();
+  }
   }

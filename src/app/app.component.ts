@@ -6,6 +6,7 @@ import { Keepalive } from '@ng-idle/keepalive';
 import { SessionPromtModalComponent } from './session.promt.modal';
 import { PlatformLocation } from '@angular/common';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   // tslint:disable-next-line
@@ -18,7 +19,8 @@ export class AppComponent implements OnInit {
   timedOut = false;
   lastPing?: Date = null;
   progressBarPopup: NgbModalRef;
-  constructor(private router: Router, location: PlatformLocation,
+  constructor(private router: Router, location: PlatformLocation, 
+    //public bsModalRef: BsModalRef,
     private element: ElementRef, private idle: Idle, private keepalive: Keepalive, private ngbModal: NgbModal) {
     // sets an idle timeout of 15 minutes.
 
@@ -99,7 +101,9 @@ export class AppComponent implements OnInit {
     });
     this.progressBarPopup.componentInstance.count = count;
     this.progressBarPopup.result.then((result: any) => {
+
       if (result !== '' && 'logout' === result) {
+        this.ngbModal.dismissAll();
         this.logout();
       } else {
         this.reset();

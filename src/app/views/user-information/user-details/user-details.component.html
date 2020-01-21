@@ -168,6 +168,35 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+              <div class="form-group col-sm-3">
+                <label for="refererName">Refer Name
+                  <span style="color:red">*</span>
+                </label>
+                <input type="text"  class="form-control" formControlName="refererName" maxlength="10" [ngClass]="{ 'is-invalid': isSubmitted && formControls.refererName.touched  && formControls.refererName.errors }">
+                <div *ngIf="isSubmitted && formControls.refererName.touched && formControls.refererName.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.refererName.errors.required" style="color:red">Name is required</div>
+                </div>
+              </div>
+              <div class="form-group col-sm-3">
+                <label for="guardian"> Refer Email Id
+                  <span style="color:red">*</span>
+                </label>
+                <input type="text"  class="form-control" formControlName="refererEmail"  [ngClass]="{ 'is-invalid': isSubmitted && formControls.refererEmail.touched  && formControls.refererEmail.errors }">
+                <div *ngIf="isSubmitted && formControls.refererEmail.touched  && formControls.refererEmail.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.refererEmail.errors.required" style="color:red">Email is required</div>
+                </div>
+              </div>
+              <div class="form-group col-sm-3">
+                <label for="firstName">Refer Cntact No </label>
+                <input type="text" appOnlynumber class="form-control" maxlength="10" formControlName="refererContact" [ngClass]="{ 'is-invalid': isSubmitted && formControls.refererContact.touched  && formControls.refererContact.errors }">
+                <div *ngIf="isSubmitted && formControls.refererContact.touched && formControls.refererContact.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.refererContact.errors.required" style="color:red"> Number is required</div>
+                  <div *ngIf="formControls.refererContact.errors.minlength" style="color:red">At least 10 digits</div>
+                </div>
+              </div>
+           
+            </div>
             <div class="row col-6" style="text-align: center">
               <button type="submit" class="btn btn-sm btn-primary">Submit</button>
             </div>
@@ -246,7 +275,7 @@
                 <div *ngIf="isAddrSubmitted && addformControls.addressDtl.touched  && addformControls.addressDtl.errors" class="invalid-feedback">
                   <div *ngIf="addformControls.addressDtl.errors.required" style="color:red">Address is required</div>
                 </div>
-                <div style="color: red; font-weight: bold">[note : same as aadhar address ]</div>
+               <!--  <div style="color: red; font-weight: bold">[note : same as aadhar address ]</div> -->
               </div>
             </div>
             <div class="row col-4" style="text-align: center">

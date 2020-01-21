@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PreviewApplicationComponent } from './preview-application/preview-application.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -14,7 +15,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     imports:[ DocumentModuleRouting,CommonModule,NgxLoadingModule, ModalModule.forRoot(),
         FormsModule  ],
     declarations:[
-        DocumentsDetailsComponent
-    ]
+        DocumentsDetailsComponent,
+        PreviewApplicationComponent
+    ],
+    entryComponents:[PreviewApplicationComponent]
 })
 export class DocumentModule{}
