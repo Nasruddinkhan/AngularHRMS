@@ -75,6 +75,15 @@ idle: number;
   }
   logoutUser() {
     console.log("calling logoutUser ::::::::: ");
+    var user = JSON.parse(sessionStorage.getItem("user"));
+    let userid = user.userID;
+    this.loginService.logoutUser(userid).then((res:any)=>{
+      if(res != null){
+      this.toastr.success('Logout Successfuly', 'Internal Errors', {
+        positionClass: 'toast-bottom-right'
+      });
+    }
+    });
     localStorage.removeItem('token');
     this.router.navigate(['/']);
   } 

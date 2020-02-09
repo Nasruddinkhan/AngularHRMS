@@ -28,4 +28,7 @@ export class LoginService {
   loggedIn() {
     return !!sessionStorage.getItem('token')    
   }
+  async logoutUser(userId:number):Promise<any>{
+    return await  this.http.get(this.baseURL+`inouttime/${userId}/logout`).toPromise();
+  }
 }

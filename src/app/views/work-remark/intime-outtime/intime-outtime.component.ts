@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../service/user.service';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -10,9 +11,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntimeOuttimeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService:UserService) { }
+  userid:number;
+  attendentList=[];
+  pageNo = 1;
+  bigTotalItems: number;
 
+  numPages: number = 0;
+  maxSize: number = 5;
   ngOnInit() {
+    var user = JSON.parse(sessionStorage.getItem("user"));
+    this.userid = user.userID;
+    this.findInOutTime();
   }
-
+  pageChanged(event: any): void {
+    this.pageNo = event.page;
+    this.findInOutTime();
+  }
+ 
+  findInOutTime(){
+    this.userService.findInOutTime(this.userid,this.pageNo).subscribe((res:any)=>{
+      this.attendentList=res.content;
+     this.bigTotalItems = res.totalElements;
+ 
+    });
+  }
 }

@@ -28,5 +28,11 @@ export class UserService {
     return this.http.post(this.baseURL+`user/personaldetails`, user).pipe(
       catchError(this.errorHandling.handleError))
   }
+
+  findInOutTime(userId:number, pageNo:number):Observable<any>{
+    console.log(this.baseURL+status);
+    return this.http.get(this.baseURL+`inouttime/${userId}/${pageNo}/times`).pipe(
+      catchError(this.errorHandling.handleError))
+  }
   
 }
