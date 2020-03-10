@@ -1,3 +1,119 @@
-<p>
-  work-status works!
-</p>
+<div class="row">
+  <div class="col-lg-12">
+     
+    <div class="card">
+        <form #newWorkStatusForm="ngForm" (ngSubmit)="onSubmit(newWorkStatusForm)">
+      <div class="card-header">
+        <i class="icon-people"></i> work-status works
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label for="WorkREMARk">Work Remark Date
+              <span style="color:red">*</span>
+            </label>
+            <input type="text" [minDate]="pastDate" [maxDate]="futureDate" name="remarkdate" required  [(ngModel)]="remarkdate"  
+            class="form-control" bsDatepicker [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }"
+            [ngClass]="{'red-border-class': !remarkdate1.valid && remarkdate1.touched}" #remarkdate1="ngModel">
+            <div *ngIf="!remarkdate1.valid && remarkdate1.touched" style="color:red">
+                remark date is required
+             </div>
+          </div>
+         <div class="form-group col-sm-4">
+            <label for="WorkREMARk">Select Course
+              <span style="color:red">*</span>
+            </label>
+            <select name="skillname" (change)="fetchSkillCourse($event.target.value)"
+            [ngClass]="{'red-border-class': !slillName1.valid && slillName1.touched}" #slillName1="ngModel" 
+            class="form-control"  required [(ngModel)]="slillName" name="slillName">
+              <option value="">Select skill</option>
+              <option *ngFor="let skl of skillsList" [value]="skl.id">{{skl.code}}</option>
+            </select>
+            <div *ngIf="!slillName1.valid && slillName1.touched" style="color:red">
+                        course  is required
+                </div>
+          </div>
+           <div class="form-group col-sm-4">
+            <label for="WorkREMARk">Select Course Category
+              <span style="color:red">*</span>
+            </label>
+            <select name="skillelementname"  class="form-control"
+            [ngClass]="{'red-border-class': !skillelementname1.valid && skillelementname1.touched}" #skillelementname1="ngModel" 
+            class="form-control"  required [(ngModel)]="skillelementname" name="skillelementname">
+              <option value="">Select skill</option>
+              <option *ngFor="let skl of skillsEleList" [value]="skl.id">{{skl.code}}</option>
+            </select>
+            <div *ngIf="!skillelementname1.valid && skillelementname1.touched" style="color:red">
+                course category is required </div>
+          </div>
+        </div>
+      <div class="row">
+          <div class="form-group col-sm-2">
+            <label for="WorkREMARk">Start Time
+              <span style="color:red">*</span>
+            </label>
+            <timepicker  [ngClass]="{'red-border-class': !startTime1.valid && startTime1.touched}" #startTime1="ngModel" 
+             required [(ngModel)]="startTime" name="startTime" [showMeridian]="ismeridian"></timepicker>
+            <div *ngIf="!startTime1.valid && startTime1.touched" style="color:red">
+               start time is required </div>
+          </div>
+           <div class="form-group col-sm-2">
+            <label for="WorkREMARk">Start Time
+              <span style="color:red">*</span>
+            </label>
+            <timepicker [(ngModel)]="endTime"   [ngClass]="{'red-border-class': !endTime1.valid && endTime1.touched}" #endTime1="ngModel" 
+            required [(ngModel)]="endTime" name="endTime" [showMeridian]="ismeridian"></timepicker>
+            <div *ngIf="!endTime1.valid && endTime1.touched" style="color:red">
+                end time is required </div>
+          </div>
+          <div class="form-group col-sm-8">
+            <label for="WorkREMARk">Remarks
+              <span style="color:red">*</span>
+            </label>
+            <textarea class="form-control"  [ngClass]="{'red-border-class': !remark1.valid && remark1.touched}" #remark1="ngModel" 
+            required [(ngModel)]="remark" maxlength="800" name="remark"></textarea>
+            <div *ngIf="!remark1.valid && remark1.touched" style="color:red">
+           remark is required </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit" [disabled]="!newWorkStatusForm.form.valid" class="btn btn-sm btn-primary">Submit</button>
+        <button type="reset" class="btn btn-sm btn-warning">Reset</button>
+      </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <i class="icon-people"></i> work-status works
+      </div>
+      <div class="card-body">
+
+        <div class="card-body table-responsive">
+          <!--   <table class="table table-bordered table-striped table-sm" >
+            <thead  style="background-color: #63c2de;color: white;">
+              <tr>
+                <th>DATE</th>
+                <th>IN TIME</th>
+                <th>DAY </th>
+                <th>OUT TIME </th>
+                <th>COMPLETED HOURS</th>
+              </tr>
+            </thead>
+            <tbody>
+            
+            </tbody>
+          </table> -->
+          <!--  <div class="row">
+          <div class="col-xs-12 col-12">
+            <pagination [totalItems]="bigTotalItems"  [maxSize]="maxSize"  [(ngModel)]="bigCurrentPage"  class="pagination-sm"  (pageChanged)="pageChanged($event)"
+                        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" 
+                        [boundaryLinks]="true" [rotate]="false"  (numPages)="numPages = $event"></pagination>
+          </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

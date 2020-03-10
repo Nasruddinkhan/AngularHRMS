@@ -5,6 +5,9 @@ import { WorkRemarkRoutingModule } from './work-remark.module.routing';
 import { CommonModule } from '@angular/common';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -14,7 +17,11 @@ import { FormsModule } from '@angular/forms';
         WorkRemarkRoutingModule,
         CommonModule,
         PaginationModule.forRoot(),
-        FormsModule
+        FormsModule,
+        CommonModule,
+        BsDatepickerModule.forRoot(),
+        TimepickerModule.forRoot(), 
+        PopoverModule.forRoot(),
     ],
     declarations:[
      IntimeOuttimeComponent,

@@ -33,4 +33,8 @@ export class SkillelementService {
     return this.http.delete(this.baseURL + `skillelement/${skillementID}/deleteskillelements`).pipe(
       catchError(this.errorHandling.handleError));
   }
+  findAllElementSkill(skillID:number):Observable<any>{
+    return this.http.get(this.baseURL + `skillelement/${skillID}/findAllElementSkill`).pipe(
+      catchError(this.errorHandling.handleError));
+  }
 }
