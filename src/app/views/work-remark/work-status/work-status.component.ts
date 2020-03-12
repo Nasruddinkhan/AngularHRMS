@@ -51,7 +51,7 @@ export class WorkStatusComponent implements OnInit {
               private toastr: ToastrService,
               private workStatusService:WorkstatusService) {
     this.pastDate = new Date();
-    this.pastDate.setDate(this.pastDate.getDate() - 7);
+    this.pastDate.setDate(this.pastDate.getDate() - 1);
     this.futureDate = new Date();
     this.futureDate.setDate(this.futureDate.getDate());
 
@@ -70,8 +70,11 @@ export class WorkStatusComponent implements OnInit {
     await this.workStatusService.findAll(this.userID, this.pageNo).then((res:any)=>{
       this.workList=res.content;
       this.bigTotalItems = res.totalElements;
-     
     })
+  }
+  pageChanged(event: any): void {
+    this.pageNo = event.page;
+    this.findAll();
   }
   getSkills() {
     this.skillService.getSkillsList().subscribe((res: any) => {
@@ -101,6 +104,7 @@ export class WorkStatusComponent implements OnInit {
       this.toastr.success('Add Remark Status Successfuly', 'Errors', {
         positionClass: 'toast-bottom-right'
       });
+      form.reset();
       this.findAll();
     },err=>{
       this.toastr.error(err.error.message, 'Errors', {
@@ -108,5 +112,20 @@ export class WorkStatusComponent implements OnInit {
       });
     });
     }
+  }
+  deleteWorkRemorks(workStatusID:number){
+      this.workStatusService.deleteWorkRemorks(workStatusID).then((res:any)=>{
+        this.findAll();
+        this.toastr.success('record delete success fully Successfuly', 'Errors', {
+          positionClass: 'toast-bottom-right'
+        });
+      },err=>{
+        this.toastr.error(err.error.message, 'Errors', {
+          positionClass: 'toast-bottom-right'
+        });
+        this.workList=[];
+        this.findAll();
+      });
+     
   }
 }

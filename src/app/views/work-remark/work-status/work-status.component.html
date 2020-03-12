@@ -53,7 +53,7 @@
               <span style="color:red">*</span>
             </label>
             <timepicker  [ngClass]="{'red-border-class': !startTime1.valid && startTime1.touched}" #startTime1="ngModel" 
-             required [(ngModel)]="startTime" name="startTime" [showMeridian]="ismeridian"></timepicker>
+             required [(ngModel)]="startTime" name="startTime" [max]="endTime"  [showMeridian]="ismeridian"></timepicker>
             <div *ngIf="!startTime1.valid && startTime1.touched" style="color:red">
                start time is required </div>
           </div>
@@ -62,7 +62,7 @@
               <span style="color:red">*</span>
             </label>
             <timepicker [(ngModel)]="endTime"   [ngClass]="{'red-border-class': !endTime1.valid && endTime1.touched}" #endTime1="ngModel" 
-            required [(ngModel)]="endTime" name="endTime" [showMeridian]="ismeridian"></timepicker>
+            required [(ngModel)]="endTime" name="endTime" [min]="startTime" [showMeridian]="ismeridian"></timepicker>
             <div *ngIf="!endTime1.valid && endTime1.touched" style="color:red">
                 end time is required </div>
           </div>
@@ -84,7 +84,7 @@
       </form>
     </div>
 
-    <div class="card">
+    <div class="card" *ngIf="workList?.length > 0">
       <div class="card-header">
         <i class="icon-people"></i> Work Status
       </div>
@@ -100,6 +100,7 @@
                 <th>REMARKS</th>
                 <th>Course </th>
                 <th>Course Category </th>
+                <th>Action </th>
               </tr>
             </thead>
             <tbody>
@@ -110,6 +111,13 @@
               <td>{{wrk.remarks}}</td>
               <td>{{wrk.skillElementName}}</td>
               <td>{{wrk.skillName}}</td>
+             
+                <td>
+                  <span><button class="badge badge-danger"
+                    (click)="deleteWorkRemorks(wrk.workStatusID)">Delete</button></span>
+
+                </td>
+             
             </tr>
             </tbody>
           </table>

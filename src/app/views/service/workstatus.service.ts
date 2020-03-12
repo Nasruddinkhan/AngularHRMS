@@ -16,4 +16,7 @@ export class WorkstatusService {
   async findAll(userId:number, pageNo:number):Promise<any>{
     return await this.http.get(this.baseURL + `workStataus/${userId}/${pageNo}/remarks` ).toPromise();
   }
+   deleteWorkRemorks(workStatusID:number){
+    return  this.http.delete(this.baseURL + `workStataus/${workStatusID}/deleteremarks` ).toPromise();  
+   }
 }
