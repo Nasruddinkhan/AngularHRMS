@@ -42,12 +42,16 @@ export class WorkStatusComponent implements OnInit {
   endTime: Date;
   workRemork:WorkStatus;
   userID:number;
+  workList=[];
+  pageNo = 1;
+  bigTotalItems: number;
+  numPages: number = 0;
+  maxSize: number = 5;
   constructor(private skillService: SkillelementService,
               private toastr: ToastrService,
               private workStatusService:WorkstatusService) {
     this.pastDate = new Date();
     this.pastDate.setDate(this.pastDate.getDate() - 7);
-
     this.futureDate = new Date();
     this.futureDate.setDate(this.futureDate.getDate());
 
@@ -59,11 +63,20 @@ export class WorkStatusComponent implements OnInit {
     this.getSkills();
     let user = JSON.parse(sessionStorage.getItem("user"));
     this.userID = user.userID;
+    this.findAll();
+
+  }
+  async findAll(){
+    await this.workStatusService.findAll(this.userID, this.pageNo).then((res:any)=>{
+      this.workList=res.content;
+      this.bigTotalItems = res.totalElements;
+     
+    })
   }
   getSkills() {
     this.skillService.getSkillsList().subscribe((res: any) => {
       this.skillsList = res;
-      alert(JSON.stringify(res));
+  
     });
   }
   fetchSkillCourse(skillId) {
@@ -88,6 +101,7 @@ export class WorkStatusComponent implements OnInit {
       this.toastr.success('Add Remark Status Successfuly', 'Errors', {
         positionClass: 'toast-bottom-right'
       });
+      this.findAll();
     },err=>{
       this.toastr.error(err.error.message, 'Errors', {
         positionClass: 'toast-bottom-right'
