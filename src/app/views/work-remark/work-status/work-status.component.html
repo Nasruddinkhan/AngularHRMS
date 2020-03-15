@@ -83,8 +83,9 @@
       </div>
       </form>
     </div>
-
-    <div class="card" *ngIf="workList?.length > 0">
+    <app-workstatus-list [workList]="workList"  (childpageEvent)="pageChanged($event)"  [bigTotalItems]="bigTotalItems" (childEvent)="deleteWorkRemorks($event)" ></app-workstatus-list>
+ 
+    <!--  <div class="card" *ngIf="workList?.length > 0">
       <div class="card-header">
         <i class="icon-people"></i> Work Status
       </div>
@@ -108,7 +109,12 @@
               <td>{{wrk.workDate | date: 'dd-MMM-yyyy'}} </td>
               <td>{{wrk.startTime  | date: 'hh:mm:ss a'}} </td>
               <td>{{wrk.endTime  | date: 'hh:mh:ss a'}} </td>
-              <td>{{wrk.remarks}}</td>
+              <td>
+                  <ng-template #searchCollege>
+                      <div> {{wrk.remarks}}</div>
+                    </ng-template>
+                    <div class="longText" [tooltip]="searchCollege">{{wrk.remarks}}</div>
+                </td>
               <td>{{wrk.skillElementName}}</td>
               <td>{{wrk.skillName}}</td>
              
@@ -130,6 +136,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

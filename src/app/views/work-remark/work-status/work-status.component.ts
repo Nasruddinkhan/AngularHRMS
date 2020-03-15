@@ -13,8 +13,8 @@ import { ToastrService } from 'ngx-toastr';
  */
 export function getTimepickerConfig(): TimepickerConfig {
   return Object.assign(new TimepickerConfig(), {
-    hourStep: 2,
-    minuteStep: 10,
+    hourStep: 10,
+    minuteStep: 1,
     showMeridian: false,
     readonlyInput: false,
     mousewheel: true,
@@ -51,7 +51,7 @@ export class WorkStatusComponent implements OnInit {
               private toastr: ToastrService,
               private workStatusService:WorkstatusService) {
     this.pastDate = new Date();
-    this.pastDate.setDate(this.pastDate.getDate() - 1);
+    this.pastDate.setDate(this.pastDate.getDate() - 6);
     this.futureDate = new Date();
     this.futureDate.setDate(this.futureDate.getDate());
 
@@ -73,6 +73,7 @@ export class WorkStatusComponent implements OnInit {
     })
   }
   pageChanged(event: any): void {
+    alert("Parent event call"+event);
     this.pageNo = event.page;
     this.findAll();
   }
@@ -114,6 +115,7 @@ export class WorkStatusComponent implements OnInit {
     }
   }
   deleteWorkRemorks(workStatusID:number){
+    alert('call inside parent');
       this.workStatusService.deleteWorkRemorks(workStatusID).then((res:any)=>{
         this.findAll();
         this.toastr.success('record delete success fully Successfuly', 'Errors', {

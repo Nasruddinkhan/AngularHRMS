@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { WorkStatusListComponent } from './work-status/work-statuslist.component';
 /**
  * Created By, Nasruddin Khan
  * Created Date Aug 17, 2019 
@@ -22,10 +24,12 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
         BsDatepickerModule.forRoot(),
         TimepickerModule.forRoot(), 
         PopoverModule.forRoot(),
+        TooltipModule.forRoot()
     ],
     declarations:[
      IntimeOuttimeComponent,
-     WorkStatusComponent   
+     WorkStatusComponent,   
+     WorkStatusListComponent
     ]
 })
 export class WorkRemarkModule{}
